@@ -22,6 +22,7 @@ public class Contact {
 		this.groupe = groupe;
 		
 		//fuck you very much
+                //salutàtoilegenevois
 		
 	}
 	
