@@ -21,6 +21,8 @@ public class Contact {
 		this.anniversaire = anniversaire;
 		this.groupe = groupe;
 		
+		//fuck you very much
+		
 	}
 	
 	
