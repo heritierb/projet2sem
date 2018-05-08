@@ -1,11 +1,12 @@
-package Projet_2sem;
+package structure;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class AppContact extends App implements Serializable{
 
-    public void afficheList() {
-    }
+    private ArrayList<String> arrayContacts = new ArrayList<String>();
+
     public void add() {
     }
     public void delete() {

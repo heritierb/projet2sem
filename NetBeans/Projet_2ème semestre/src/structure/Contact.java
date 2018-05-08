@@ -1,4 +1,4 @@
-package Projet_2sem;
+package structure;
 
 import java.io.Serializable;
 

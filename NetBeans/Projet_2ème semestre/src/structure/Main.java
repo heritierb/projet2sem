@@ -1,4 +1,4 @@
-package Projet_2sem;
+package structure;
 
 public class Main {
     

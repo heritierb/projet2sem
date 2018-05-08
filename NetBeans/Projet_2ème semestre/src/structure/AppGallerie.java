@@ -1,9 +1,6 @@
-package Projet_2sem;
+package structure;
 
 public class AppGallerie extends App{
-
-    public void afficheList() {
-    }
 
     public void add() {
     }
