@@ -1,19 +1,20 @@
 package structure;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Contact extends AppContact implements Serializable{
 
 	String nom;
 	String prenom;
-	int numero;
+	String numero;
 	String email;
 	String adresse;
-	int anniversaire;
-	String groupe;
+	String anniversaire;
+	String groupe;    
 	
-	public Contact(String nom, String prenom, int numero, String email,
-			String adresse, int anniversaire, String groupe) {
+	public Contact(String nom, String prenom, String numero, String email,
+			String adresse, String anniversaire, String groupe) {
 		
 		this.nom = nom;
 		this.prenom = prenom;
@@ -41,11 +42,11 @@ public class Contact extends AppContact implements Serializable{
         this.prenom = prenom;
     }
 
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 
@@ -65,11 +66,11 @@ public class Contact extends AppContact implements Serializable{
         this.adresse = adresse;
     }
 
-    public int getAnniversaire() {
+    public String getAnniversaire() {
         return anniversaire;
     }
 
-    public void setAnniversaire(int anniversaire) {
+    public void setAnniversaire(String anniversaire) {
         this.anniversaire = anniversaire;
     }
 
