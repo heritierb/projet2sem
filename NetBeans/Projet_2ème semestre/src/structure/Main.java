@@ -1,29 +1,50 @@
 package structure;
 
-import java.io.FileNotFoundException;
-import java.net.UnknownHostException;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class Main {
     
-    public static void main(String[] args)throws FileNotFoundException, UnknownHostException{
+    public static void main(String[] args){
+        Phone gastonTel = new Phone();
         
-        
-    ArrayList arrayContacts = new ArrayList();
-    
-    Object[][] tableau = new Object[arrayContacts.size()][4];
-    
-    Contact c1 = new Contact("1", "2", "3", "4", "5", "6", "7");
-    Contact c2 = new Contact("1", "2", "3", "4", "5", "6", "7");
-       
-    arrayContacts.add(c1);
-    arrayContacts.toString();
-        for (int i = 0; i < arrayContacts.size(); i++) {
-            ArrayList ligne = (ArrayList)arrayContacts.get(i);
-            for (int j = 0; j < ligne.size(); j++) {
-                System.out.println(ligne.get(j)+"\n");
-            }
-        }
+        System.out.println("Chemin de sauvegarde : "+"C:\\Users\\ben\\OneDrive\\HES\\2eme semestre\\Fondements de la programmation\\NetBeans\\Projet_2ème semestre\\svg.ser");
+        try {
+		serializeObject(gastonTel);
+		deserializeObject(gastonTel);
+        } catch (IOException | ClassNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
     }
+    	private static void serializeObject(Phone gastonTel) throws IOException {
+		// TODO Auto-generated method stub
+		FileOutputStream fichier = new FileOutputStream("C:\\Users\\ben\\OneDrive\\HES\\2eme semestre\\Fondements de la programmation\\NetBeans\\Projet_2ème semestre\\svg.ser");
+		
+		BufferedOutputStream bfichier = new BufferedOutputStream(fichier);
+		
+		ObjectOutputStream obfichier = new ObjectOutputStream(bfichier);
+		obfichier.writeObject(gastonTel);
+		obfichier.close();
+	}
     
+	private static void deserializeObject(Phone gastonTel) throws IOException, ClassNotFoundException {
+		// TODO Auto-generated method stub
+		FileInputStream fichier = new FileInputStream("C:\\Users\\ben\\OneDrive\\HES\\2eme semestre\\Fondements de la programmation\\NetBeans\\Projet_2ème semestre\\svg.ser");
+		BufferedInputStream bfichier = new BufferedInputStream(fichier);
+		
+		ObjectInputStream obfichier = new ObjectInputStream(bfichier);
+		Phone gaston = (Phone)obfichier.readObject();
+		System.out.println("deserializeObject : "+gaston);
+		obfichier.close();
+		
+		
+	}
 }

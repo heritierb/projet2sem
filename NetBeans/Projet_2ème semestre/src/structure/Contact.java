@@ -2,10 +2,12 @@ package structure;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class Contact extends AppContact implements Serializable{
 
-	String nom;
+	UUID contactID;
+        String nom;
 	String prenom;
 	String numero;
 	String email;
@@ -13,7 +15,7 @@ public class Contact extends AppContact implements Serializable{
 	String anniversaire;
 	String groupe;    
 	
-	public Contact(String nom, String prenom, String numero, String email,
+	public Contact(UUID contactID, String nom, String prenom, String numero, String email,
 			String adresse, String anniversaire, String groupe) {
 		
 		this.nom = nom;
@@ -25,7 +27,13 @@ public class Contact extends AppContact implements Serializable{
 		this.groupe = groupe;
 		
 	}
+    public UUID getContactID() {
+        return contactID;
+    }
 
+    public void setContactID(UUID contactID) {
+        this.contactID = UUID.randomUUID();
+    }    
     public String getNom() {
         return nom;
     }
