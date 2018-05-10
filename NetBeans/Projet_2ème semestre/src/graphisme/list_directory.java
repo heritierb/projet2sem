@@ -14,14 +14,14 @@ class list_directory {
 		this.extension = extension;
 		fichiers = listFileNames(dossier, extension);
 		nb_items = fichiers.size();
-		System.out.println(fichiers.size() + "elements");
+		System.out.println(fichiers.size());
 	}
 
 	public ArrayList<String> getFichiers() {
 		return fichiers;
 	}
 
-	private ArrayList<String> listFileNames(String dir, String extension) {
+	public static ArrayList<String> listFileNames(String dir, String extension) {
 		File file = new File(dir);
 		if (file.isDirectory()) {
 			String names[] = file.list();
