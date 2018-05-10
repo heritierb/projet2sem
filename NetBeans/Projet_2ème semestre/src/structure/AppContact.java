@@ -3,12 +3,14 @@ package structure;
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
+import static java.util.UUID.randomUUID;
 
 public class AppContact extends App implements Serializable{
     
     //0.ID 1.Nom 2.Prenom 3.Numero 4.Email 5.Adresse 6.Anni 7.Groupe
     private String dossierContacts;        
 
+    Contact contact = new Contact(randomUUID(), "2", "3", "4", "5", "6", "7", "8");
 
     private ArrayList<Contact> arrayContacts = new ArrayList<>();
     
@@ -16,13 +18,13 @@ public class AppContact extends App implements Serializable{
  
     public void add() {
         for (int i = 0; i < arrayContacts.size(); i++) {
-            arrayContacts.add();
+            arrayContacts.add(contact);
         }
  
     }
     public void delete() {
         for (int i = 0; i < arrayContacts.size(); i++) {
-            arrayContacts.remove(1);
+            arrayContacts.remove(contact);
         }
         
     }
