@@ -5,7 +5,7 @@ public class testprojet{
 		// TODO Auto-generated method stub
 		
 		GUITelephone Tel = new GUITelephone();
-			
+			tdc
 	}
 
 }
