@@ -2,10 +2,10 @@ package structure;
 
 public class AppGallerie extends App{
 
-    public void add() {
+    public void addC() {
     }
 
-    public void delete() {
+    public void deleteC() {
     }
 
     public void afficheUnit() {

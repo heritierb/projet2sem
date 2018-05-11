@@ -1,6 +1,8 @@
 
 package graphisme;
 
+import graphisme.NewContact;
+
 public class testNewContact {
    
     
