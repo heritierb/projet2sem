@@ -12,10 +12,12 @@ import javax.swing.JPanel;
 
 public class GUIGallerie extends JFrame {
 	int TAILLE_BOUTON = 100;
-	static String DOSSIER = "F:/HES-Informatique De Gestion/poo/Projet/Photo_Projet/photos/";
+	int nb_items;
+	
+	static String DOSSIER = "C:/Users/Projet/Photo_Projet/photos";
 	String EXTENSION = ".jpg";
 	ArrayList<String> fichiers;
-	int nb_items;
+	
 	list_directory photos = new list_directory(DOSSIER, EXTENSION);
 	JFrame fen = new JFrame("Gallerie");
 	JPanel panelSouth = new JPanel();
