@@ -38,7 +38,9 @@ class list_directory {
 
 
 	public ArrayList<String> getFichiers() {
-		// TODO Auto-generated method stub
-		return null;
+		return fichiers;
 	}
+
+
+	
 }

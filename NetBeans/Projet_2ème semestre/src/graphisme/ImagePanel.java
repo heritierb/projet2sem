@@ -12,7 +12,7 @@ public class ImagePanel extends JPanel {
 
 	public void paintComponent(Graphics g){
 	    try {
-	      Image img = ImageIO.read(new File("F:/HES-Informatique De Gestion/poo/Projet/Photo_Projet/wallpaper.jpg"));
+	      Image img = ImageIO.read(new File("C:/Users/Projet/Photo_Projet/wallpaper.jpg"));
 	     
 	  
 	      g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);

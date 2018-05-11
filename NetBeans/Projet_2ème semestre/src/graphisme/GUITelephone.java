@@ -13,35 +13,33 @@ import javax.swing.JPanel;
 
 public class GUITelephone extends JFrame  {
 
-	private JFrame fen = new JFrame("Téléphone");
-	private ImagePanel fondecran;
-	private ArrayList<JButton> listBoutons = new ArrayList<JButton>();
-	private JButton BoutonGallerie;
+	
 
 	public GUITelephone() {
-		setResizable(false);
+		JFrame fen = new JFrame("Téléphone");
+		ImagePanel fondecran;
+		JButton BoutonGallerie;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		fondecran = new ImagePanel();
-
+		fondecran.setPreferredSize(new Dimension(240, 400));
+		
 		ImageIcon ImageContact = new ImageIcon(
-				"F:/HES-Informatique De Gestion/poo/Projet/Photo_Projet/contact.jpg");
+				"C:/Users/Projet/Photo_Projet/contact.jpg");
 		Image ImageContactRedim = ImageContact.getImage().getScaledInstance(
 				100, 100, java.awt.Image.SCALE_SMOOTH);
 		ImageContact = new ImageIcon(ImageContactRedim);
 		JButton BoutonContact = new JButton(ImageContact);
-		listBoutons.add(BoutonContact);
-		fondecran.add(listBoutons.get(listBoutons.size() - 1));
+		
 
 		ImageIcon ImageGallerie = new ImageIcon(
-				"F:/HES-Informatique De Gestion/poo/Projet/Photo_Projet/gallerie.jpg");
+				"C:/Users/Projet/Photo_Projet/gallerie.jpg");
 		Image ImageGallerieRedim = ImageGallerie.getImage().getScaledInstance(
 				100, 100, java.awt.Image.SCALE_SMOOTH);
 		ImageGallerie = new ImageIcon(ImageGallerieRedim);
 		BoutonGallerie = new JButton(ImageGallerie);
-		listBoutons.add(BoutonGallerie);
-		fondecran.add(listBoutons.get(listBoutons.size() - 1));
-
+		
 		fen.setPreferredSize(new Dimension(480, 800));
 		BoutonGallerie.setPreferredSize(new Dimension(100, 100));
 		BoutonContact.setPreferredSize(new Dimension(100, 100));
@@ -52,8 +50,9 @@ public class GUITelephone extends JFrame  {
 		
 		BoutonGallerie.addActionListener(new MonListener());
 		
-		
+		setResizable(false);
 		pack();
+		setLocationRelativeTo(null);
 		setVisible(true);
 		
 
@@ -62,7 +61,7 @@ public class GUITelephone extends JFrame  {
 		public void actionPerformed(ActionEvent e) {  
 			GUIGallerie picture = new GUIGallerie();
 			picture.setVisible(true);
-			System.out.println("ta mere");
+			dispose();
 		}  
 	}
 }
