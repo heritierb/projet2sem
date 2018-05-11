@@ -3,6 +3,7 @@ package graphisme;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import javax.swing.BorderFactory;
@@ -12,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
 public class NewContact extends JFrame{
@@ -38,17 +40,20 @@ public class NewContact extends JFrame{
     private JTextField txt5 = new JTextField(25);
     private JTextField txt6 = new JTextField(25);
     private JTextField txt7 = new JTextField(25);
-  
+    private JButton buttonDone = new JButton("Done");
+    private JButton buttonCancel = new JButton("Cancel");
+    private JButton addImage = new JButton("<html>add a<br />photo</html>");
+    
 
     
     	public NewContact() {
-                setTitle("New contact");
-        	setPreferredSize(new Dimension(480, 800));
+                fen.setTitle("New contact");
+        	fen.setPreferredSize(new Dimension(480, 800));
                 ImagePanel fondecran = new ImagePanel();
-		setResizable(false);
-                add(fondecran, BorderLayout.NORTH);
+		fen.setResizable(false);
+                fen.setLayout(new BorderLayout);
                 
-		add(panel_center, BorderLayout.CENTER);
+		fen.add(panel_center, BorderLayout.CENTER);
                 panel_center.setLayout(new GridLayout(7, 1, 14, 50));
                 panel_center.add(txt1);
                 panel_center.add(txt2);
@@ -82,19 +87,35 @@ public class NewContact extends JFrame{
                 panel_west.add(label6);
                 panel_west.add(label7);
                 panel_west.setPreferredSize(new Dimension(100,800));
-                add(panel_west, BorderLayout.WEST);
+                fen.add(panel_west, BorderLayout.WEST);
                 
                 panel_east.setPreferredSize(new Dimension(50,800));
-                add(panel_east, BorderLayout.EAST);
+                fen.add(panel_east, BorderLayout.EAST);
+                
+               // panel_north.setLayout(new FlowLayout());
+                buttonDone.setContentAreaFilled(false);
+                buttonDone.setPreferredSize(new Dimension(80,28));
+                
+                buttonCancel.setContentAreaFilled(false);
+                buttonCancel.setPreferredSize(new Dimension(80,28));
+                addImage.setContentAreaFilled(false);
+                addImage.setPreferredSize(new Dimension(90,90));
+                panel_north.add(buttonDone);
+                panel_north.add(addImage);
+                panel_north.add(buttonCancel);
                 panel_north.setPreferredSize(new Dimension(100,100));
-                add(panel_north, BorderLayout.NORTH);
-                panel_south.setPreferredSize(new Dimension(100,100));
-                add(panel_south, BorderLayout.SOUTH);
+                fen.add(panel_north, BorderLayout.NORTH);
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		pack();
-                setVisible(true);
+                panel_south.setPreferredSize(new Dimension(100,100));
+                fen.add(panel_south, BorderLayout.SOUTH);
+
+		fen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		fen.pack();
+                fen.setLocationRelativeTo(null);
+                fen.setVisible(true);
                 
 	}
+        
+       
     
 }
