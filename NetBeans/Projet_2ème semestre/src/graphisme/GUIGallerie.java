@@ -14,10 +14,9 @@ public class GUIGallerie extends JFrame {
 	int TAILLE_BOUTON = 100;
 	int nb_items;
 	
-	static String DOSSIER = "C:/Users/Projet/Photo_Projet/photos";
+	static String DOSSIER = "C:/Users/Projet/Photo_Projet/photos/";
 	String EXTENSION = ".jpg";
 	ArrayList<String> fichiers;
-	
 	list_directory photos = new list_directory(DOSSIER, EXTENSION);
 	JFrame fen = new JFrame("Gallerie");
 	JPanel panelSouth = new JPanel();
