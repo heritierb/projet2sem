@@ -27,7 +27,6 @@ import structure.Contact;
 
 public class NewContact extends JFrame {
     
-    private JFrame fen = new JFrame("New contact");
     private JPanel panel_center = new JPanel();
     private JPanel panel_west = new JPanel();
     private JPanel panel_east = new JPanel();
@@ -60,6 +59,7 @@ public class NewContact extends JFrame {
                 setTitle("New contact");
         	setPreferredSize(new Dimension(480, 800));
 		setResizable(false);
+                setUndecorated(true);
                 
                 // **** CENTER **** //
                 panel_center.setLayout(new GridLayout(7, 1, 14, 50));
