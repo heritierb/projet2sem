@@ -11,14 +11,16 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class GUIGallerie extends JPanel {
-        private ImagePanel gallerie = new ImagePanel(new ImageIcon("C:/Users/Projet/Photo_Projet/wallpaper2.png"));
+        private ImagePanel gallerie = new ImagePanel(new ImageIcon("src/images/wallpaper2.png"));
         private GUITelephone guit;
         
         public GUIGallerie(GUITelephone guit){
             this.guit = guit;
             setLayout(new BorderLayout());
             add(gallerie);          
-        }  
+        }
+        
+        
 }
 //	int TAILLE_BOUTON = 100;
 //	int nb_items;

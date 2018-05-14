@@ -2,8 +2,10 @@ package graphisme;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,29 +20,41 @@ public class GUITelephone extends JFrame  {
     
     // **** DECLARATION COMPOSANTS **** //
     private JPanel northpanel = new JPanel();
+    private JPanel northpanelE = new JPanel();
+    private JPanel northpanelW = new JPanel();
     private JPanel southpanel = new JPanel();
     private JPanel apps = new JPanel(new GridBagLayout());
     private JPanel status = new JPanel();
-    private ImageIcon homeI = new ImageIcon("C:/Users/Projet/Photo_Projet/homebutton.png");
-    private JButton bhome = new JButton(homeI);
-    private JButton icontacts = new JButton(new ImageIcon("C:/Users/Projet/Photo_Projet/contacts.png"));
-    private JButton igallerie = new JButton(new ImageIcon("C:/Users/Projet/Photo_Projet/gallery.png"));
-    private JButton cadre0 = new JButton(new ImageIcon("C:/Users/Projet/Photo_Projet/empty.png"));
-    private JButton cadre1 = new JButton(new ImageIcon("C:/Users/Projet/Photo_Projet/empty.png"));
-    private JButton cadre2 = new JButton(new ImageIcon("C:/Users/Projet/Photo_Projet/empty.png"));
-    private JButton cadre3 = new JButton(new ImageIcon("C:/Users/Projet/Photo_Projet/empty.png"));
-    private JButton cadre4 = new JButton(new ImageIcon("C:/Users/Projet/Photo_Projet/empty.png"));
-    private JButton cadre5 = new JButton(new ImageIcon("C:/Users/Projet/Photo_Projet/empty.png"));
-    private JButton cadre6 = new JButton(new ImageIcon("C:/Users/Projet/Photo_Projet/empty.png"));
-    private JButton cadre7 = new JButton(new ImageIcon("C:/Users/Projet/Photo_Projet/empty.png"));
-    private JButton cadre8 = new JButton(new ImageIcon("C:/Users/Projet/Photo_Projet/empty.png"));
-    private JButton cadre9 = new JButton(new ImageIcon("C:/Users/Projet/Photo_Projet/empty.png"));
-    private ImagePanel mainP = new ImagePanel(new ImageIcon("C:/Users/Projet/Photo_Projet/wallpaper2.png"));
-    private ImagePanel phoneP = new ImagePanel(new ImageIcon("C:/Users/Projet/Photo_Projet/wallpaper.png"));
-    
+    private JPanel empty = new JPanel();
+    private JButton boff = new JButton(new ImageIcon("src/images/off.png"));
+    private JButton bhome = new JButton(new ImageIcon("src/images/homebutton.png"));
+    private JButton back = new JButton(new ImageIcon("src/images/back.png"));
+    private JButton icontacts = new JButton(new ImageIcon("src/images/contacts.png"));
+    private JButton igallerie = new JButton(new ImageIcon("src/images/gallery.png"));
+    private JButton cadre0 = new JButton(new ImageIcon("src/images/empty.png"));
+    private JButton cadre1 = new JButton(new ImageIcon("src/images/empty.png"));
+    private JButton cadre2 = new JButton(new ImageIcon("src/images/empty.png"));
+    private JButton cadre3 = new JButton(new ImageIcon("src/images/empty.png"));
+    private JButton cadre4 = new JButton(new ImageIcon("src/images/empty.png"));
+    private JButton cadre5 = new JButton(new ImageIcon("src/images/empty.png"));
+    private JButton cadre6 = new JButton(new ImageIcon("src/images/empty.png"));
+    private JButton cadre7 = new JButton(new ImageIcon("src/images/empty.png"));
+    private JButton cadre8 = new JButton(new ImageIcon("src/images/empty.png"));
+    private JButton cadre9 = new JButton(new ImageIcon("src/images/empty.png"));
+    private ImagePanel bluethooth = new ImagePanel(new ImageIcon("src/images/bluethooth.png"));
+    private ImagePanel alarm = new ImagePanel (new ImageIcon("src/images/alarm.png"));
+    private ImagePanel battery = new ImagePanel (new ImageIcon("src/images/battery.png"));
+    private ImagePanel wifi = new ImagePanel (new ImageIcon("src/images/wifi.png"));
+    private ImagePanel signal = new ImagePanel (new ImageIcon("src/images/signal.png"));
+    private ImagePanel logo = new ImagePanel (new ImageIcon("src/images/logo.png"));
+    private ImagePanel mainP = new ImagePanel(new ImageIcon("src/images/wallpaper2.png"));
+    private ImagePanel phoneP = new ImagePanel(new ImageIcon("src/images/wallpaper.png"));
+        // POSITION FOR THE BUTTON BACK
+    private int backPosition = 0;
     // **** APPLICATIONS **** //
     private GUIGallerie guigallerie = new GUIGallerie(this);
     private GUIContacts guicontacts = new GUIContacts(this);
+    private GUINewContact guinewcontact = new GUINewContact(this);
     
     // **** FORMAT JEU DE CARTES **** //
     private CardLayout cardL = new CardLayout();
@@ -53,7 +67,7 @@ public class GUITelephone extends JFrame  {
 		setPreferredSize(new Dimension(480, 800));
                 setLocationRelativeTo(null);
                 setAlwaysOnTop(true);
-                //setUndecorated(true);
+                setUndecorated(true);
 
                 // **** CONFIG CARDS PANEL **** //
 		setContentPane(phoneP);
@@ -65,6 +79,7 @@ public class GUITelephone extends JFrame  {
                 cardP.add(mainP, "main");
                 cardP.add(guigallerie, "GUIGallerie");
                 cardP.add(guicontacts, "contacts");
+                cardP.add(guinewcontact, "newcontact");
                 
                 // **** "SAC" DE BOUTONS D'APPLICATIONS **** //
                 mainP.setLayout(new BorderLayout());
@@ -105,6 +120,7 @@ public class GUITelephone extends JFrame  {
                 apps.add(cadre0, bag);
                 cadre0.setContentAreaFilled(false);
                 cadre0.setBorderPainted(false);
+                cadre0.addActionListener(new ClickTest());
                 bag.gridx = 0;
 		bag.gridy = 1;
 		bag.gridwidth = 1;
@@ -172,18 +188,49 @@ public class GUITelephone extends JFrame  {
                 
                 // **** PANEL NORTH **** //
                 phoneP.add(northpanel, BorderLayout.NORTH);
+                northpanel.setLayout(new BorderLayout());
+                northpanel.add(northpanelW, BorderLayout.WEST);
+                northpanel.add(northpanelE, BorderLayout.EAST);
+                northpanelE.setLayout(new FlowLayout());
+                northpanelW.setLayout(new FlowLayout());
+                northpanelE.add(bluethooth);
+                northpanelE.add(alarm);
+                northpanelE.add(battery);
+                northpanelW.add(signal);
+                northpanelW.add(logo);
+                northpanelW.add(wifi);
 		northpanel.setOpaque(false);
-		northpanel.setPreferredSize(new Dimension(480, 20));
+                northpanelE.setOpaque(false);
+                northpanelW.setOpaque(false);
+                bluethooth.setPreferredSize(new Dimension(16,16));
+                alarm.setPreferredSize(new Dimension(16,16));
+                battery.setPreferredSize(new Dimension(16,16));
+                signal.setPreferredSize(new Dimension(16,16));
+                logo.setPreferredSize(new Dimension(53,14));
+                wifi.setPreferredSize(new Dimension(16,16));
+		northpanel.setPreferredSize(new Dimension(480, 22));
 
                 
                 // **** PANEL SOUTH **** //
                 phoneP.add(southpanel, BorderLayout.SOUTH);
 		southpanel.setOpaque(false);
 		southpanel.setPreferredSize(new Dimension(480, 95));
+                southpanel.setLayout(new BorderLayout());
                 bhome.setContentAreaFilled(false);
                 bhome.setBorderPainted(false);
-                southpanel.add(bhome);
+                southpanel.add(bhome, BorderLayout.CENTER);
+                back.setContentAreaFilled(false);
+                back.setBorderPainted(false);
+                southpanel.add(back, BorderLayout.EAST);
+                southpanel.add(boff, BorderLayout.WEST);
+                boff.setContentAreaFilled(false);
+                boff.setBorderPainted(false);
+                boff.setPreferredSize(new Dimension(200, 95));
+                back.setPreferredSize(new Dimension(200, 95));
+                    //ACTIONLISTENERS
                 bhome.addActionListener(new ClickHome());
+                back.addActionListener(new ClickBack());
+                boff.addActionListener(new ClickOff());
                 
                 // **** BASICS OPTIONS **** //
 		setResizable(false);
@@ -195,21 +242,57 @@ public class GUITelephone extends JFrame  {
 		public void actionPerformed(ActionEvent e) 
 		{
 			cardL.show(cardP, "GUIGallerie");
+                        backPosition = 1;
 		}
 	}
         class ClickContacts implements ActionListener {
 		public void actionPerformed(ActionEvent e) 
 		{
 			cardL.show(cardP, "contacts");
+                        backPosition = 2;
 		}
 	}
         class ClickHome implements ActionListener{
                 public void actionPerformed(ActionEvent e) 
 		{
 			cardL.show(cardP, "main");
+                        backPosition = 0;
 		}
         }
-        
+        class ClickBack implements ActionListener{
+                public void actionPerformed(ActionEvent e) 
+		{   
+                    // reviens sur le home depuis la gallerie
+                    if(backPosition == 1){
+                        cardL.show(cardP, "main");
+                        backPosition = 0;
+                    }
+                    // reviens sur le home depuis les contacts
+                    else if(backPosition == 2){
+                        cardL.show(cardP, "main");
+                        backPosition = 0;
+                    }
+                    else if(backPosition == 3){
+                        cardL.show(cardP, "contacts");
+                        backPosition = 2;
+                    }
+		}
+        }
+            class ClickTest implements ActionListener {
+		public void actionPerformed(ActionEvent e) 
+		{
+			cardL.show(cardP, "newcontact");
+                        backPosition = 3;
+		}
+	}
+            class ClickOff implements ActionListener {
+		public void actionPerformed(ActionEvent e) 
+		{
+			dispose();
+		}
+	}
+                
+      
         
                        
 }

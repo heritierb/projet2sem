@@ -5,7 +5,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class GUIContacts extends JPanel {
-        private ImagePanel contacts = new ImagePanel(new ImageIcon("C:/Users/Projet/Photo_Projet/wallpaper2.png"));
+        private ImagePanel contacts = new ImagePanel(new ImageIcon("src/images/wallpaper2.png"));
         private GUITelephone guit;
         
         public GUIContacts(GUITelephone guit){
