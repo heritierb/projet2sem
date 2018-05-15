@@ -6,6 +6,8 @@ import javax.swing.JPanel;
 public class ImagePanel extends JPanel {
 	
 	ImageIcon image;
+        
+        
 
 	public ImagePanel(ImageIcon image) 
 	{
@@ -32,19 +34,4 @@ public class ImagePanel extends JPanel {
 //
 //public class ImagePanel extends JPanel {
 //
-//    ImagePanel(ImageIcon imageIcon) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-//
-//
-//	public void paintComponent(Graphics g){
-//	    try {
-//	      Image img = ImageIO.read(new File("C:/Users/Projet/Photo_Projet/wallpaper.jpg"));
-//	     
-//	  
-//	      g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
-//	    } catch (UnsupportedOperationException | IOException e) {
-//	      e.printStackTrace();
-//	    }                
-//	  }  
-//}
+

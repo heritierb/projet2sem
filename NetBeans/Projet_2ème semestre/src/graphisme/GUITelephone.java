@@ -51,6 +51,7 @@ public class GUITelephone extends JFrame  {
     private ImagePanel phoneP = new ImagePanel(new ImageIcon("src/images/wallpaper.png"));
         // POSITION FOR THE BUTTON BACK
     private int backPosition = 0;
+
     // **** APPLICATIONS **** //
     private GUIGallerie guigallerie = new GUIGallerie(this);
     private GUIContacts guicontacts = new GUIContacts(this);
@@ -238,28 +239,32 @@ public class GUITelephone extends JFrame  {
 		setLocationRelativeTo(null);
 	}
         
-        class ClickGallerie implements ActionListener {
+        public void setCurrentPanel(String currentPanel){
+            cardL.show(cardP, currentPanel);
+        }
+                
+        private class ClickGallerie implements ActionListener {
 		public void actionPerformed(ActionEvent e) 
 		{
 			cardL.show(cardP, "GUIGallerie");
                         backPosition = 1;
 		}
 	}
-        class ClickContacts implements ActionListener {
+        private class ClickContacts implements ActionListener {
 		public void actionPerformed(ActionEvent e) 
 		{
 			cardL.show(cardP, "contacts");
                         backPosition = 2;
 		}
 	}
-        class ClickHome implements ActionListener{
+        private class ClickHome implements ActionListener{
                 public void actionPerformed(ActionEvent e) 
 		{
 			cardL.show(cardP, "main");
                         backPosition = 0;
 		}
         }
-        class ClickBack implements ActionListener{
+        private class ClickBack implements ActionListener{
                 public void actionPerformed(ActionEvent e) 
 		{   
                     // reviens sur le home depuis la gallerie
@@ -278,20 +283,27 @@ public class GUITelephone extends JFrame  {
                     }
 		}
         }
-            class ClickTest implements ActionListener {
+        private class ClickTest implements ActionListener {
 		public void actionPerformed(ActionEvent e) 
 		{
 			cardL.show(cardP, "newcontact");
                         backPosition = 3;
 		}
 	}
-            class ClickOff implements ActionListener {
+        private class ClickOff implements ActionListener {
 		public void actionPerformed(ActionEvent e) 
 		{
 			dispose();
 		}
 	}
-                
+        
+    public int getBackPosition() {
+        return backPosition;
+    }
+
+    public void setBackPosition(int backPosition) {
+        this.backPosition = backPosition;
+    }        
       
         
                        
