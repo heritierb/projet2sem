@@ -154,7 +154,7 @@ public class GUINewContact extends JPanel {
         private class doneClick implements ActionListener {  
 		public void actionPerformed(ActionEvent e) { 
                     Contact joselasticot = new Contact(randomUUID(), txt1.getText(),txt2.getText(),txt3.getText(),txt4.getText(),txt5.getText(),txt6.getText(),txt7.getText());
-                    joselasticot.addC();
+                    joselasticot.addC(joselasticot);
                     
 		}  
 	}

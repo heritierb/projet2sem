@@ -9,14 +9,16 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import static structure.Main.serializeObject;
 
 
-public class GUITelephone extends JFrame  {
+public class GUITelephone extends JFrame implements Serializable{
     
     // **** DECLARATION COMPOSANTS **** //
     private JPanel northpanel = new JPanel();
@@ -51,6 +53,9 @@ public class GUITelephone extends JFrame  {
     private ImagePanel phoneP = new ImagePanel(new ImageIcon("src/images/wallpaper.png"));
         // POSITION FOR THE BUTTON BACK
     private int backPosition = 0;
+    
+        // PERMET DE SERIALISER OU NON
+    public Boolean serialisation = false;
 
     // **** APPLICATIONS **** //
     private GUIGallerie guigallerie = new GUIGallerie(this);
@@ -292,8 +297,9 @@ public class GUITelephone extends JFrame  {
 	}
         private class ClickOff implements ActionListener {
 		public void actionPerformed(ActionEvent e) 
-		{
-			dispose();
+		{   
+                    serialisation = true;
+                    dispose();
 		}
 	}
         
@@ -303,7 +309,15 @@ public class GUITelephone extends JFrame  {
 
     public void setBackPosition(int backPosition) {
         this.backPosition = backPosition;
-    }        
+    }  
+    
+    public Boolean getSerialisation() {
+        return serialisation;
+    }
+
+    public void setSerialisation(Boolean serialisation) {
+        this.serialisation = serialisation;
+    }
       
         
                        

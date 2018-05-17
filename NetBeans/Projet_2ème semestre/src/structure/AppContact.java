@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import static java.util.UUID.randomUUID;
 
-public abstract class AppContact extends App implements Serializable{
+public abstract class AppContact implements Serializable{
     
     //0.ID 1.Nom 2.Prenom 3.Numero 4.Email 5.Adresse 6.Anni 7.Groupe
     //Contact contact = new Contact(randomUUID(), "2", "3", "4", "5", "6", "7", "8");

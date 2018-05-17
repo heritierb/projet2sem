@@ -1,6 +1,8 @@
 package structure;
 
-public class AppGallerie extends App{
+import java.io.Serializable;
+
+public class AppGallerie implements Serializable{
 
     public void addC() {
     }
