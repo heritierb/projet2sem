@@ -14,10 +14,8 @@ public abstract class AppContact implements Serializable{
     
     Object[][] tableau = new Object[arrayContacts.size()][4];
  
-    public void addC(Contact contactC) {
-        for (int i = 0; i < arrayContacts.size(); i++) {
-            arrayContacts.add(contactC);
-        }
+    public void addC(Contact contact) {
+            arrayContacts.add(contact); 
  
     }
     public void deleteC(Contact contactC) {

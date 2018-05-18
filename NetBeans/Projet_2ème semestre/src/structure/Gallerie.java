@@ -1,6 +1,6 @@
 package structure;
 
-public class Gallerie extends AppGallerie{
+public class Gallerie {
     
     String nom;
     String date;
