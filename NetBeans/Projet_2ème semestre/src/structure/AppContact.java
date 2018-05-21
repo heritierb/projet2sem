@@ -8,11 +8,8 @@ import static java.util.UUID.randomUUID;
 public abstract class AppContact implements Serializable{
     
     //0.ID 1.Nom 2.Prenom 3.Numero 4.Email 5.Adresse 6.Anni 7.Groupe
-    //Contact contact = new Contact(randomUUID(), "2", "3", "4", "5", "6", "7", "8");
 
-    private ArrayList<Contact> arrayContacts = new ArrayList<>();
-    
-    Object[][] tableau = new Object[arrayContacts.size()][4];
+    public ArrayList<Contact> arrayContacts = new ArrayList<>();
  
     public void addC(Contact contact) {
             arrayContacts.add(contact); 

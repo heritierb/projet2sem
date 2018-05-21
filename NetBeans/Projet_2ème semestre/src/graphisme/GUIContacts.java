@@ -30,7 +30,7 @@ public class GUIContacts extends JPanel implements Serializable {
 
     AppContact contactA = new AppContact() {
     };
-    private ArrayList<Contact> arrayC = new ArrayList<>();
+    private ArrayList<Contact> arrayC = contactA.getArrayContacts();
     private ImagePanel contacts = new ImagePanel(new ImageIcon("src/images/wallpaper2.png"));
     private GUITelephone guit = (GUITelephone) SwingUtilities.getAncestorOfClass(GUITelephone.class, GUIContacts.this);
     private JPanel panelnorth = new JPanel();
@@ -72,11 +72,10 @@ public class GUIContacts extends JPanel implements Serializable {
 
     }
 
-    private void afficheUnit() {
+    public void afficheUnit() {
 
         for (int i = 0; i < arrayC.size(); i++) {
             for (int j = 0; j < arrayC.size(); j++) {
-                list.setLayout(new FlowLayout());
                 list.add(new JLabel(arrayC.get(j).getPrenom() + " " + arrayC.get(j).getNom()));
                 panelcenter.add(list);
             }

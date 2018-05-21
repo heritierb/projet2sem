@@ -28,8 +28,8 @@ import structure.Contact;
 
 public class GUINewContact extends JPanel {
 
-    AppContact contactA = new AppContact() {
-    };
+    AppContact contactA = new AppContact(){};
+    //GUIContacts guic = new GUIContacts();
     private ImagePanel newcontact = new ImagePanel(new ImageIcon("src/images/wallpaper2.png"));
     private GUITelephone guit = (GUITelephone) SwingUtilities.getAncestorOfClass(GUITelephone.class, GUINewContact.this);
     private JPanel panel_center = new JPanel();
@@ -166,6 +166,7 @@ public class GUINewContact extends JPanel {
             } catch (IOException ex) {
                 Logger.getLogger(GUITelephone.class.getName()).log(Level.SEVERE, null, ex);
             }
+            //GUIContacts.afficheUnit();
             guit.setCurrentPanel("contacts");
             guit.setBackPosition(2);
             System.out.println("Contact enregistré");

@@ -24,9 +24,9 @@ public class Contact extends AppContact implements Serializable{
 		this.email = email;
 		this.adresse = adresse;
 		this.anniversaire = anniversaire;
-		this.groupe = groupe;
-		
+		this.groupe = groupe;	
 	}
+        
     public UUID getContactID() {
         return contactID;
     }
