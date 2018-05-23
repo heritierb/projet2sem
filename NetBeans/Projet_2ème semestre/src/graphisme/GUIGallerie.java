@@ -2,6 +2,7 @@ package graphisme;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.util.ArrayList;
 
@@ -18,7 +19,7 @@ public class GUIGallerie extends JPanel {
 	int TAILLE_BOUTON = 100;
 	int nb_items;
 
-	static String DOSSIER = "C:/Users/Projet/Photo_Projet/photos/";
+	static String DOSSIER = "src/photos/";
 	String EXTENSION = ".jpg";
 	ArrayList<String> fichiers;
 	list_directory photos = new list_directory(DOSSIER, EXTENSION);
@@ -28,7 +29,7 @@ public class GUIGallerie extends JPanel {
 
 	public GUIGallerie(GUITelephone guit) {
 		this.guit = guit;
-		setLayout(new BorderLayout());
+		setLayout(new GridLayout(10, 3));
 
 		fichiers = list_directory.listFileNames(DOSSIER, EXTENSION);
 		nb_items = fichiers.size();
