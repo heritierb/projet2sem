@@ -66,6 +66,7 @@ public class GUITelephone extends JFrame implements Serializable {
     private GUIGallerie guigallerie = new GUIGallerie(this);
     private GUIContacts guicontacts = new GUIContacts(this);
     private GUINewContact guinewcontact = new GUINewContact(this);
+    private GUIImage guiimage = new GUIImage(this);
 
     // **** FORMAT JEU DE CARTES **** //
     private CardLayout cardL = new CardLayout();
@@ -88,9 +89,10 @@ public class GUITelephone extends JFrame implements Serializable {
 
         // **** AJOUT DES CARTES APPLICATIONS **** //
         cardP.add(mainP, "main");
-        cardP.add(guigallerie, "GUIGallerie");
+        cardP.add(guigallerie, "gallerie");
         cardP.add(guicontacts, "contacts");
         cardP.add(guinewcontact, "newcontact");
+        cardP.add(guiimage, "image");
        
 
         // **** "SAC" DE BOUTONS D'APPLICATIONS **** //
@@ -258,6 +260,7 @@ public class GUITelephone extends JFrame implements Serializable {
 
             cardL.show(cardP, "GUIGallerie");
             backPosition = 1;
+            guicontacts.afficheUnit();
         }
     }
 
@@ -307,7 +310,7 @@ public class GUITelephone extends JFrame implements Serializable {
     private class ClickOff implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
-
+            guicontacts.serializeObject();
             dispose();
         }
     }
