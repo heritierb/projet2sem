@@ -1,4 +1,5 @@
 package graphisme;
+
 import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.ImageIcon;
@@ -20,8 +21,7 @@ public class AfficheImage {
 
 		JFrame fen = new JFrame("Ordinateur ");
 		JPanel pan = new JPanel();
-		ImageIcon icon = new ImageIcon(
-				"C:/Users/oppik/Pictures/Screenshots/Capture.jpg");
+		ImageIcon icon = new ImageIcon("src/photos/geneva-2379789__340.jpg");
 		JLabel img = new JLabel(icon);
 		pan.add(img);
 		fen.add(pan);

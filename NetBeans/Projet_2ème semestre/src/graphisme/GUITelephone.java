@@ -258,7 +258,7 @@ public class GUITelephone extends JFrame implements Serializable {
 
         public void actionPerformed(ActionEvent e) {
 
-            cardL.show(cardP, "GUIGallerie");
+            cardL.show(cardP, "gallerie");
             backPosition = 1;
             guicontacts.afficheUnit();
         }
@@ -295,6 +295,9 @@ public class GUITelephone extends JFrame implements Serializable {
             } else if (backPosition == 3) {
                 cardL.show(cardP, "contacts");
                 backPosition = 2;
+            }else if (backPosition == 4){
+            	cardL.show(cardP, "gallerie");
+            	backPosition = 1;
             }
         }
     }
