@@ -19,16 +19,20 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import structure.AppContact;
+import structure.AppGallerie;
 
 public class GUITelephone extends JFrame implements Serializable {
 
     AppContact contactA;
+    AppGallerie gallerieA;
     // **** DECLARATION COMPOSANTS **** //
     private JPanel northpanel = new JPanel();
     private JPanel northpanelE = new JPanel();
@@ -74,9 +78,10 @@ public class GUITelephone extends JFrame implements Serializable {
     private JPanel cardP = new JPanel(cardL);
     private GridBagConstraints bag = new GridBagConstraints();
 
-    public GUITelephone(AppContact contactA) {
+    public GUITelephone(AppContact contactA, AppGallerie gallerieA) {
         this.contactA = contactA;
-        this.guigallerie = new GUIGallerie(this);
+        this.gallerieA = gallerieA;
+        this.guigallerie = new GUIGallerie(this, gallerieA);
         this.guicontacts = new GUIContacts(this, contactA);
         this.guinewcontact = new GUINewContact(this, contactA);
         this.guiimage = new GUIImage(this);

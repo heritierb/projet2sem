@@ -2,7 +2,6 @@ package graphisme;
 
 import javax.swing.JButton;
 
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Image;
@@ -11,31 +10,35 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import structure.AppGallerie;
+
 public class GUIGallerie extends JPanel {
+	AppGallerie gallerieA;
+	
 	static int TAILLE_BOUTON = 100;
-	static String DOSSIER = "src/photos/";
-	static String EXTENSION = ".jpg";
+	
 	private GUITelephone guit = (GUITelephone) SwingUtilities
 			.getAncestorOfClass(GUITelephone.class, GUIGallerie.this);
 	private ImagePanel gallerie = new ImagePanel(new ImageIcon(
 			"src/images/wallpaper2.png"));
-	private ArrayList<String> fichiers;
-	private list_directory photos = new list_directory(DOSSIER, EXTENSION);
+	private ArrayList<String> fichiers; 
 	private static String imageAAfficher = "test";
 
-	public GUIGallerie(GUITelephone guit) {
+	public GUIGallerie(GUITelephone guit, AppGallerie gallerieA) {
+		this.gallerieA=gallerieA;
+		fichiers= gallerieA.getFichiers();
 		this.guit = guit;
 		// Pour chaque image du dossier, céer un bouton
-		fichiers = list_directory.listFileNames(DOSSIER, EXTENSION);
+		
+		
 		for (int i = 0; i < fichiers.size(); i++) {
-			JButton cpt = CreationBoutonImage((String) photos.getFichiers()
+			JButton cpt = CreationBoutonImage((String) gallerieA.getFichiers()
 					.get(i));
 
-			cpt.setName((String) photos.getFichiers().get(i));
+			cpt.setName((String) gallerieA.getFichiers().get(i));
 			gallerie.add(cpt);
 			cpt.addActionListener(new ClickImage());
 		}
@@ -47,13 +50,13 @@ public class GUIGallerie extends JPanel {
 
 	}
 
-	public static JButton CreationBoutonImage(String name) {
+	public JButton CreationBoutonImage(String name) {
 		ImageIcon imageBouton;
 		Image imageBoutonRedim;
 		JButton bouton;
 
 		// un bouton a comme icon une image dans le dossier
-		imageBoutonRedim = new ImageIcon(DOSSIER.concat(name)).getImage()
+		imageBoutonRedim = new ImageIcon(gallerieA.getDOSSIER().concat(name)).getImage()
 				.getScaledInstance(TAILLE_BOUTON, TAILLE_BOUTON,
 						java.awt.Image.SCALE_SMOOTH);
 		imageBouton = new ImageIcon(imageBoutonRedim);
@@ -71,7 +74,7 @@ public class GUIGallerie extends JPanel {
 			guit.setCurrentPanel("image");
 			guit.setBackPosition(4);
 
-			imageAAfficher = DOSSIER.concat(button.getName());
+			imageAAfficher = gallerieA.getDOSSIER().concat(button.getName());
 			
 		}
 	}
