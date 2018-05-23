@@ -32,7 +32,7 @@ public class GUIContacts extends JPanel implements Serializable {
 
     AppContact contactA = new AppContact() {
     };
-    private ArrayList<Contact> arrayCc = contactA.getArrayContacts();
+    private ArrayList<Contact> arrayCc;
     private ImagePanel contacts = new ImagePanel(new ImageIcon("src/images/wallpaper2.png"));
     private GUITelephone guit = (GUITelephone) SwingUtilities.getAncestorOfClass(GUITelephone.class, GUIContacts.this);
     private JPanel panelnorth = new JPanel();
@@ -77,8 +77,8 @@ public class GUIContacts extends JPanel implements Serializable {
     }
 
     public void afficheUnit() {
-        for (int i = 0; i < arrayCc.size(); i++) {
-            JButton cpt = CreationBoutonContact(arrayCc.get(i).getPrenom() + "test");
+        for (int i = 0; i < contactA.getArrayContacts().size(); i++) {
+            JButton cpt = CreationBoutonContact(contactA.getArrayContacts().get(i).getPrenom() + "test");
             panelcenter.add(cpt);
             System.out.println("test affichage contacts"+i);
         }
@@ -92,6 +92,7 @@ public class GUIContacts extends JPanel implements Serializable {
 
     public void refresh() {
         panelcenter.removeAll();
+        arrayCc = contactA.getArrayContacts();
         updateUI();
         afficheUnit();
         System.out.println("test refresh");
@@ -131,5 +132,5 @@ public class GUIContacts extends JPanel implements Serializable {
             e.printStackTrace();
         }
         System.out.println("test seri");
-    }
+    }    
 }

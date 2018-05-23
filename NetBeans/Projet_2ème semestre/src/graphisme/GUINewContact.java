@@ -31,7 +31,7 @@ public class GUINewContact extends JPanel {
 
     AppContact contactA = new AppContact() {
     };
-    GUIContacts guic;
+    private GUIContacts guic = (GUIContacts) SwingUtilities.getAncestorOfClass(GUIContacts.class, GUINewContact.this);
     private ArrayList<Contact> arrayC = contactA.getArrayContacts();
     private ImagePanel newcontact = new ImagePanel(new ImageIcon("src/images/wallpaper2.png"));
     private GUITelephone guit = (GUITelephone) SwingUtilities.getAncestorOfClass(GUITelephone.class, GUINewContact.this);
@@ -165,7 +165,7 @@ public class GUINewContact extends JPanel {
 
         public void actionPerformed(ActionEvent e) {
             Contact cc = new Contact(txt1.getText(), txt2.getText(), txt3.getText(), txt4.getText(), txt5.getText(), txt6.getText(), txt7.getText());
-            contactA.addC(cc);
+            contactA.arrayContacts.add(cc);
             for (int i = 0; i < arrayC.size(); i++) {
                 System.out.println(i);
             }
