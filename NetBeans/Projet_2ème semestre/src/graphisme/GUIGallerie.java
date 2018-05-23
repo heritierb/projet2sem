@@ -1,45 +1,38 @@
 package graphisme;
 
-import java.awt.BorderLayout;
+import javax.swing.JButton;
 import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.FlowLayout;
 import java.awt.Image;
 import java.util.ArrayList;
-
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class GUIGallerie extends JPanel {
+	static int TAILLE_BOUTON = 100;
+	static String DOSSIER = "src/photos/";
+	static String EXTENSION = ".jpg";
 	private ImagePanel gallerie = new ImagePanel(new ImageIcon(
 			"src/images/wallpaper2.png"));
-	private GUITelephone guit;
-
-	int TAILLE_BOUTON = 100;
-	int nb_items;
-
-	static String DOSSIER = "src/photos/";
-	String EXTENSION = ".jpg";
-	ArrayList<String> fichiers;
-	list_directory photos = new list_directory(DOSSIER, EXTENSION);
-	JFrame fen = new JFrame("Gallerie");
-	JPanel panelSouth = new JPanel();
-	JButton home = new JButton("Home");
+	private int nb_items;
+	private ArrayList<String> fichiers;
+	private list_directory photos = new list_directory(DOSSIER, EXTENSION);
 
 	public GUIGallerie(GUITelephone guit) {
-		this.guit = guit;
-		setLayout(new GridLayout(10, 3));
 
+		//Pour chaque image du dossier, céer un bouton
 		fichiers = list_directory.listFileNames(DOSSIER, EXTENSION);
 		nb_items = fichiers.size();
-
 		for (int i = 0; i < nb_items; i++) {
 			JButton cpt = CreationBoutonImage((String) photos.getFichiers()
 					.get(i));
 			gallerie.add(cpt);
 		}
-
+		
+		//Affichage de la gallerie
+		gallerie.setLayout(new FlowLayout());
+		gallerie.setOpaque(false);
+		gallerie.setPreferredSize(new Dimension(480, 683));
 		add(gallerie);
 
 	}
@@ -49,13 +42,13 @@ public class GUIGallerie extends JPanel {
 		Image imageBoutonRedim;
 		JButton bouton;
 
-		imageBouton = new ImageIcon(DOSSIER.concat(name));
-		imageBoutonRedim = imageBouton.getImage().getScaledInstance(100, 100,
-				java.awt.Image.SCALE_SMOOTH);
+		//un bouton a comme icon une image dans le dossier
+		imageBoutonRedim = new ImageIcon(DOSSIER.concat(name)).getImage().getScaledInstance(
+				TAILLE_BOUTON, TAILLE_BOUTON, java.awt.Image.SCALE_SMOOTH);
 		imageBouton = new ImageIcon(imageBoutonRedim);
 		bouton = new JButton(imageBouton);
 
 		return bouton;
 	}
-}
 
+}
