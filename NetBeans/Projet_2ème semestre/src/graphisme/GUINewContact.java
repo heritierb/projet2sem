@@ -156,33 +156,29 @@ public class GUINewContact extends JPanel {
 
         // **** ACTION LISTENERS ****//
         buttonDone.addActionListener(new doneClick());
+        
+        
     }
+
 
     private class doneClick implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
-            Contact cc = new Contact(UUID.randomUUID(), txt1.getText(), txt2.getText(), txt3.getText(), txt4.getText(), txt5.getText(), txt6.getText(), txt7.getText());
+            Contact cc = new Contact(txt1.getText(), txt2.getText(), txt3.getText(), txt4.getText(), txt5.getText(), txt6.getText(), txt7.getText());
             contactA.addC(cc);
-            try {
-                serializeObject(arrayC);
-            } catch (IOException ex) {
-                Logger.getLogger(GUITelephone.class.getName()).log(Level.SEVERE, null, ex);
+            for (int i = 0; i < arrayC.size(); i++) {
+                System.out.println(i);
             }
             guit.setCurrentPanel("contacts");
-            //guic.refresh();
-            System.out.println("Contact enregistré");
-
         }
-
     }
 
-    public static void serializeObject(ArrayList arrayC) throws IOException {
-        // TODO Auto-generated method stub
-        FileOutputStream fichier = new FileOutputStream("src/svg.ser");
-        BufferedOutputStream bfichier = new BufferedOutputStream(fichier);
-        ObjectOutputStream obfichier = new ObjectOutputStream(bfichier);
-        obfichier.writeObject(arrayC);
-        System.out.println("Sérialisation effectuée");
-        obfichier.close();
+    public ArrayList<Contact> getArrayC() {
+        return arrayC;
     }
+
+    public void setArrayC(ArrayList<Contact> arrayC) {
+        this.arrayC = arrayC;
+    }
+    
 }

@@ -4,42 +4,25 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class Contact extends AppContact implements Serializable{
+public class Contact extends AppContact implements Serializable {
 
-	UUID contactID;
-        String nom;
-	String prenom;
-	String numero;
-	String email;
-	String adresse;
-	String anniversaire;
-	String groupe;    
-	
-	public Contact(UUID contactID, String nom, String prenom, String numero, String email,
-			String adresse, String anniversaire, String groupe) {
-		
-		this.nom = nom;
-		this.prenom = prenom;
-		this.numero = numero;
-		this.email = email;
-		this.adresse = adresse;
-		this.anniversaire = anniversaire;
-		this.groupe = groupe;	
-	}
-        
-    public UUID getContactID() {
-        return contactID;
-    }
+    String prenom;
+    String nom;
+    String numero;
+    String email;
+    String adresse;
+    String anniversaire;
+    String groupe;
 
-    public void setContactID(UUID contactID) {
-        this.contactID = UUID.randomUUID();
-    }    
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
+    public Contact(String prenom, String nom, String numero, String email,
+            String adresse, String anniversaire, String groupe) {
+        this.prenom = prenom;
         this.nom = nom;
+        this.numero = numero;
+        this.email = email;
+        this.adresse = adresse;
+        this.anniversaire = anniversaire;
+        this.groupe = groupe;
     }
 
     public String getPrenom() {
@@ -48,6 +31,14 @@ public class Contact extends AppContact implements Serializable{
 
     public void setPrenom(String prenom) {
         this.prenom = prenom;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
     public String getNumero() {
@@ -89,5 +80,5 @@ public class Contact extends AppContact implements Serializable{
     public void setGroupe(String groupe) {
         this.groupe = groupe;
     }
-	
+
 }

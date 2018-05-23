@@ -7,19 +7,15 @@ import static java.util.UUID.randomUUID;
 
 public abstract class AppContact implements Serializable{
     
-    //0.ID 1.Nom 2.Prenom 3.Numero 4.Email 5.Adresse 6.Anni 7.Groupe
 
-    public ArrayList<Contact> arrayContacts = new ArrayList<>();
+    public ArrayList<Contact> arrayContacts = new ArrayList<Contact>();
  
     public void addC(Contact contact) {
-            arrayContacts.add(contact); 
- 
+            arrayContacts.add(contact);
+            System.out.println(contact.getPrenom()+" "+contact.getNom()+" : contact enregistré");
     }
-    public void deleteC(Contact contactC) {
-        for (int i = 0; i < arrayContacts.size(); i++) {
-            arrayContacts.remove(contactC);
-        }
-        
+    public void deleteC(Contact contact) {
+            arrayContacts.remove(contact);
     }
     public void afficheUnit() {
            
@@ -34,6 +30,5 @@ public abstract class AppContact implements Serializable{
 
     public void setArrayContacts(ArrayList<Contact> arrayContacts) {
         this.arrayContacts = arrayContacts;
-    }
- 
+    } 
 }
