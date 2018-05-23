@@ -91,6 +91,7 @@ public class GUITelephone extends JFrame implements Serializable {
         cardP.add(guigallerie, "GUIGallerie");
         cardP.add(guicontacts, "contacts");
         cardP.add(guinewcontact, "newcontact");
+       
 
         // **** "SAC" DE BOUTONS D'APPLICATIONS **** //
         mainP.setLayout(new BorderLayout());

@@ -3,6 +3,7 @@ package graphisme;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;
@@ -67,44 +68,50 @@ public class GUIContacts extends JPanel implements Serializable {
         // **** AJOUT DE LA LISTE DES CONTACTS **** //
         contacts.add(panelcenter, BorderLayout.CENTER);
         panelcenter.setOpaque(false);
+        panelcenter.setLayout(new GridLayout());
         panelcenter.setPreferredSize(new Dimension(480, 600));
         afficheUnit();
-
+        
     }
 
     public void afficheUnit() {
 
         for (int i = 0; i < arrayC.size(); i++) {
-            for (int j = 0; j < arrayC.size(); j++) {
-                list.add(new JLabel(arrayC.get(j).getPrenom() + " " + arrayC.get(j).getNom()));
+                list.add(new JLabel(arrayC.get(i).getPrenom() + " " + arrayC.get(i).getNom()));
                 panelcenter.add(list);
-            }
+                System.out.println(list);
         }
+    }
+    
+    public void refresh(){
+        panelcenter.removeAll();
+        afficheUnit();
+        updateUI();
     }
 
     private class ClickNewContact implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
-            try {
-                deserializeObject(contactA);
-            } catch (IOException ex) {
-                Logger.getLogger(GUITelephone.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(GUITelephone.class.getName()).log(Level.SEVERE, null, ex);
-            }
+//            try {
+//                deserializeObject(arrayC);
+//            } catch (IOException ex) {
+//                Logger.getLogger(GUITelephone.class.getName()).log(Level.SEVERE, null, ex);
+//            } catch (ClassNotFoundException ex) {
+//                Logger.getLogger(GUITelephone.class.getName()).log(Level.SEVERE, null, ex);
+//            }
             guit.setCurrentPanel("newcontact");
             guit.setBackPosition(3);
         }
     }
 
-    private static void deserializeObject(AppContact contactA) throws IOException, ClassNotFoundException {
-        // TODO Auto-generated method stub
-        FileInputStream fichier = new FileInputStream("src/svg.ser");
-        BufferedInputStream bfichier = new BufferedInputStream(fichier);
-        ObjectInputStream obfichier = new ObjectInputStream(bfichier);
-        AppContact contactB = (AppContact) obfichier.readObject();
-        System.out.println("Déserialisation effectuée");
-        obfichier.close();
-    }
+//    private static void deserializeObject(ArrayList<Contact> arrayC) throws IOException, ClassNotFoundException {
+//        // TODO Auto-generated method stub
+//        FileInputStream fichier = new FileInputStream("src/svg.ser");
+//        BufferedInputStream bfichier = new BufferedInputStream(fichier);
+//        ObjectInputStream obfichier = new ObjectInputStream(bfichier);
+//        ArrayList<Contact> arrayL = (ArrayList<Contact>)obfichier.readObject();
+//        System.out.println("Déserialisation effectuée");
+//        obfichier.close();
+//    }
 
 }

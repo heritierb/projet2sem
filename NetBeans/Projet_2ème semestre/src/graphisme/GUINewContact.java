@@ -11,6 +11,7 @@ import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.UUID;
 import static java.util.UUID.randomUUID;
 import java.util.logging.Level;
@@ -28,8 +29,10 @@ import structure.Contact;
 
 public class GUINewContact extends JPanel {
 
-    AppContact contactA = new AppContact(){};
-    //GUIContacts guic = new GUIContacts();
+    AppContact contactA = new AppContact() {
+    };
+    GUIContacts guic;
+    private ArrayList<Contact> arrayC = contactA.getArrayContacts();
     private ImagePanel newcontact = new ImagePanel(new ImageIcon("src/images/wallpaper2.png"));
     private GUITelephone guit = (GUITelephone) SwingUtilities.getAncestorOfClass(GUITelephone.class, GUINewContact.this);
     private JPanel panel_center = new JPanel();
@@ -153,34 +156,32 @@ public class GUINewContact extends JPanel {
 
         // **** ACTION LISTENERS ****//
         buttonDone.addActionListener(new doneClick());
-
     }
 
     private class doneClick implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
-            Contact contact = new Contact(UUID.randomUUID(), txt1.getText(), txt2.getText(), txt3.getText(), txt4.getText(), txt5.getText(), txt6.getText(), txt7.getText());
-            contactA.addC(contact);
+            Contact cc = new Contact(UUID.randomUUID(), txt1.getText(), txt2.getText(), txt3.getText(), txt4.getText(), txt5.getText(), txt6.getText(), txt7.getText());
+            contactA.addC(cc);
             try {
-                serializeObject(contactA);
+                serializeObject(arrayC);
             } catch (IOException ex) {
                 Logger.getLogger(GUITelephone.class.getName()).log(Level.SEVERE, null, ex);
             }
-            //GUIContacts.afficheUnit();
             guit.setCurrentPanel("contacts");
-            guit.setBackPosition(2);
+            //guic.refresh();
             System.out.println("Contact enregistré");
 
         }
 
     }
 
-    public static void serializeObject(AppContact contactA) throws IOException {
+    public static void serializeObject(ArrayList arrayC) throws IOException {
         // TODO Auto-generated method stub
         FileOutputStream fichier = new FileOutputStream("src/svg.ser");
         BufferedOutputStream bfichier = new BufferedOutputStream(fichier);
         ObjectOutputStream obfichier = new ObjectOutputStream(bfichier);
-        obfichier.writeObject(contactA);
+        obfichier.writeObject(arrayC);
         System.out.println("Sérialisation effectuée");
         obfichier.close();
     }
