@@ -28,6 +28,7 @@ import structure.AppContact;
 
 public class GUITelephone extends JFrame implements Serializable {
 
+    AppContact contactA;
     // **** DECLARATION COMPOSANTS **** //
     private JPanel northpanel = new JPanel();
     private JPanel northpanelE = new JPanel();
@@ -63,17 +64,22 @@ public class GUITelephone extends JFrame implements Serializable {
     private int backPosition = 0;
 
     // **** APPLICATIONS **** //
-    private GUIGallerie guigallerie = new GUIGallerie(this);
-    private GUIContacts guicontacts = new GUIContacts(this);
-    private GUINewContact guinewcontact = new GUINewContact(this);
-    private GUIImage guiimage = new GUIImage(this);
+    private GUIGallerie guigallerie;
+    private GUIContacts guicontacts;
+    private GUINewContact guinewcontact;
+    private GUIImage guiimage;
 
     // **** FORMAT JEU DE CARTES **** //
     private CardLayout cardL = new CardLayout();
     private JPanel cardP = new JPanel(cardL);
     private GridBagConstraints bag = new GridBagConstraints();
 
-    public GUITelephone() {
+    public GUITelephone(AppContact contactA) {
+        this.contactA = contactA;
+        this.guigallerie = new GUIGallerie(this);
+        this.guicontacts = new GUIContacts(this, contactA);
+        this.guinewcontact = new GUINewContact(this, contactA);
+        this.guiimage = new GUIImage(this);
         // **** CONFIG FRAME **** //
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(480, 800));
@@ -93,7 +99,6 @@ public class GUITelephone extends JFrame implements Serializable {
         cardP.add(guicontacts, "contacts");
         cardP.add(guinewcontact, "newcontact");
         cardP.add(guiimage, "image");
-       
 
         // **** "SAC" DE BOUTONS D'APPLICATIONS **** //
         mainP.setLayout(new BorderLayout());

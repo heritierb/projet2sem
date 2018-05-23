@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class Contact extends AppContact implements Serializable {
+public class Contact implements Serializable {
 
     String prenom;
     String nom;

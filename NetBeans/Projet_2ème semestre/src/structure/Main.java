@@ -5,7 +5,9 @@ import graphisme.GUITelephone;
 public class Main {
     
     public static void main(String[] args){
-        GUITelephone tel = new GUITelephone();
+        AppContact contactA = new AppContact();
+        GUITelephone tel = new GUITelephone(contactA);
+        
         tel.setVisible(true);
     }
 }

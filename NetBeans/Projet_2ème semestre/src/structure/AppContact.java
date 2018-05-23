@@ -5,23 +5,27 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import static java.util.UUID.randomUUID;
 
-public abstract class AppContact implements Serializable{
-    
+public class AppContact implements Serializable {
 
     public ArrayList<Contact> arrayContacts = new ArrayList<Contact>();
- 
+
     public void addC(Contact contact) {
-            arrayContacts.add(contact);
-            System.out.println(contact.getPrenom()+" "+contact.getNom()+" : contact enregistré");
+        arrayContacts.add(contact);
+        for(Contact c : arrayContacts) {
+            System.out.println("nom : " + c.getPrenom());
+        }
     }
+
     public void deleteC(Contact contact) {
-            arrayContacts.remove(contact);
+        arrayContacts.remove(contact);
     }
+
     public void afficheUnit() {
-           
+
     }
-    public void edit(){
-        
+
+    public void edit() {
+
     }
 
     public ArrayList<Contact> getArrayContacts() {
@@ -30,5 +34,5 @@ public abstract class AppContact implements Serializable{
 
     public void setArrayContacts(ArrayList<Contact> arrayContacts) {
         this.arrayContacts = arrayContacts;
-    } 
+    }
 }

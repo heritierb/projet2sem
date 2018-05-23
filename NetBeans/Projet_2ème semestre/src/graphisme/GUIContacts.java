@@ -30,8 +30,7 @@ import structure.Contact;
 
 public class GUIContacts extends JPanel implements Serializable {
 
-    AppContact contactA = new AppContact() {
-    };
+    AppContact contactA;
     private ArrayList<Contact> arrayCc;
     private ImagePanel contacts = new ImagePanel(new ImageIcon("src/images/wallpaper2.png"));
     private GUITelephone guit = (GUITelephone) SwingUtilities.getAncestorOfClass(GUITelephone.class, GUIContacts.this);
@@ -44,8 +43,9 @@ public class GUIContacts extends JPanel implements Serializable {
     private JLabel list = new JLabel();
     private JLabel label2 = new JLabel(" Last name ");
 
-    public GUIContacts(GUITelephone guit) {
+    public GUIContacts(GUITelephone guit, AppContact contactA) {
         this.guit = guit;
+        this.contactA = contactA;
         add(contacts);
         deserializeObject();
         contacts.setBorder(new EmptyBorder(0, 0, 0, 0));
@@ -72,19 +72,22 @@ public class GUIContacts extends JPanel implements Serializable {
         panelcenter.setOpaque(false);
         panelcenter.setLayout(new GridLayout());
         panelcenter.setPreferredSize(new Dimension(480, 600));
+        arrayCc = contactA.getArrayContacts();
         afficheUnit();
 
     }
 
     public void afficheUnit() {
+        arrayCc = contactA.getArrayContacts();
+        System.out.println("test1 affichage");
         for (int i = 0; i < contactA.getArrayContacts().size(); i++) {
-            JButton cpt = CreationBoutonContact(contactA.getArrayContacts().get(i).getPrenom() + "test");
+            JButton cpt = CreationBoutonContact(arrayCc.get(i).getPrenom());
             panelcenter.add(cpt);
-            System.out.println("test affichage contacts"+i);
+            System.out.println("test affichage contacts");
         }
     }
 
-    public static JButton CreationBoutonContact(String par) {
+    public JButton CreationBoutonContact(String par) {
         JPanel panelcontact = null;
         JButton bouton = new JButton((Icon) panelcontact);
         return bouton;
@@ -92,7 +95,7 @@ public class GUIContacts extends JPanel implements Serializable {
 
     public void refresh() {
         panelcenter.removeAll();
-        arrayCc = contactA.getArrayContacts();
+        
         updateUI();
         afficheUnit();
         System.out.println("test refresh");

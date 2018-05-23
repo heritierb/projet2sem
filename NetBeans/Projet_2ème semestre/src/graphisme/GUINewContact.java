@@ -29,10 +29,9 @@ import structure.Contact;
 
 public class GUINewContact extends JPanel {
 
-    AppContact contactA = new AppContact() {
-    };
+    AppContact contactA;
     private GUIContacts guic = (GUIContacts) SwingUtilities.getAncestorOfClass(GUIContacts.class, GUINewContact.this);
-    private ArrayList<Contact> arrayC = contactA.getArrayContacts();
+    private ArrayList<Contact> arrayC;
     private ImagePanel newcontact = new ImagePanel(new ImageIcon("src/images/wallpaper2.png"));
     private GUITelephone guit = (GUITelephone) SwingUtilities.getAncestorOfClass(GUITelephone.class, GUINewContact.this);
     private JPanel panel_center = new JPanel();
@@ -66,9 +65,11 @@ public class GUINewContact extends JPanel {
     Color blanc = new Color(255, 255, 255);
     Color blancasse = new Color(250, 250, 250);
 
-    public GUINewContact(GUITelephone guit) {
+    public GUINewContact(GUITelephone guit, AppContact contactA) {
         this.guit = guit;
+        this.contactA = contactA;
         add(newcontact);
+        arrayC = contactA.getArrayContacts();
         newcontact.setLayout(new BorderLayout());
         newcontact.setAlignmentY(0);
         newcontact.setPreferredSize(new Dimension(480, 683));
@@ -165,7 +166,7 @@ public class GUINewContact extends JPanel {
 
         public void actionPerformed(ActionEvent e) {
             Contact cc = new Contact(txt1.getText(), txt2.getText(), txt3.getText(), txt4.getText(), txt5.getText(), txt6.getText(), txt7.getText());
-            contactA.arrayContacts.add(cc);
+            contactA.addC(cc);
             for (int i = 0; i < arrayC.size(); i++) {
                 System.out.println(i);
             }
