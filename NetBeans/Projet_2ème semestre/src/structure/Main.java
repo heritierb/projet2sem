@@ -6,7 +6,8 @@ public class Main {
     
     public static void main(String[] args){
         AppContact contactA = new AppContact();
-        GUITelephone tel = new GUITelephone(contactA);
+        AppGallerie gallerieA = new AppGallerie();
+        GUITelephone tel = new GUITelephone(contactA, gallerieA);
         
         tel.setVisible(true);
     }
