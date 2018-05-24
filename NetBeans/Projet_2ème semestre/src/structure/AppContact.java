@@ -6,9 +6,8 @@ import java.util.ArrayList;
 import static java.util.UUID.randomUUID;
 
 public class AppContact implements Serializable {
-
+    
     public ArrayList<Contact> arrayContacts = new ArrayList<Contact>();
-
     public void addC(Contact contact) {
         arrayContacts.add(contact);
         for(Contact c : arrayContacts) {
@@ -20,7 +19,7 @@ public class AppContact implements Serializable {
         arrayContacts.remove(contact);
     }
 
-    public void afficheUnit() {
+    public void affichePrenom() {
 
     }
 
@@ -35,4 +34,6 @@ public class AppContact implements Serializable {
     public void setArrayContacts(ArrayList<Contact> arrayContacts) {
         this.arrayContacts = arrayContacts;
     }
+    
+    
 }

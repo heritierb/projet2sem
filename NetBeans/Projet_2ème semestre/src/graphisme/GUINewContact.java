@@ -7,15 +7,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.UUID;
-import static java.util.UUID.randomUUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -40,7 +32,7 @@ public class GUINewContact extends JPanel {
     private JPanel panel_north = new JPanel();
     private JPanel panel_ntm = new JPanel();
     private JPanel empty = new JPanel();
-
+    
     //0.ID 1.Nom 2.Prenom 3.Numero 4.Email 5.Adresse 6.Anni 7.Groupe
     private JLabel label1 = new JLabel(" First name ");
     private JLabel label2 = new JLabel(" Last name ");
