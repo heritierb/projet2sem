@@ -262,6 +262,9 @@ public class GUITelephone extends JFrame implements Serializable {
 
     public void setCurrentPanel(String currentPanel) {
         cardL.show(cardP, currentPanel);
+        if(currentPanel == "contacts") {
+            guicontacts.refresh();
+        }
     }
 
     private class ClickGallerie implements ActionListener {
@@ -305,9 +308,9 @@ public class GUITelephone extends JFrame implements Serializable {
             } else if (backPosition == 3) {
                 cardL.show(cardP, "contacts");
                 backPosition = 2;
-            }else if (backPosition == 4){
-            	cardL.show(cardP, "gallerie");
-            	backPosition = 1;
+            } else if (backPosition == 4) {
+                cardL.show(cardP, "gallerie");
+                backPosition = 1;
             }
         }
     }
@@ -323,7 +326,7 @@ public class GUITelephone extends JFrame implements Serializable {
     private class ClickOff implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
-            guicontacts.serializeObject();
+            serializeObject();
             dispose();
         }
     }
@@ -334,6 +337,19 @@ public class GUITelephone extends JFrame implements Serializable {
 
     public void setBackPosition(int backPosition) {
         this.backPosition = backPosition;
+    }
+
+    public void serializeObject() {
+        try {
+            FileOutputStream fichier = new FileOutputStream("src/svg.ser");
+            ObjectOutputStream obfichier = new ObjectOutputStream(fichier);
+            obfichier.writeObject(contactA);
+            obfichier.flush();
+            obfichier.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("test seri");
     }
 
 }

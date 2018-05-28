@@ -22,6 +22,7 @@ import structure.Contact;
 public class GUINewContact extends JPanel {
 
     AppContact contactA;
+    GUIContacts guicontacts;
     private GUIContacts guic = (GUIContacts) SwingUtilities.getAncestorOfClass(GUIContacts.class, GUINewContact.this);
     private ArrayList<Contact> arrayC;
     private ImagePanel newcontact = new ImagePanel(new ImageIcon("src/images/wallpaper2.png"));
@@ -32,7 +33,7 @@ public class GUINewContact extends JPanel {
     private JPanel panel_north = new JPanel();
     private JPanel panel_ntm = new JPanel();
     private JPanel empty = new JPanel();
-    
+
     //0.ID 1.Nom 2.Prenom 3.Numero 4.Email 5.Adresse 6.Anni 7.Groupe
     private JLabel label1 = new JLabel(" First name ");
     private JLabel label2 = new JLabel(" Last name ");
@@ -149,29 +150,38 @@ public class GUINewContact extends JPanel {
 
         // **** ACTION LISTENERS ****//
         buttonDone.addActionListener(new doneClick());
-        
-        
-    }
+        buttonCancel.addActionListener(new cancelClick());
 
+    }
 
     private class doneClick implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
             Contact cc = new Contact(txt1.getText(), txt2.getText(), txt3.getText(), txt4.getText(), txt5.getText(), txt6.getText(), txt7.getText());
             contactA.addC(cc);
-            for (int i = 0; i < arrayC.size(); i++) {
-                System.out.println(i);
-            }
+            refreshC();
             guit.setCurrentPanel("contacts");
+
         }
     }
 
-    public ArrayList<Contact> getArrayC() {
-        return arrayC;
+    private class cancelClick implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            refreshC();
+            guit.setCurrentPanel("contacts");
+
+        }
     }
 
-    public void setArrayC(ArrayList<Contact> arrayC) {
-        this.arrayC = arrayC;
+    public void refreshC() {
+        txt1.setText("");
+        txt2.setText("");
+        txt3.setText("");
+        txt4.setText("");
+        txt5.setText("");
+        txt6.setText("");
+        txt7.setText("");
+        System.out.println("test refresh");
     }
-    
 }
