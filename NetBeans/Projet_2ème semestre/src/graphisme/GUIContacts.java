@@ -99,7 +99,6 @@ public class GUIContacts extends JPanel implements Serializable {
         panelScroll.setPreferredSize(new Dimension(15, 605));
         afficheUnit();
         contacts.add(panelcentscroll, BorderLayout.CENTER);
-
     }
 
     // **** RECUPERE LA LISTE DES CONTACTS ET CREE DES BOUTONS PRENOM+NOM **** //
@@ -114,6 +113,7 @@ public class GUIContacts extends JPanel implements Serializable {
             cpt.setHorizontalAlignment(10);
             cpt.setFont(ecriture);
             cpt.setForeground(blanc);
+            cpt.addActionListener(new ClickContact());
             panelcenter.add(cpt);
             panelcentscroll.add(panelScroll, BorderLayout.CENTER);
         }
@@ -141,4 +141,14 @@ public class GUIContacts extends JPanel implements Serializable {
             refresh();
         }
     }
+        // **** BOUTON POUR MODIFIER UN CONTACT **** //
+    private class ClickContact implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            guit.setCurrentPanel("editcontact");
+            guit.setBackPosition(3);
+            refresh();
+        }
+    }
+    
 }

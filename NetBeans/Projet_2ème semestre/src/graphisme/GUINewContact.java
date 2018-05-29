@@ -70,7 +70,8 @@ public class GUINewContact extends JPanel {
     JButton BaddImage = new JButton(addImage);
     Color blanc = new Color(255, 255, 255);
     Color blancasse = new Color(250, 250, 250);
-    Font ecriture = new Font("SANS_SERIF", 50, 18);
+    Font ecriture = new Font("SANS_SERIF",Font.ITALIC, 18);
+    Font ecritureI = new Font("SANS_SERIF",50, 18);
 
     public GUINewContact(GUITelephone guit, AppContact contactA) {
         this.guit = guit;
@@ -141,12 +142,14 @@ public class GUINewContact extends JPanel {
             public void focusGained(FocusEvent arg0) {
                 if (txt1.getText().equals(prenomB)) {
                     txt1.setText(vide);
+                    txt1.setFont(ecriture);
                 }
             }
 
             public void focusLost(FocusEvent arg0) {
                 if (txt1.getText().equals(vide)) {
                     txt1.setText(prenomB);
+                    txt1.setFont(ecritureI);
                 }
             }
         });

@@ -36,6 +36,7 @@ public class GUITelephone extends JFrame implements Serializable {
     private GUIContacts guicontacts;
     private GUINewContact guinewcontact;
     private GUIImage guiimage;
+    private GUIEditContact guieditcontact;
 
     // **** DECLARATION PANELS **** //
     private JPanel northpanel = new JPanel();
@@ -91,6 +92,7 @@ public class GUITelephone extends JFrame implements Serializable {
         this.guicontacts = new GUIContacts(this, contactA);
         this.guinewcontact = new GUINewContact(this, contactA);
         this.guiimage = new GUIImage(this);
+        this.guieditcontact = new GUIEditContact(this, contactA);
 
         // **** CONFIG FRAME **** // Position+size
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -111,6 +113,7 @@ public class GUITelephone extends JFrame implements Serializable {
         cardP.add(guicontacts, "contacts");
         cardP.add(guinewcontact, "newcontact");
         cardP.add(guiimage, "image");
+        cardP.add(guieditcontact, "editcontact");
 
         // **** "SAC" DE BOUTONS D'APPLICATIONS **** // GridbagLayout, panelcenter
         mainP.setLayout(new BorderLayout());
@@ -320,9 +323,6 @@ public class GUITelephone extends JFrame implements Serializable {
             } else if (backPosition == 4) {
                 cardL.show(cardP, "gallerie");
                 backPosition = 1;
-            } else if (backPosition == 5) {
-                cardL.show(cardP, "contacts");
-                backPosition = 2;
             }
         }
     }
