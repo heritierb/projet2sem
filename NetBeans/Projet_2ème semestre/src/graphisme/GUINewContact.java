@@ -34,7 +34,7 @@ public class GUINewContact extends JPanel {
     private JPanel panel_ntm = new JPanel();
     private JPanel empty = new JPanel();
 
-    //0.ID 1.Nom 2.Prenom 3.Numero 4.Email 5.Adresse 6.Anni 7.Groupe
+    //1.Nom 2.Prenom 3.Numero 4.Email 5.Adresse 6.Anni 7.Groupe
     private JLabel label1 = new JLabel(" First name ");
     private JLabel label2 = new JLabel(" Last name ");
     private JLabel label3 = new JLabel(" add number ");
@@ -70,20 +70,13 @@ public class GUINewContact extends JPanel {
 
         // **** CENTER **** //
         panel_center.setLayout(new GridLayout(8, 1, 15, 50));
-        panel_center.add(txt1);
-        panel_center.add(txt2);
-        panel_center.add(txt3);
-        panel_center.add(txt4);
-        panel_center.add(txt5);
-        panel_center.add(txt6);
-        panel_center.add(txt7);
-        txt1.setBackground(blanc);
-        txt2.setBackground(blanc);
-        txt3.setBackground(blanc);
-        txt4.setBackground(blanc);
-        txt5.setBackground(blanc);
-        txt6.setBackground(blanc);
-        txt7.setBackground(blanc);
+        panel_center.add(txt1);txt1.setBackground(blanc);
+        panel_center.add(txt2);txt2.setBackground(blanc);
+        panel_center.add(txt3);txt3.setBackground(blanc);
+        panel_center.add(txt4);txt4.setBackground(blanc);
+        panel_center.add(txt5);txt5.setBackground(blanc);
+        panel_center.add(txt6);txt6.setBackground(blanc);
+        panel_center.add(txt7);txt7.setBackground(blanc);
         txt1.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.white));
         txt2.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.white));
         txt3.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.white));
@@ -95,20 +88,13 @@ public class GUINewContact extends JPanel {
 
         // **** WEST **** //
         panel_west.setLayout(new GridLayout(8, 1, 15, 50));
-        panel_west.add(label1);
-        panel_west.add(label2);
-        panel_west.add(label3);
-        panel_west.add(label4);
-        panel_west.add(label5);
-        panel_west.add(label6);
-        panel_west.add(label7);
-        label1.setForeground(blanc);
-        label2.setForeground(blanc);
-        label3.setForeground(blanc);
-        label4.setForeground(blanc);
-        label5.setForeground(blanc);
-        label6.setForeground(blanc);
-        label7.setForeground(blanc);
+        panel_west.add(label1);label1.setForeground(blanc);
+        panel_west.add(label2);label2.setForeground(blanc);
+        panel_west.add(label3);label3.setForeground(blanc);
+        panel_west.add(label4);label4.setForeground(blanc);
+        panel_west.add(label5);label5.setForeground(blanc);
+        panel_west.add(label6);label6.setForeground(blanc);
+        panel_west.add(label7);label7.setForeground(blanc);
         panel_west.setPreferredSize(new Dimension(100, 600));
 
         // **** EAST **** //
@@ -153,27 +139,23 @@ public class GUINewContact extends JPanel {
         buttonCancel.addActionListener(new cancelClick());
 
     }
-
+    // **** ENREGISTRE LE CONTACT ET REVIENT SUR LA LISTE DE CONTACTS **** //
     private class doneClick implements ActionListener {
-
         public void actionPerformed(ActionEvent e) {
             Contact cc = new Contact(txt1.getText(), txt2.getText(), txt3.getText(), txt4.getText(), txt5.getText(), txt6.getText(), txt7.getText());
             contactA.addC(cc);
             refreshC();
             guit.setCurrentPanel("contacts");
-
         }
     }
-
+    // **** ANNULE LA CREATION DE CONTACTS ET REVIENT SUR LA LISTE DE CONTACTS **** //
     private class cancelClick implements ActionListener {
-
         public void actionPerformed(ActionEvent e) {
             refreshC();
             guit.setCurrentPanel("contacts");
-
         }
     }
-
+    // **** VIDE LES CHAMPS DE TEXTE **** //
     public void refreshC() {
         txt1.setText("");
         txt2.setText("");
