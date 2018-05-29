@@ -39,6 +39,7 @@ public class GUITelephone extends JFrame implements Serializable {
     private GUINewContact guinewcontact;
     private GUIImage guiimage;
     
+    
     // **** DECLARATION PANELS **** //
     private JPanel northpanel = new JPanel();
     private JPanel northpanelE = new JPanel();
