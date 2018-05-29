@@ -8,12 +8,16 @@ import java.io.ObjectInputStream;
 public class Main {
     
     public static void main(String[] args){
+        // **** INSTANCE DES APPLICATIONS **** // + deserialisation
         AppContact contactA = new AppContact();
         contactA = deserializeObject();      
         AppGallerie gallerieA = new AppGallerie();
+        
+        // **** LANCE LE PROGRAMME **** //
         GUITelephone tel = new GUITelephone(contactA, gallerieA);
         tel.setVisible(true);
     }
+        // **** RECUPERE L'INSTANCE contactB DU FICHIER DE SAUVEGARDE **** //
         public static AppContact deserializeObject() {
         try {
             AppContact contactB = new AppContact();
@@ -28,7 +32,6 @@ public class Main {
 
         } catch (ClassNotFoundException e) {
         }
-        System.out.println("test deseri");
         return null;
     }
 }
