@@ -2,6 +2,7 @@ package graphisme;
 // ****                        **** //
 // **** AUTEUR BENOIT HERITIER **** //
 // ****                        **** //
+
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Dimension;
@@ -12,7 +13,8 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileOutputStream;
-import java.io.IOException;;
+import java.io.IOException;
+;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import javax.swing.ImageIcon;
@@ -23,8 +25,10 @@ import javax.swing.border.EmptyBorder;
 import structure.AppContact;
 import structure.AppGallerie;
 
+
+
 public class GUITelephone extends JFrame implements Serializable {
-    
+
     // **** DECLARATION APPLICATIONS **** //
     private AppContact contactA;
     private AppGallerie gallerieA;
@@ -32,8 +36,7 @@ public class GUITelephone extends JFrame implements Serializable {
     private GUIContacts guicontacts;
     private GUINewContact guinewcontact;
     private GUIImage guiimage;
-    
-    
+
     // **** DECLARATION PANELS **** //
     private JPanel northpanel = new JPanel();
     private JPanel northpanelE = new JPanel();
@@ -42,7 +45,7 @@ public class GUITelephone extends JFrame implements Serializable {
     private JPanel apps = new JPanel(new GridBagLayout());
     private JPanel status = new JPanel();
     private JPanel empty = new JPanel();
-    
+
     // **** DECLARATION BOUTONS **** // depuis le package images
     private JButton boff = new JButton(new ImageIcon("src/images/off.png"));
     private JButton bhome = new JButton(new ImageIcon("src/images/homebutton.png"));
@@ -59,7 +62,7 @@ public class GUITelephone extends JFrame implements Serializable {
     private JButton cadre7 = new JButton(new ImageIcon("src/images/empty.png"));
     private JButton cadre8 = new JButton(new ImageIcon("src/images/empty.png"));
     private JButton cadre9 = new JButton(new ImageIcon("src/images/empty.png"));
-    
+
     // **** DECLARATION IMAGES **** // depuis le package images
     private ImagePanel bluethooth = new ImagePanel(new ImageIcon("src/images/bluethooth.png"));
     private ImagePanel alarm = new ImagePanel(new ImageIcon("src/images/alarm.png"));
@@ -69,7 +72,7 @@ public class GUITelephone extends JFrame implements Serializable {
     private ImagePanel logo = new ImagePanel(new ImageIcon("src/images/logo.png"));
     private ImagePanel mainP = new ImagePanel(new ImageIcon("src/images/wallpaper.png"));
     private ImagePanel phoneP = new ImagePanel(new ImageIcon("src/images/wallpaper.png"));
-    
+
     // **** POSITION BOUTON BACK **** // permet en fonction du panel afficher de retourner au panel supérieur
     private int backPosition = 0;
 
@@ -77,10 +80,10 @@ public class GUITelephone extends JFrame implements Serializable {
     private CardLayout cardL = new CardLayout();
     private JPanel cardP = new JPanel(cardL);
     private GridBagConstraints bag = new GridBagConstraints();
-    
+
     // **** CONSTRUCTEUR **** // avec comme paramètre l'instance contactA et gallerieA
     public GUITelephone(AppContact contactA, AppGallerie gallerieA) {
-        
+
         // **** REPRISE DES INSTANCES DANS LE CONSTRUCTEUR **** //
         this.contactA = contactA;
         this.gallerieA = gallerieA;
@@ -88,7 +91,7 @@ public class GUITelephone extends JFrame implements Serializable {
         this.guicontacts = new GUIContacts(this, contactA);
         this.guinewcontact = new GUINewContact(this, contactA);
         this.guiimage = new GUIImage(this);
-        
+
         // **** CONFIG FRAME **** // Position+size
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(480, 800));
@@ -108,7 +111,7 @@ public class GUITelephone extends JFrame implements Serializable {
         cardP.add(guicontacts, "contacts");
         cardP.add(guinewcontact, "newcontact");
         cardP.add(guiimage, "image");
-        
+
         // **** "SAC" DE BOUTONS D'APPLICATIONS **** // GridbagLayout, panelcenter
         mainP.setLayout(new BorderLayout());
         mainP.add(apps, BorderLayout.CENTER);
@@ -141,26 +144,76 @@ public class GUITelephone extends JFrame implements Serializable {
         icontacts.addActionListener(new ClickContacts());
 
         // **** AUTRES BOUTONS VIDES **** //
-        bag.gridx = 2;bag.gridy = 0;bag.gridwidth = 1;bag.gridheight = 1;
-        apps.add(cadre0, bag);cadre0.setContentAreaFilled(false);cadre0.setBorderPainted(false);      
-        bag.gridx = 0;bag.gridy = 1;bag.gridwidth = 1;bag.gridheight = 1;
-        apps.add(cadre1, bag);cadre1.setContentAreaFilled(false);cadre1.setBorderPainted(false);
-        bag.gridx = 1;bag.gridy = 1;bag.gridwidth = 1;bag.gridheight = 1;
-        apps.add(cadre2, bag);cadre2.setContentAreaFilled(false);cadre2.setBorderPainted(false);
-        bag.gridx = 2;bag.gridy = 1;bag.gridwidth = 1;bag.gridheight = 1;
-        apps.add(cadre3, bag);cadre3.setContentAreaFilled(false);cadre3.setBorderPainted(false);
-        bag.gridx = 0;bag.gridy = 2;bag.gridwidth = 1;bag.gridheight = 1;
-        apps.add(cadre4, bag);cadre4.setContentAreaFilled(false);cadre4.setBorderPainted(false);
-        bag.gridx = 1;bag.gridy = 2;bag.gridwidth = 1;bag.gridheight = 1;
-        apps.add(cadre5, bag);cadre5.setContentAreaFilled(false);cadre5.setBorderPainted(false);
-        bag.gridx = 2;bag.gridy = 2;bag.gridwidth = 1;bag.gridheight = 1;
-        apps.add(cadre6, bag);cadre6.setContentAreaFilled(false);cadre6.setBorderPainted(false);
-        bag.gridx = 0;bag.gridy = 3;bag.gridwidth = 1;bag.gridheight = 1;
-        apps.add(cadre7, bag);cadre7.setContentAreaFilled(false);cadre7.setBorderPainted(false);
-        bag.gridx = 1;bag.gridy = 3;bag.gridwidth = 1;bag.gridheight = 1;
-        apps.add(cadre8, bag);cadre8.setContentAreaFilled(false);cadre8.setBorderPainted(false);
-        bag.gridx = 2;bag.gridy = 3;bag.gridwidth = 1;bag.gridheight = 1;
-        apps.add(cadre9, bag);cadre9.setContentAreaFilled(false);cadre9.setBorderPainted(false);
+        bag.gridx = 2;
+        bag.gridy = 0;
+        bag.gridwidth = 1;
+        bag.gridheight = 1;
+        apps.add(cadre0, bag);
+        cadre0.setContentAreaFilled(false);
+        cadre0.setBorderPainted(false);
+        bag.gridx = 0;
+        bag.gridy = 1;
+        bag.gridwidth = 1;
+        bag.gridheight = 1;
+        apps.add(cadre1, bag);
+        cadre1.setContentAreaFilled(false);
+        cadre1.setBorderPainted(false);
+        bag.gridx = 1;
+        bag.gridy = 1;
+        bag.gridwidth = 1;
+        bag.gridheight = 1;
+        apps.add(cadre2, bag);
+        cadre2.setContentAreaFilled(false);
+        cadre2.setBorderPainted(false);
+        bag.gridx = 2;
+        bag.gridy = 1;
+        bag.gridwidth = 1;
+        bag.gridheight = 1;
+        apps.add(cadre3, bag);
+        cadre3.setContentAreaFilled(false);
+        cadre3.setBorderPainted(false);
+        bag.gridx = 0;
+        bag.gridy = 2;
+        bag.gridwidth = 1;
+        bag.gridheight = 1;
+        apps.add(cadre4, bag);
+        cadre4.setContentAreaFilled(false);
+        cadre4.setBorderPainted(false);
+        bag.gridx = 1;
+        bag.gridy = 2;
+        bag.gridwidth = 1;
+        bag.gridheight = 1;
+        apps.add(cadre5, bag);
+        cadre5.setContentAreaFilled(false);
+        cadre5.setBorderPainted(false);
+        bag.gridx = 2;
+        bag.gridy = 2;
+        bag.gridwidth = 1;
+        bag.gridheight = 1;
+        apps.add(cadre6, bag);
+        cadre6.setContentAreaFilled(false);
+        cadre6.setBorderPainted(false);
+        bag.gridx = 0;
+        bag.gridy = 3;
+        bag.gridwidth = 1;
+        bag.gridheight = 1;
+        apps.add(cadre7, bag);
+        cadre7.setContentAreaFilled(false);
+        cadre7.setBorderPainted(false);
+        bag.gridx = 1;
+        bag.gridy = 3;
+        bag.gridwidth = 1;
+        bag.gridheight = 1;
+        apps.add(cadre8, bag);
+        cadre8.setContentAreaFilled(false);
+        cadre8.setBorderPainted(false);
+        bag.gridx = 2;
+        bag.gridy = 3;
+        bag.gridwidth = 1;
+        bag.gridheight = 1;
+        apps.add(cadre9, bag);
+        cadre9.setContentAreaFilled(false);
+        cadre9.setBorderPainted(false);
 
         // **** PANEL NORTH **** //
         phoneP.add(northpanel, BorderLayout.NORTH);
@@ -169,12 +222,18 @@ public class GUITelephone extends JFrame implements Serializable {
         northpanel.add(northpanelE, BorderLayout.EAST);
         northpanelE.setLayout(new FlowLayout());
         northpanelW.setLayout(new FlowLayout());
-        northpanelE.add(bluethooth);bluethooth.setPreferredSize(new Dimension(16, 16));
-        northpanelE.add(alarm);alarm.setPreferredSize(new Dimension(16, 16));
-        northpanelE.add(battery);battery.setPreferredSize(new Dimension(16, 16));
-        northpanelW.add(signal);signal.setPreferredSize(new Dimension(16, 16));
-        northpanelW.add(logo);logo.setPreferredSize(new Dimension(53, 14));
-        northpanelW.add(wifi);wifi.setPreferredSize(new Dimension(16, 16));
+        northpanelE.add(bluethooth);
+        bluethooth.setPreferredSize(new Dimension(16, 16));
+        northpanelE.add(alarm);
+        alarm.setPreferredSize(new Dimension(16, 16));
+        northpanelE.add(battery);
+        battery.setPreferredSize(new Dimension(16, 16));
+        northpanelW.add(signal);
+        signal.setPreferredSize(new Dimension(16, 16));
+        northpanelW.add(logo);
+        logo.setPreferredSize(new Dimension(53, 14));
+        northpanelW.add(wifi);
+        wifi.setPreferredSize(new Dimension(16, 16));
         northpanel.setOpaque(false);
         northpanelE.setOpaque(false);
         northpanelW.setOpaque(false);
@@ -185,9 +244,12 @@ public class GUITelephone extends JFrame implements Serializable {
         southpanel.setOpaque(false);
         southpanel.setPreferredSize(new Dimension(480, 95));
         southpanel.setLayout(new BorderLayout());
-        bhome.setContentAreaFilled(false);bhome.setBorderPainted(false);
-        back.setContentAreaFilled(false);back.setBorderPainted(false);
-        boff.setContentAreaFilled(false);boff.setBorderPainted(false);
+        bhome.setContentAreaFilled(false);
+        bhome.setBorderPainted(false);
+        back.setContentAreaFilled(false);
+        back.setBorderPainted(false);
+        boff.setContentAreaFilled(false);
+        boff.setBorderPainted(false);
         southpanel.add(bhome, BorderLayout.CENTER);
         southpanel.add(back, BorderLayout.EAST);
         southpanel.add(boff, BorderLayout.WEST);
@@ -203,37 +265,46 @@ public class GUITelephone extends JFrame implements Serializable {
         pack();
         setLocationRelativeTo(null);
     }
+
     // **** CHANGEMENT DE CARTE **** // +refresh du panel contact 
     public void setCurrentPanel(String currentPanel) {
         cardL.show(cardP, currentPanel);
-        if(currentPanel == "contacts") {
+        if (currentPanel == "contacts") {
             guicontacts.refresh();
         }
     }
+
     // **** OUVERTURE PANEL GUIGallerie **** //
     private class ClickGallerie implements ActionListener {
+
         public void actionPerformed(ActionEvent e) {
             cardL.show(cardP, "gallerie");
             backPosition = 1;
             guicontacts.afficheUnit();
         }
     }
+
     // **** OUVERTURE PANEL GUIContacts **** //
     private class ClickContacts implements ActionListener {
+
         public void actionPerformed(ActionEvent e) {
             cardL.show(cardP, "contacts");
             backPosition = 2;
         }
     }
+
     // **** RETOUR SUR GUITelephone **** //
     private class ClickHome implements ActionListener {
+
         public void actionPerformed(ActionEvent e) {
             cardL.show(cardP, "main");
             backPosition = 0;
         }
     }
+
     // **** RETOUR SUR LE PANEL PRECEDANT **** // recupere le backPosition
     private class ClickBack implements ActionListener {
+
         public void actionPerformed(ActionEvent e) {
             // reviens sur le home depuis la gallerie
             if (backPosition == 1) {
@@ -249,24 +320,31 @@ public class GUITelephone extends JFrame implements Serializable {
             } else if (backPosition == 4) {
                 cardL.show(cardP, "gallerie");
                 backPosition = 1;
+            } else if (backPosition == 5) {
+                cardL.show(cardP, "contacts");
+                backPosition = 2;
             }
         }
     }
+
     // **** ETEINDS L'APPLICATION + SERIALISATION **** //
     private class ClickOff implements ActionListener {
+
         public void actionPerformed(ActionEvent e) {
             serializeObject();
             dispose();
         }
     }
+
     // **** GETTERS&SETTERS **** //
     public int getBackPosition() {
         return backPosition;
     }
+
     public void setBackPosition(int backPosition) {
         this.backPosition = backPosition;
     }
-    
+
     // **** SERIALISE L'INSTANCE contactA de AppContact **** //
     public void serializeObject() {
         try {

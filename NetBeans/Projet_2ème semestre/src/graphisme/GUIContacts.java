@@ -2,7 +2,9 @@ package graphisme;
 // ****                        **** //
 // **** AUTEUR BENOIT HERITIER **** //
 // ****                        **** //
+
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -11,24 +13,28 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Serializable;
 import java.util.ArrayList;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.EmptyBorder;
 import structure.AppContact;
 import structure.Contact;
 
 public class GUIContacts extends JPanel implements Serializable {
+
     // **** INSTANCE GUITelephone **** // Recupere la method permettant de switch la card
     private GUITelephone guit = (GUITelephone) SwingUtilities.getAncestorOfClass(GUITelephone.class, GUIContacts.this);
-    
+
     // **** INSTANCE AppContact **** // Recupere le tableau de contacts
     AppContact contactA;
     private ArrayList<Contact> arrayCc;
-    
+
     // **** CREATIONS PANELS **** //
     private ImagePanel contacts = new ImagePanel(new ImageIcon("src/images/wallpaper.png"));
     private JPanel panelnorth = new JPanel();
@@ -36,29 +42,31 @@ public class GUIContacts extends JPanel implements Serializable {
     private JPanel panelcentscroll = new JPanel();
     private JPanel panelntm = new JPanel();
     private JPanel empty = new JPanel();
-    
+
     // **** CREATION SCROLLBAR **** //
     private JScrollPane panelScroll = new JScrollPane(panelcenter);
-    
+
     // **** AUTRES COMPOSANTS **** // 
     ImageIcon addContact = new ImageIcon("src/images/addContact.png");
     private JButton buttonAddContact = new JButton(addContact);
-    Font ecriture = new Font("SANS_SERIF",50,30);
+    Font ecriture = new Font("SANS_SERIF", 50, 30);
     private JLabel list = new JLabel();
     private JLabel label2 = new JLabel(" Last name ");
     private JLabel lContact = new JLabel();
-
+    Color blanc = new Color(255, 255, 255);
+    
     public GUIContacts(GUITelephone guit, AppContact contactA) {
-        
+
         //**** RECUPERE LES INSTANCES DANS LE CONSTRUCTEUR **** //
         this.guit = guit;
         this.contactA = contactA;
-        
+        System.out.println(UIManager.getLookAndFeel());
         // **** CONFIG DE BASE **** //
         add(contacts);
         contacts.setBorder(new EmptyBorder(0, 0, 0, 0));
         contacts.setLayout(new BorderLayout());
         contacts.setOpaque(false);
+        contacts.setBackground(null);
 
         // **** AJOUT DU PANEL NORD **** // bouton add un contact
         contacts.add(panelnorth, BorderLayout.NORTH);
@@ -79,8 +87,13 @@ public class GUIContacts extends JPanel implements Serializable {
         panelcentscroll.setLayout(new BorderLayout());
         panelcenter.setLayout(new GridLayout(12, 1));
         panelcentscroll.setOpaque(false);
+        panelcentscroll.setBackground(null);
+        panelcentscroll.setBorder(null);
         panelcenter.setOpaque(false);
-        panelScroll.setOpaque(false);
+        panelcenter.setBackground(null);
+        panelcenter.setBorder(null);
+        panelScroll.getViewport().setOpaque(false);
+	panelScroll.setOpaque(false);
         panelcentscroll.setPreferredSize(new Dimension(480, 605));
         panelcenter.setPreferredSize(new Dimension(463, 605));
         panelScroll.setPreferredSize(new Dimension(15, 605));
@@ -88,6 +101,7 @@ public class GUIContacts extends JPanel implements Serializable {
         contacts.add(panelcentscroll, BorderLayout.CENTER);
 
     }
+
     // **** RECUPERE LA LISTE DES CONTACTS ET CREE DES BOUTONS PRENOM+NOM **** //
     public void afficheUnit() {
         arrayCc = contactA.getArrayContacts();
@@ -99,25 +113,28 @@ public class GUIContacts extends JPanel implements Serializable {
             cpt.setContentAreaFilled(false);
             cpt.setHorizontalAlignment(10);
             cpt.setFont(ecriture);
-            cpt.setOpaque(false);
+            cpt.setForeground(blanc);
             panelcenter.add(cpt);
             panelcentscroll.add(panelScroll, BorderLayout.CENTER);
         }
     }
+
     // **** POUR CHAQUE BOUTON DE LA BOUCLE AFFICHEUNIT **** //
     public JButton CreationBoutonContact(JButton bouton) {
         bouton = new JButton();
         return bouton;
     }
+
     // **** EFFACE ET RECREE LA LISTE DE CONTACTS **** //
     public void refresh() {
         panelcenter.removeAll();
         updateUI();
         afficheUnit();
-        System.out.println("test refresh");
     }
+
     // **** BOUTON POUR AJOUTER UN CONTACT **** //
     private class ClickNewContact implements ActionListener {
+
         public void actionPerformed(ActionEvent e) {
             guit.setCurrentPanel("newcontact");
             guit.setBackPosition(3);
