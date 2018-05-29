@@ -1,8 +1,8 @@
 package structure;
-
+// ****                        **** //
+// **** AUTEUR BENOIT HERITIER **** //
+// ****                        **** //
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.UUID;
 
 public class Contact implements Serializable {
     

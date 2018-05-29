@@ -1,5 +1,7 @@
 package structure;
-
+// ****                        **** //
+// **** AUTEUR BENOIT HERITIER **** //
+// ****                        **** //
 import graphisme.GUITelephone;
 import java.io.FileInputStream;
 import java.io.IOException;

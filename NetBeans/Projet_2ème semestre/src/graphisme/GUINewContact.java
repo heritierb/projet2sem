@@ -1,5 +1,7 @@
 package graphisme;
-
+// ****                        **** //
+// **** AUTEUR BENOIT HERITIER **** //
+// ****                        **** //
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;

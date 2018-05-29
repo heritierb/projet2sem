@@ -1,5 +1,7 @@
 package structure;
-
+// ****                        **** //
+// **** AUTEUR BENOIT HERITIER **** //
+// ****                        **** //
 public class Gallerie {
     
     String nom;
