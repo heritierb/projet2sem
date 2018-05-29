@@ -11,31 +11,30 @@ import java.util.ArrayList;
 import static java.util.UUID.randomUUID;
 
 public class AppContact implements Serializable {
-
+    
+    // **** DECLARATION LISTE DYNAMIQUE DE CONTACTS **** //
     public ArrayList<Contact> arrayContacts = new ArrayList<Contact>();
+    
+    // **** AJOUTE UN CONTACT **** //
     public void addC(Contact contact) {
         arrayContacts.add(contact);
-//        for (Contact c : arrayContacts) {
-//            System.out.println("nom : " + c.getPrenom());
-//        }
+        // **** affichage de la liste **** //
+        //        for (Contact c : arrayContacts) {
+        //            System.out.println("Prenom : " + c.getPrenom()+ " || Nom : " + c.getNom());
+        //        }
     }
-
+    // **** SUPPRIME UN CONTACT **** //
     public void deleteC(Contact contact) {
         arrayContacts.remove(contact);
     }
-
-    public void affichePrenom() {
-
-    }
-
+    // **** EDITER LES INFORMATIONS D'UN CONTACT **** //
     public void edit() {
 
     }
-
+    // **** GETTERS&SETTERS **** //
     public ArrayList<Contact> getArrayContacts() {
         return arrayContacts;
     }
-
     public void setArrayContacts(ArrayList<Contact> arrayContacts) {
         this.arrayContacts = arrayContacts;
     }
