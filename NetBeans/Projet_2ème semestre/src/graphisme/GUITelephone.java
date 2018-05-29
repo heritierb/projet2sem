@@ -147,32 +147,23 @@ public class GUITelephone extends JFrame implements Serializable {
 
         // **** AUTRES BOUTONS VIDES **** //
         bag.gridx = 2;bag.gridy = 0;bag.gridwidth = 1;bag.gridheight = 1;
-        apps.add(cadre0, bag);cadre0.setContentAreaFilled(false);cadre0.setBorderPainted(false);
-                
+        apps.add(cadre0, bag);cadre0.setContentAreaFilled(false);cadre0.setBorderPainted(false);      
         bag.gridx = 0;bag.gridy = 1;bag.gridwidth = 1;bag.gridheight = 1;
         apps.add(cadre1, bag);cadre1.setContentAreaFilled(false);cadre1.setBorderPainted(false);
-        
         bag.gridx = 1;bag.gridy = 1;bag.gridwidth = 1;bag.gridheight = 1;
         apps.add(cadre2, bag);cadre2.setContentAreaFilled(false);cadre2.setBorderPainted(false);
-        
         bag.gridx = 2;bag.gridy = 1;bag.gridwidth = 1;bag.gridheight = 1;
         apps.add(cadre3, bag);cadre3.setContentAreaFilled(false);cadre3.setBorderPainted(false);
-        
         bag.gridx = 0;bag.gridy = 2;bag.gridwidth = 1;bag.gridheight = 1;
         apps.add(cadre4, bag);cadre4.setContentAreaFilled(false);cadre4.setBorderPainted(false);
-        
         bag.gridx = 1;bag.gridy = 2;bag.gridwidth = 1;bag.gridheight = 1;
         apps.add(cadre5, bag);cadre5.setContentAreaFilled(false);cadre5.setBorderPainted(false);
-        
         bag.gridx = 2;bag.gridy = 2;bag.gridwidth = 1;bag.gridheight = 1;
         apps.add(cadre6, bag);cadre6.setContentAreaFilled(false);cadre6.setBorderPainted(false);
-
         bag.gridx = 0;bag.gridy = 3;bag.gridwidth = 1;bag.gridheight = 1;
         apps.add(cadre7, bag);cadre7.setContentAreaFilled(false);cadre7.setBorderPainted(false);
-
         bag.gridx = 1;bag.gridy = 3;bag.gridwidth = 1;bag.gridheight = 1;
         apps.add(cadre8, bag);cadre8.setContentAreaFilled(false);cadre8.setBorderPainted(false);
-
         bag.gridx = 2;bag.gridy = 3;bag.gridwidth = 1;bag.gridheight = 1;
         apps.add(cadre9, bag);cadre9.setContentAreaFilled(false);cadre9.setBorderPainted(false);
 
@@ -183,21 +174,15 @@ public class GUITelephone extends JFrame implements Serializable {
         northpanel.add(northpanelE, BorderLayout.EAST);
         northpanelE.setLayout(new FlowLayout());
         northpanelW.setLayout(new FlowLayout());
-        northpanelE.add(bluethooth);
-        northpanelE.add(alarm);
-        northpanelE.add(battery);
-        northpanelW.add(signal);
-        northpanelW.add(logo);
-        northpanelW.add(wifi);
+        northpanelE.add(bluethooth);bluethooth.setPreferredSize(new Dimension(16, 16));
+        northpanelE.add(alarm);alarm.setPreferredSize(new Dimension(16, 16));
+        northpanelE.add(battery);battery.setPreferredSize(new Dimension(16, 16));
+        northpanelW.add(signal);signal.setPreferredSize(new Dimension(16, 16));
+        northpanelW.add(logo);logo.setPreferredSize(new Dimension(53, 14));
+        northpanelW.add(wifi);wifi.setPreferredSize(new Dimension(16, 16));
         northpanel.setOpaque(false);
         northpanelE.setOpaque(false);
         northpanelW.setOpaque(false);
-        bluethooth.setPreferredSize(new Dimension(16, 16));
-        alarm.setPreferredSize(new Dimension(16, 16));
-        battery.setPreferredSize(new Dimension(16, 16));
-        signal.setPreferredSize(new Dimension(16, 16));
-        logo.setPreferredSize(new Dimension(53, 14));
-        wifi.setPreferredSize(new Dimension(16, 16));
         northpanel.setPreferredSize(new Dimension(480, 22));
 
         // **** PANEL SOUTH **** //
@@ -205,12 +190,9 @@ public class GUITelephone extends JFrame implements Serializable {
         southpanel.setOpaque(false);
         southpanel.setPreferredSize(new Dimension(480, 95));
         southpanel.setLayout(new BorderLayout());
-        bhome.setContentAreaFilled(false);
-        bhome.setBorderPainted(false);
-        back.setContentAreaFilled(false);
-        back.setBorderPainted(false);
-        boff.setContentAreaFilled(false);
-        boff.setBorderPainted(false);
+        bhome.setContentAreaFilled(false);bhome.setBorderPainted(false);
+        back.setContentAreaFilled(false);back.setBorderPainted(false);
+        boff.setContentAreaFilled(false);boff.setBorderPainted(false);
         southpanel.add(bhome, BorderLayout.CENTER);
         southpanel.add(back, BorderLayout.EAST);
         southpanel.add(boff, BorderLayout.WEST);
@@ -221,7 +203,7 @@ public class GUITelephone extends JFrame implements Serializable {
         back.addActionListener(new ClickBack());
         boff.addActionListener(new ClickOff());
 
-        // **** BASICS OPTIONS **** //
+        // **** BASICS OPTIONS **** // 
         setResizable(false);
         pack();
         setLocationRelativeTo(null);
@@ -235,9 +217,7 @@ public class GUITelephone extends JFrame implements Serializable {
     }
     // **** OUVERTURE PANEL GUIGallerie **** //
     private class ClickGallerie implements ActionListener {
-
         public void actionPerformed(ActionEvent e) {
-
             cardL.show(cardP, "gallerie");
             backPosition = 1;
             guicontacts.afficheUnit();
@@ -245,7 +225,6 @@ public class GUITelephone extends JFrame implements Serializable {
     }
     // **** OUVERTURE PANEL GUIContacts **** //
     private class ClickContacts implements ActionListener {
-
         public void actionPerformed(ActionEvent e) {
             cardL.show(cardP, "contacts");
             backPosition = 2;
@@ -253,16 +232,13 @@ public class GUITelephone extends JFrame implements Serializable {
     }
     // **** RETOUR SUR GUITelephone **** //
     private class ClickHome implements ActionListener {
-
         public void actionPerformed(ActionEvent e) {
-
             cardL.show(cardP, "main");
             backPosition = 0;
         }
     }
     // **** RETOUR SUR LE PANEL PRECEDANT **** // recupere le backPosition
     private class ClickBack implements ActionListener {
-
         public void actionPerformed(ActionEvent e) {
             // reviens sur le home depuis la gallerie
             if (backPosition == 1) {
@@ -283,7 +259,6 @@ public class GUITelephone extends JFrame implements Serializable {
     }
     // **** ETEINDS L'APPLICATION + SERIALISATION **** //
     private class ClickOff implements ActionListener {
-
         public void actionPerformed(ActionEvent e) {
             serializeObject();
             dispose();
@@ -309,5 +284,4 @@ public class GUITelephone extends JFrame implements Serializable {
             e.printStackTrace();
         }
     }
-
 }
