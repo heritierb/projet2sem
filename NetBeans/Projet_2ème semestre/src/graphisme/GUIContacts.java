@@ -30,7 +30,7 @@ public class GUIContacts extends JPanel implements Serializable {
     private ArrayList<Contact> arrayCc;
     
     // **** CREATIONS PANELS **** //
-    private ImagePanel contacts = new ImagePanel(new ImageIcon("src/images/wallpaper2.png"));
+    private ImagePanel contacts = new ImagePanel(new ImageIcon("src/images/wallpaper.png"));
     private JPanel panelnorth = new JPanel();
     private JPanel panelcenter = new JPanel();
     private JPanel panelcentscroll = new JPanel();
@@ -68,7 +68,7 @@ public class GUIContacts extends JPanel implements Serializable {
         panelntm.setLayout(new FlowLayout());
         panelnorth.add(empty, BorderLayout.SOUTH);
         panelnorth.setOpaque(false);
-        panelntm.setOpaque(true);
+        panelntm.setOpaque(false);
         empty.setOpaque(true);
         empty.setPreferredSize(new Dimension(480, 5));
         buttonAddContact.addActionListener(new ClickNewContact());
@@ -99,6 +99,7 @@ public class GUIContacts extends JPanel implements Serializable {
             cpt.setContentAreaFilled(false);
             cpt.setHorizontalAlignment(10);
             cpt.setFont(ecriture);
+            cpt.setOpaque(false);
             panelcenter.add(cpt);
             panelcentscroll.add(panelScroll, BorderLayout.CENTER);
         }

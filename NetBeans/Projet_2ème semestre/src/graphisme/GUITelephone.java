@@ -67,7 +67,7 @@ public class GUITelephone extends JFrame implements Serializable {
     private ImagePanel wifi = new ImagePanel(new ImageIcon("src/images/wifi.png"));
     private ImagePanel signal = new ImagePanel(new ImageIcon("src/images/signal.png"));
     private ImagePanel logo = new ImagePanel(new ImageIcon("src/images/logo.png"));
-    private ImagePanel mainP = new ImagePanel(new ImageIcon("src/images/wallpaper2.png"));
+    private ImagePanel mainP = new ImagePanel(new ImageIcon("src/images/wallpaper.png"));
     private ImagePanel phoneP = new ImagePanel(new ImageIcon("src/images/wallpaper.png"));
     
     // **** POSITION BOUTON BACK **** // permet en fonction du panel afficher de retourner au panel supérieur
@@ -108,7 +108,7 @@ public class GUITelephone extends JFrame implements Serializable {
         cardP.add(guicontacts, "contacts");
         cardP.add(guinewcontact, "newcontact");
         cardP.add(guiimage, "image");
-
+        
         // **** "SAC" DE BOUTONS D'APPLICATIONS **** // GridbagLayout, panelcenter
         mainP.setLayout(new BorderLayout());
         mainP.add(apps, BorderLayout.CENTER);

@@ -2,13 +2,17 @@ package graphisme;
 // ****                        **** //
 // **** AUTEUR BENOIT HERITIER **** //
 // ****                        **** //
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -16,6 +20,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import structure.AppContact;
@@ -27,7 +32,7 @@ public class GUINewContact extends JPanel {
     GUIContacts guicontacts;
     private GUIContacts guic = (GUIContacts) SwingUtilities.getAncestorOfClass(GUIContacts.class, GUINewContact.this);
     private ArrayList<Contact> arrayC;
-    private ImagePanel newcontact = new ImagePanel(new ImageIcon("src/images/wallpaper2.png"));
+    private ImagePanel newcontact = new ImagePanel(new ImageIcon("src/images/wallpaper.png"));
     private GUITelephone guit = (GUITelephone) SwingUtilities.getAncestorOfClass(GUITelephone.class, GUINewContact.this);
     private JPanel panel_center = new JPanel();
     private JPanel panel_west = new JPanel();
@@ -36,29 +41,36 @@ public class GUINewContact extends JPanel {
     private JPanel panel_ntm = new JPanel();
     private JPanel empty = new JPanel();
 
-    //1.Nom 2.Prenom 3.Numero 4.Email 5.Adresse 6.Anni 7.Groupe
-    private JLabel label1 = new JLabel(" First name ");
-    private JLabel label2 = new JLabel(" Last name ");
-    private JLabel label3 = new JLabel(" add number ");
-    private JLabel label4 = new JLabel(" add email ");
-    private JLabel label5 = new JLabel(" add address ");
-    private JLabel label6 = new JLabel(" add birthday ");
-    private JLabel label7 = new JLabel(" add group ");
-    private JTextField txt1 = new JTextField(25);
-    private JTextField txt2 = new JTextField(25);
-    private JTextField txt3 = new JTextField(25);
-    private JTextField txt4 = new JTextField(25);
-    private JTextField txt5 = new JTextField(25);
-    private JTextField txt6 = new JTextField(25);
-    private JTextField txt7 = new JTextField(25);
+    //1.Prenom 2.Nom 3.Numero 4.Email 5.Adresse 6.Anni 7.Groupe
+    JTextField txt = new JTextField();
+    JTextField txtboucle = new JTextField();
+    String parametre = "";
+    String vide = "";
+    private String prenomB = "Entrez le prénom";
+    private String nomB = "Entrez le nom";
+    private String numeroB = "Entrez le numéro";
+    private String emailB = "Entrez l'email";
+    private String adresseB = "Entrez l'adresse";
+    private String anniB = "Entrez la date de naissance";
+    private String groupeB = "Entrez le groupe";
+    private JTextField txt1 = new JTextField();
+    private JTextField txt2 = new JTextField();
+    private JTextField txt3 = new JTextField();
+    private JTextField txt4 = new JTextField();
+    private JTextField txt5 = new JTextField();
+    private JTextField txt6 = new JTextField();
+    private JTextField txt7 = new JTextField();
     ImageIcon done = new ImageIcon("src/images/done.png");
     ImageIcon cancel = new ImageIcon("src/images/cancel.png");
     ImageIcon addImage = new ImageIcon("src/images/addImage.png");
+    ImageIcon symbol = new ImageIcon("src/images/symbol.png");
     private JButton buttonCancel = new JButton(cancel);
     private JButton buttonDone = new JButton(done);
+    private JLabel symbolP = new JLabel(symbol);
     JButton BaddImage = new JButton(addImage);
     Color blanc = new Color(255, 255, 255);
     Color blancasse = new Color(250, 250, 250);
+    Font ecriture = new Font("SANS_SERIF", 50, 18);
 
     public GUINewContact(GUITelephone guit, AppContact contactA) {
         this.guit = guit;
@@ -70,37 +82,154 @@ public class GUINewContact extends JPanel {
         newcontact.setPreferredSize(new Dimension(480, 683));
         newcontact.setOpaque(false);
 
-        // **** CENTER **** //
-        panel_center.setLayout(new GridLayout(8, 1, 15, 50));
-        panel_center.add(txt1);txt1.setBackground(blanc);
-        panel_center.add(txt2);txt2.setBackground(blanc);
-        panel_center.add(txt3);txt3.setBackground(blanc);
-        panel_center.add(txt4);txt4.setBackground(blanc);
-        panel_center.add(txt5);txt5.setBackground(blanc);
-        panel_center.add(txt6);txt6.setBackground(blanc);
-        panel_center.add(txt7);txt7.setBackground(blanc);
-        txt1.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.white));
-        txt2.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.white));
-        txt3.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.white));
-        txt4.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.white));
-        txt5.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.white));
-        txt6.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.white));
-        txt7.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.white));
-        panel_center.setPreferredSize(new Dimension(280, 683));
-
         // **** WEST **** //
-        panel_west.setLayout(new GridLayout(8, 1, 15, 50));
-        panel_west.add(label1);label1.setForeground(blanc);
-        panel_west.add(label2);label2.setForeground(blanc);
-        panel_west.add(label3);label3.setForeground(blanc);
-        panel_west.add(label4);label4.setForeground(blanc);
-        panel_west.add(label5);label5.setForeground(blanc);
-        panel_west.add(label6);label6.setForeground(blanc);
-        panel_west.add(label7);label7.setForeground(blanc);
-        panel_west.setPreferredSize(new Dimension(100, 600));
-
+        panel_west.setLayout(new GridLayout(10, 1, 0, 0));
+        for (int i = 0; i < 7; i++) {
+            symbolP = new JLabel(CreationImageIcon(symbol));
+            panel_west.add(symbolP);
+            symbolP.setBackground(blanc);
+            symbolP.setOpaque(false);
+        }
+        panel_west.setPreferredSize(new Dimension(40, 600));
         // **** EAST **** //
-        panel_east.setPreferredSize(new Dimension(100, 600));
+        panel_east.setPreferredSize(new Dimension(40,600));
+        
+        // **** CENTER **** //
+        panel_center.setLayout(new GridLayout(10, 1, 0, 0));
+        for (int i = 0; i < 7; i++) {
+            txtboucle = CreationFieldContact(txt);
+            txtboucle.setOpaque(false);
+            txtboucle.setHorizontalAlignment(SwingConstants.CENTER);
+            txtboucle.setForeground(blanc);
+            txtboucle.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.white));
+            txtboucle.setFont(ecriture);
+
+            switch (i) {
+                case 0:
+                    txt1 = txtboucle;
+                    txtboucle.setText(prenomB);
+                    break;
+                case 1:
+                    txt2 = txtboucle;
+                    txtboucle.setText(nomB);
+                    break;
+                case 2:
+                    txt3 = txtboucle;
+                    txtboucle.setText(numeroB);
+                    break;
+                case 3:
+                    txt4 = txtboucle;
+                    txtboucle.setText(emailB);
+                    break;
+                case 4:
+                    txt5 = txtboucle;
+                    txtboucle.setText(adresseB);
+                    break;
+                case 5:
+                    txt6 = txtboucle;
+                    txtboucle.setText(anniB);
+                    break;
+                case 6:
+                    txt7 = txtboucle;
+                    txtboucle.setText(groupeB);
+                    break;
+            }
+
+            panel_center.add(txtboucle);
+        }
+        txt1.addFocusListener(new FocusListener() {
+            public void focusGained(FocusEvent arg0) {
+                if (txt1.getText().equals(prenomB)) {
+                    txt1.setText(vide);
+                }
+            }
+
+            public void focusLost(FocusEvent arg0) {
+                if (txt1.getText().equals(vide)) {
+                    txt1.setText(prenomB);
+                }
+            }
+        });
+        txt2.addFocusListener(new FocusListener() {
+            public void focusGained(FocusEvent arg0) {
+                if (txt2.getText().equals(nomB)) {
+                    txt2.setText(vide);
+                }
+            }
+
+            public void focusLost(FocusEvent arg0) {
+                if (txt2.getText().equals(vide)) {
+                    txt2.setText(nomB);
+                }
+            }
+        });
+        txt3.addFocusListener(new FocusListener() {
+            public void focusGained(FocusEvent arg0) {
+                if (txt3.getText().equals(numeroB)) {
+                    txt3.setText(vide);
+                }
+            }
+
+            public void focusLost(FocusEvent arg0) {
+                if (txt3.getText().equals(vide)) {
+                    txt3.setText(numeroB);
+                }
+            }
+        });
+        txt4.addFocusListener(new FocusListener() {
+            public void focusGained(FocusEvent arg0) {
+                if (txt4.getText().equals(emailB)) {
+                    txt4.setText(vide);
+                }
+            }
+
+            public void focusLost(FocusEvent arg0) {
+                if (txt4.getText().equals(vide)) {
+                    txt4.setText(emailB);
+                }
+            }
+        });
+        txt5.addFocusListener(new FocusListener() {
+            public void focusGained(FocusEvent arg0) {
+                if (txt5.getText().equals(adresseB)) {
+                    txt5.setText(vide);
+                }
+            }
+
+            public void focusLost(FocusEvent arg0) {
+                if (txt5.getText().equals(vide)) {
+                    txt5.setText(adresseB);
+                }
+            }
+        });
+        txt6.addFocusListener(new FocusListener() {
+            public void focusGained(FocusEvent arg0) {
+                if (txt6.getText().equals(anniB)) {
+                    txt6.setText(vide);
+                }
+            }
+
+            public void focusLost(FocusEvent arg0) {
+                if (txt6.getText().equals(vide)) {
+                    txt6.setText(anniB);
+                }
+            }
+        });
+        txt7.addFocusListener(new FocusListener() {
+            public void focusGained(FocusEvent arg0) {
+                if (txt7.getText().equals(groupeB)) {
+                    txt7.setText(vide);
+                }
+            }
+
+            public void focusLost(FocusEvent arg0) {
+                if (txt7.getText().equals(vide)) {
+                    txt7.setText(groupeB);
+                }
+            }
+        });
+        panel_center.setPreferredSize(
+                new Dimension(340, 683));
 
         // **** NORTH **** //
         panel_north.setLayout(new BorderLayout());
@@ -129,7 +258,6 @@ public class GUINewContact extends JPanel {
         newcontact.add(panel_east, BorderLayout.EAST);
         newcontact.add(panel_north, BorderLayout.NORTH);
         newcontact.add(panel_center);
-
         panel_center.setOpaque(false);
         panel_north.setOpaque(false);
         panel_east.setOpaque(false);
@@ -139,10 +267,23 @@ public class GUINewContact extends JPanel {
         // **** ACTION LISTENERS ****//
         buttonDone.addActionListener(new doneClick());
         buttonCancel.addActionListener(new cancelClick());
-
+        symbolP.requestFocus();
     }
+
+    // **** POUR CHAQUE TXT DE LA BOUCLE DES CHAMPS **** //
+    public JTextField CreationFieldContact(JTextField txt) {
+        txt = new JTextField();
+        return txt;
+    }
+
+    public ImageIcon CreationImageIcon(ImageIcon symbol) {
+        symbol = new ImageIcon("src/images/symbol.png");
+        return symbol;
+    }
+
     // **** ENREGISTRE LE CONTACT ET REVIENT SUR LA LISTE DE CONTACTS **** //
     private class doneClick implements ActionListener {
+
         public void actionPerformed(ActionEvent e) {
             Contact cc = new Contact(txt1.getText(), txt2.getText(), txt3.getText(), txt4.getText(), txt5.getText(), txt6.getText(), txt7.getText());
             contactA.addC(cc);
@@ -150,22 +291,24 @@ public class GUINewContact extends JPanel {
             guit.setCurrentPanel("contacts");
         }
     }
-    // **** ANNULE LA CREATION DE CONTACTS ET REVIENT SUR LA LISTE DE CONTACTS **** //
+
+// **** ANNULE LA CREATION DE CONTACTS ET REVIENT SUR LA LISTE DE CONTACTS **** //
     private class cancelClick implements ActionListener {
+
         public void actionPerformed(ActionEvent e) {
             refreshC();
             guit.setCurrentPanel("contacts");
         }
     }
-    // **** VIDE LES CHAMPS DE TEXTE **** //
+
+// **** VIDE LES CHAMPS DE TEXTE **** //
     public void refreshC() {
-        txt1.setText("");
-        txt2.setText("");
-        txt3.setText("");
-        txt4.setText("");
-        txt5.setText("");
-        txt6.setText("");
-        txt7.setText("");
-        System.out.println("test refresh");
+        txt1.setText(prenomB);
+        txt2.setText(nomB);
+        txt3.setText(numeroB);
+        txt4.setText(emailB);
+        txt5.setText(adresseB);
+        txt6.setText(anniB);
+        txt7.setText(groupeB);
     }
 }
