@@ -4,8 +4,10 @@ package graphisme;
 // ****                        **** //
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -15,16 +17,19 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Calendar;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import structure.AppContact;
 import structure.AppGallerie;
 
 public class GUITelephone extends JFrame implements Serializable {
-    
+
     // **** DECLARATION APPLICATIONS **** //
     private AppContact contactA;
     private AppGallerie gallerieA;
@@ -69,6 +74,11 @@ public class GUITelephone extends JFrame implements Serializable {
     private ImagePanel logo = new ImagePanel(new ImageIcon("src/images/logo.png"));
     private ImagePanel mainP = new ImagePanel(new ImageIcon("src/images/wallpaper.png"));
     private ImagePanel phoneP = new ImagePanel(new ImageIcon("src/images/wallpaper.png"));
+    private JTextField time = new JTextField();
+    int hour;
+    int minute;
+    private JTextField batteryS = new JTextField();
+    Font fonto = new Font("Dialog", Font.BOLD, 15);
 
     // **** POSITION BOUTON BACK **** // permet en fonction du panel afficher de retourner au panel supérieur
     private int backPosition = 0;
@@ -91,6 +101,9 @@ public class GUITelephone extends JFrame implements Serializable {
         this.guieditcontact = new GUIEditContact(this, contactA, guicontacts);
 
         // **** CONFIG FRAME **** // Position+size
+        Calendar cal = Calendar.getInstance();
+        hour = cal.get(Calendar.HOUR_OF_DAY);
+        minute = cal.get(Calendar.MINUTE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(480, 800));
         setLocationRelativeTo(null);
@@ -221,6 +234,13 @@ public class GUITelephone extends JFrame implements Serializable {
         northpanel.add(northpanelE, BorderLayout.EAST);
         northpanelE.setLayout(new FlowLayout());
         northpanelW.setLayout(new FlowLayout());
+        northpanelE.add(time);
+        time.setText((hour + ":" + minute));
+        time.setRequestFocusEnabled(false);
+        time.setOpaque(false);
+        time.setForeground(Color.WHITE);
+        time.setFont(fonto);
+        time.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, Color.white));
         northpanelE.add(bluethooth);
         bluethooth.setPreferredSize(new Dimension(16, 16));
         northpanelE.add(alarm);
@@ -236,7 +256,7 @@ public class GUITelephone extends JFrame implements Serializable {
         northpanel.setOpaque(false);
         northpanelE.setOpaque(false);
         northpanelW.setOpaque(false);
-        northpanel.setPreferredSize(new Dimension(480, 22));
+        northpanel.setPreferredSize(new Dimension(480, 24));
 
         // **** PANEL SOUTH **** //
         phoneP.add(southpanel, BorderLayout.SOUTH);
@@ -270,8 +290,7 @@ public class GUITelephone extends JFrame implements Serializable {
         cardL.show(cardP, currentPanel);
         if (currentPanel == "contacts") {
             guicontacts.refresh();
-        }
-        else if (currentPanel == "editcontact") {
+        } else if (currentPanel == "editcontact") {
             guieditcontact.refreshE();
         }
     }
@@ -355,5 +374,5 @@ public class GUITelephone extends JFrame implements Serializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }    
+    }
 }

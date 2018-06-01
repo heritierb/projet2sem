@@ -90,7 +90,6 @@ public class GUIContacts extends JPanel implements Serializable {
 
         // **** AJOUT DE LA LISTE DES CONTACTS **** // Appelle afficheUnit qui donne la liste des contacts
         panelcentscroll.setLayout(new BorderLayout());
-        panelcenter.setLayout(new GridLayout((int) (1.2 * contactA.arrayContacts.size()), 1));
         //panelcenter.setLayout(new GridLayout(10, 1));
         panelcentscroll.setOpaque(false);
         panelcentscroll.setBackground(null);
@@ -126,6 +125,11 @@ public class GUIContacts extends JPanel implements Serializable {
             panelcenter.add(cpt);
             panelcentscroll.add(panelScroll, BorderLayout.CENTER);
         }
+        if (contactA.arrayContacts.size() < 6) {
+            panelcenter.setLayout(new GridLayout(12, 1));
+        } else{
+            panelcenter.setLayout(new GridLayout((int) (2.05 * contactA.arrayContacts.size()), 1));
+        }
     }
 
     // **** POUR CHAQUE BOUTON DE LA BOUCLE AFFICHEUNIT **** //
@@ -159,7 +163,6 @@ public class GUIContacts extends JPanel implements Serializable {
             JButton boutonClicked = (JButton) e.getSource();
             Contact edit = contactA.arrayContacts.get(arrayButton.indexOf(boutonClicked));
             indexC = contactA.arrayContacts.indexOf(edit);
-            System.out.println("Index à récuperer : " + indexC);
             guit.setCurrentPanel("editcontact");
             guit.setBackPosition(3);
         }

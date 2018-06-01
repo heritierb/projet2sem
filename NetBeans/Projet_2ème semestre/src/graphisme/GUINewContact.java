@@ -315,10 +315,6 @@ public class GUINewContact extends JPanel {
             refreshC();
             guit.setCurrentPanel("contacts");
         }
-
-        public int incr(int n) {
-            return ++n;
-        }
     }
 
 // **** ANNULE LA CREATION DE CONTACTS ET REVIENT SUR LA LISTE DE CONTACTS **** //
