@@ -13,13 +13,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.UUID;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import structure.AppContact;
 import structure.Contact;
@@ -32,6 +32,10 @@ public class GUIContacts extends JPanel implements Serializable {
     // **** INSTANCE AppContact **** // Recupere le tableau de contacts
     AppContact contactA;
     private ArrayList<Contact> arrayCc;
+
+    // **** CREATION D'UNE LISTE DE BOUTONS DE CONTACTS **** //
+    ArrayList<JButton> arrayButton = new ArrayList<>();
+    Contact edit;
 
     // **** CREATIONS PANELS **** //
     private ImagePanel contacts = new ImagePanel(new ImageIcon("src/images/wallpaper.png"));
@@ -52,12 +56,15 @@ public class GUIContacts extends JPanel implements Serializable {
     private JLabel label2 = new JLabel(" Last name ");
     private JLabel lContact = new JLabel();
     Color blanc = new Color(255, 255, 255);
+    UUID ID;
+    int indexC;
 
     public GUIContacts(GUITelephone guit, AppContact contactA) {
 
         //**** RECUPERE LES INSTANCES DANS LE CONSTRUCTEUR **** //
         this.guit = guit;
         this.contactA = contactA;
+        this.arrayButton = arrayButton;
 
         // **** CONFIG DE BASE **** //
         add(contacts);
@@ -83,7 +90,8 @@ public class GUIContacts extends JPanel implements Serializable {
 
         // **** AJOUT DE LA LISTE DES CONTACTS **** // Appelle afficheUnit qui donne la liste des contacts
         panelcentscroll.setLayout(new BorderLayout());
-        panelcenter.setLayout(new GridLayout(12, 1));
+        panelcenter.setLayout(new GridLayout((int) (1.2 * contactA.arrayContacts.size()), 1));
+        //panelcenter.setLayout(new GridLayout(10, 1));
         panelcentscroll.setOpaque(false);
         panelcentscroll.setBackground(null);
         panelcentscroll.setBorder(null);
@@ -92,11 +100,13 @@ public class GUIContacts extends JPanel implements Serializable {
         panelcenter.setBorder(null);
         panelScroll.getViewport().setOpaque(false);
         panelScroll.setOpaque(false);
-        panelcentscroll.setPreferredSize(new Dimension(480, 605));
-        panelcenter.setPreferredSize(new Dimension(463, 605));
-        panelScroll.setPreferredSize(new Dimension(15, 605));
+        panelcentscroll.setPreferredSize(new Dimension(480, 606));
+        panelcenter.setPreferredSize(new Dimension(463, 50 * contactA.arrayContacts.size()));
+        //panelcenter.setPreferredSize(new Dimension(463, 605));
+        panelScroll.setPreferredSize(new Dimension(15, 606));
         afficheUnit();
         contacts.add(panelcentscroll, BorderLayout.CENTER);
+
     }
 
     // **** RECUPERE LA LISTE DES CONTACTS ET CREE DES BOUTONS PRENOM+NOM **** //
@@ -112,6 +122,7 @@ public class GUIContacts extends JPanel implements Serializable {
             cpt.setFont(ecriture);
             cpt.setForeground(blanc);
             cpt.addActionListener(new ClickContact());
+            arrayButton.add(cpt);
             panelcenter.add(cpt);
             panelcentscroll.add(panelScroll, BorderLayout.CENTER);
         }
@@ -127,6 +138,7 @@ public class GUIContacts extends JPanel implements Serializable {
     public void refresh() {
         panelcenter.removeAll();
         updateUI();
+        arrayButton.clear();
         afficheUnit();
     }
 
@@ -139,13 +151,34 @@ public class GUIContacts extends JPanel implements Serializable {
             refresh();
         }
     }
+
     // **** BOUTON POUR MODIFIER UN CONTACT **** //
     private class ClickContact implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
+            JButton boutonClicked = (JButton) e.getSource();
+            Contact edit = contactA.arrayContacts.get(arrayButton.indexOf(boutonClicked));
+            indexC = contactA.arrayContacts.indexOf(edit);
+            System.out.println("Index à récuperer : " + indexC);
             guit.setCurrentPanel("editcontact");
             guit.setBackPosition(3);
-            refresh();
         }
     }
+
+    public Contact getEdit() {
+        return edit;
+    }
+
+    public void setEdit(Contact edit) {
+        this.edit = edit;
+    }
+
+    public ArrayList<JButton> getArrayButton() {
+        return arrayButton;
+    }
+
+    public void setArrayButton(ArrayList<JButton> arrayButton) {
+        this.arrayButton = arrayButton;
+    }
+
 }

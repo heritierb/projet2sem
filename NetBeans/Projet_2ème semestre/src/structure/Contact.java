@@ -3,10 +3,12 @@ package structure;
 // **** AUTEUR BENOIT HERITIER **** //
 // ****                        **** //
 import java.io.Serializable;
+import java.util.UUID;
 
 public class Contact implements Serializable {
     
     // **** COMPOSANTS D'UN CONTACT **** //
+    UUID ID;
     String prenom;
     String nom;
     String numero;
@@ -16,8 +18,9 @@ public class Contact implements Serializable {
     String groupe;
     
     // **** CONSTRUCTEUR **** //
-    public Contact(String prenom, String nom, String numero, String email,
+    public Contact(UUID ID, String prenom, String nom, String numero, String email,
             String adresse, String anniversaire, String groupe) {
+        this.ID = ID;
         this.prenom = prenom;
         this.nom = nom;
         this.numero = numero;
@@ -26,7 +29,13 @@ public class Contact implements Serializable {
         this.anniversaire = anniversaire;
         this.groupe = groupe;
     }
-    // **** GETTERS&SETTERS **** //  
+    // **** GETTERS&SETTERS **** //
+    public UUID getID() {
+        return ID;
+    }
+    public void setID(UUID ID) {
+        this.ID = ID;
+    }
     public String getPrenom() {
         return prenom;
     }

@@ -2,7 +2,7 @@ package graphisme;
 // ****                        **** //
 // **** AUTEUR BENOIT HERITIER **** //
 // ****                        **** //
-
+import com.sun.xml.internal.bind.v2.model.core.ID;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.ArrayList;
+import java.util.UUID;
 import static java.util.UUID.randomUUID;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -309,7 +310,7 @@ public class GUINewContact extends JPanel {
             if (txt7.getText().equals(groupeB)) {
                 txt7.setText(vide);
             }
-            Contact cc = new Contact(txt1.getText(), txt2.getText(), txt3.getText(), txt4.getText(), txt5.getText(), txt6.getText(), txt7.getText());
+            Contact cc = new Contact(UUID.randomUUID(),txt1.getText(), txt2.getText(), txt3.getText(), txt4.getText(), txt5.getText(), txt6.getText(), txt7.getText());
             contactA.addC(cc);
             refreshC();
             guit.setCurrentPanel("contacts");

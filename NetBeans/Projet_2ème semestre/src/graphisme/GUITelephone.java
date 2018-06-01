@@ -88,7 +88,7 @@ public class GUITelephone extends JFrame implements Serializable {
         this.guicontacts = new GUIContacts(this, contactA);
         this.guinewcontact = new GUINewContact(this, contactA);
         this.guiimage = new GUIImage(this);
-        this.guieditcontact = new GUIEditContact(this, contactA);
+        this.guieditcontact = new GUIEditContact(this, contactA, guicontacts);
 
         // **** CONFIG FRAME **** // Position+size
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -272,7 +272,7 @@ public class GUITelephone extends JFrame implements Serializable {
             guicontacts.refresh();
         }
         else if (currentPanel == "editcontact") {
-            
+            guieditcontact.refreshE();
         }
     }
 
