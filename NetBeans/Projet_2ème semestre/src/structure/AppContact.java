@@ -24,8 +24,7 @@ public class AppContact implements Serializable {
     }
     // **** EDITER LES INFORMATIONS D'UN CONTACT **** //
     public void editC(Contact contact) {
-        arrayContacts.remove(contact);
-        arrayContacts.add(contact);
+        arrayContacts.set(arrayContacts.indexOf(contact), contact);
     }
     // **** GETTERS&SETTERS **** //
     public ArrayList<Contact> getArrayContacts() {

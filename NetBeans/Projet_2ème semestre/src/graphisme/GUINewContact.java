@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.ArrayList;
+import static java.util.UUID.randomUUID;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -70,8 +71,9 @@ public class GUINewContact extends JPanel {
     JButton BaddImage = new JButton(addImage);
     Color blanc = new Color(255, 255, 255);
     Color blancasse = new Color(250, 250, 250);
-    Font ecriture = new Font("SANS_SERIF",Font.ITALIC, 18);
-    Font ecritureI = new Font("SANS_SERIF",50, 18);
+    Font ecriture = new Font("SANS_SERIF", Font.ITALIC, 18);
+    Font ecritureI = new Font("SANS_SERIF", 50, 18);
+    int n = 0;
 
     public GUINewContact(GUITelephone guit, AppContact contactA) {
         this.guit = guit;
@@ -93,8 +95,8 @@ public class GUINewContact extends JPanel {
         }
         panel_west.setPreferredSize(new Dimension(40, 600));
         // **** EAST **** //
-        panel_east.setPreferredSize(new Dimension(40,600));
-        
+        panel_east.setPreferredSize(new Dimension(40, 600));
+
         // **** CENTER **** //
         panel_center.setLayout(new GridLayout(10, 1, 0, 0));
         for (int i = 0; i < 7; i++) {
@@ -142,14 +144,12 @@ public class GUINewContact extends JPanel {
             public void focusGained(FocusEvent arg0) {
                 if (txt1.getText().equals(prenomB)) {
                     txt1.setText(vide);
-                    txt1.setFont(ecriture);
                 }
             }
 
             public void focusLost(FocusEvent arg0) {
                 if (txt1.getText().equals(vide)) {
                     txt1.setText(prenomB);
-                    txt1.setFont(ecritureI);
                 }
             }
         });
@@ -288,10 +288,35 @@ public class GUINewContact extends JPanel {
     private class doneClick implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
+            if (txt1.getText().equals(prenomB)) {
+                txt1.setText(vide);
+            }
+            if (txt2.getText().equals(nomB)) {
+                txt2.setText(vide);
+            }
+            if (txt3.getText().equals(numeroB)) {
+                txt3.setText(vide);
+            }
+            if (txt4.getText().equals(emailB)) {
+                txt4.setText(vide);
+            }
+            if (txt5.getText().equals(adresseB)) {
+                txt5.setText(vide);
+            }
+            if (txt6.getText().equals(anniB)) {
+                txt6.setText(vide);
+            }
+            if (txt7.getText().equals(groupeB)) {
+                txt7.setText(vide);
+            }
             Contact cc = new Contact(txt1.getText(), txt2.getText(), txt3.getText(), txt4.getText(), txt5.getText(), txt6.getText(), txt7.getText());
             contactA.addC(cc);
             refreshC();
             guit.setCurrentPanel("contacts");
+        }
+
+        public int incr(int n) {
+            return ++n;
         }
     }
 

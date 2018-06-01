@@ -2,7 +2,6 @@ package graphisme;
 // ****                        **** //
 // **** AUTEUR BENOIT HERITIER **** //
 // ****                        **** //
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -12,7 +11,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -51,15 +49,18 @@ public class GUIEditContact extends JPanel implements Serializable {
     private JTextField txt7 = new JTextField();
     Color blanc = new Color(255, 255, 255);
     Font ecriture = new Font("SANS_SERIF", 50, 30);
-    int i = 2;
+    protected static Contact contactX;
+    int i = 1;
+    
 
     public GUIEditContact(GUITelephone guit, AppContact contactA) {
         this.guit = guit;
         this.contactA = contactA;
+        contactA.addC(contactX);
+        i = contactA.arrayContacts.indexOf(contactX);
         add(contactDetails);
         contactDetails.setOpaque(false);
-        contactDetails.setPreferredSize(new Dimension(480,683));
-
+        contactDetails.setPreferredSize(new Dimension(480, 683));
         contactDetails.setLayout(new BorderLayout());
 
         for (int j = 0; j < 7; j++) {

@@ -2,7 +2,6 @@ package graphisme;
 // ****                        **** //
 // **** AUTEUR BENOIT HERITIER **** //
 // ****                        **** //
-
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Dimension;
@@ -14,7 +13,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileOutputStream;
 import java.io.IOException;
-;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import javax.swing.ImageIcon;
@@ -25,10 +23,8 @@ import javax.swing.border.EmptyBorder;
 import structure.AppContact;
 import structure.AppGallerie;
 
-
-
 public class GUITelephone extends JFrame implements Serializable {
-
+    
     // **** DECLARATION APPLICATIONS **** //
     private AppContact contactA;
     private AppGallerie gallerieA;
@@ -275,6 +271,9 @@ public class GUITelephone extends JFrame implements Serializable {
         if (currentPanel == "contacts") {
             guicontacts.refresh();
         }
+        else if (currentPanel == "editcontact") {
+            
+        }
     }
 
     // **** OUVERTURE PANEL GUIGallerie **** //
@@ -356,5 +355,5 @@ public class GUITelephone extends JFrame implements Serializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }    
 }

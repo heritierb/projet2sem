@@ -26,7 +26,7 @@ public class Contact implements Serializable {
         this.anniversaire = anniversaire;
         this.groupe = groupe;
     }
-    // **** GETTERS&SETTERS **** //
+    // **** GETTERS&SETTERS **** //  
     public String getPrenom() {
         return prenom;
     }

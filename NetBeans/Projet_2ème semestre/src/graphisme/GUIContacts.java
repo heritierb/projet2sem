@@ -13,7 +13,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Serializable;
 import java.util.ArrayList;
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -21,7 +20,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.EmptyBorder;
 import structure.AppContact;
 import structure.Contact;
@@ -54,13 +52,13 @@ public class GUIContacts extends JPanel implements Serializable {
     private JLabel label2 = new JLabel(" Last name ");
     private JLabel lContact = new JLabel();
     Color blanc = new Color(255, 255, 255);
-    
+
     public GUIContacts(GUITelephone guit, AppContact contactA) {
 
         //**** RECUPERE LES INSTANCES DANS LE CONSTRUCTEUR **** //
         this.guit = guit;
         this.contactA = contactA;
-        System.out.println(UIManager.getLookAndFeel());
+
         // **** CONFIG DE BASE **** //
         add(contacts);
         contacts.setBorder(new EmptyBorder(0, 0, 0, 0));
@@ -93,7 +91,7 @@ public class GUIContacts extends JPanel implements Serializable {
         panelcenter.setBackground(null);
         panelcenter.setBorder(null);
         panelScroll.getViewport().setOpaque(false);
-	panelScroll.setOpaque(false);
+        panelScroll.setOpaque(false);
         panelcentscroll.setPreferredSize(new Dimension(480, 605));
         panelcenter.setPreferredSize(new Dimension(463, 605));
         panelScroll.setPreferredSize(new Dimension(15, 605));
@@ -141,7 +139,7 @@ public class GUIContacts extends JPanel implements Serializable {
             refresh();
         }
     }
-        // **** BOUTON POUR MODIFIER UN CONTACT **** //
+    // **** BOUTON POUR MODIFIER UN CONTACT **** //
     private class ClickContact implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
@@ -150,5 +148,4 @@ public class GUIContacts extends JPanel implements Serializable {
             refresh();
         }
     }
-    
 }
