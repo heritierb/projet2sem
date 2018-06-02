@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.UUID;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -90,7 +91,6 @@ public class GUIContacts extends JPanel implements Serializable {
 
         // **** AJOUT DE LA LISTE DES CONTACTS **** // Appelle afficheUnit qui donne la liste des contacts
         panelcentscroll.setLayout(new BorderLayout());
-        //panelcenter.setLayout(new GridLayout(10, 1));
         panelcentscroll.setOpaque(false);
         panelcentscroll.setBackground(null);
         panelcentscroll.setBorder(null);
@@ -100,9 +100,11 @@ public class GUIContacts extends JPanel implements Serializable {
         panelScroll.getViewport().setOpaque(false);
         panelScroll.setOpaque(false);
         panelcentscroll.setPreferredSize(new Dimension(480, 606));
-        panelcenter.setPreferredSize(new Dimension(463, 50 * contactA.arrayContacts.size()));
-        //panelcenter.setPreferredSize(new Dimension(463, 605));
         panelScroll.setPreferredSize(new Dimension(15, 606));
+        panelScroll.setHorizontalScrollBarPolicy(
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        panelScroll.setVerticalScrollBarPolicy(
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         afficheUnit();
         contacts.add(panelcentscroll, BorderLayout.CENTER);
 
@@ -115,20 +117,19 @@ public class GUIContacts extends JPanel implements Serializable {
             JButton migna = new JButton();
             JButton cpt = CreationBoutonContact(migna);
             cpt.setText(contactA.getArrayContacts().get(i).getPrenom() + " " + contactA.getArrayContacts().get(i).getNom());
-            cpt.setPreferredSize(new Dimension(10, 10));
+            cpt.setMaximumSize(new Dimension(480, 50));
+            cpt.setMinimumSize(new Dimension(480, 50));
             cpt.setContentAreaFilled(false);
             cpt.setHorizontalAlignment(10);
             cpt.setFont(ecriture);
             cpt.setForeground(blanc);
             cpt.addActionListener(new ClickContact());
+            panelcenter.setPreferredSize(new Dimension(463, 52 * contactA.arrayContacts.size()));
             arrayButton.add(cpt);
             panelcenter.add(cpt);
+            panelcenter.setLayout(new BoxLayout(panelcenter, BoxLayout.Y_AXIS));
+            panelcentscroll.setPreferredSize(new Dimension(480, 585));
             panelcentscroll.add(panelScroll, BorderLayout.CENTER);
-        }
-        if (contactA.arrayContacts.size() < 6) {
-            panelcenter.setLayout(new GridLayout(12, 1));
-        } else{
-            panelcenter.setLayout(new GridLayout((int) (2.05 * contactA.arrayContacts.size()), 1));
         }
     }
 

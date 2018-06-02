@@ -77,7 +77,6 @@ public class GUITelephone extends JFrame implements Serializable {
     private JTextField time = new JTextField();
     int hour;
     int minute;
-    private JTextField batteryS = new JTextField();
     Font fonto = new Font("Dialog", Font.BOLD, 15);
 
     // **** POSITION BOUTON BACK **** // permet en fonction du panel afficher de retourner au panel supérieur
@@ -256,7 +255,7 @@ public class GUITelephone extends JFrame implements Serializable {
         northpanel.setOpaque(false);
         northpanelE.setOpaque(false);
         northpanelW.setOpaque(false);
-        northpanel.setPreferredSize(new Dimension(480, 24));
+        northpanel.setPreferredSize(new Dimension(480, 28));
 
         // **** PANEL SOUTH **** //
         phoneP.add(southpanel, BorderLayout.SOUTH);

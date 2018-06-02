@@ -50,11 +50,13 @@ public class GUIEditContact extends JPanel implements Serializable {
     ImageIcon addImage = new ImageIcon("src/images/addImage.png");
     ImageIcon symbol = new ImageIcon("src/images/symbol.png");
     ImageIcon delete = new ImageIcon("src/images/delete.png");
+    ImageIcon delete2 = new ImageIcon("src/images/delete2.png");
     ImageIcon refresh = new ImageIcon("src/images/refresh.png");
+    ImageIcon confirm = new ImageIcon("src/images/confirm.png");
     private JButton buttonCancel = new JButton(cancel);
     private JButton buttonDone = new JButton(done);
-    private JButton buttonCancel2 = new JButton(cancel);
-    private JButton buttonDone2 = new JButton(done);
+    private JButton buttonCancel2 = new JButton(delete2);
+    private JButton buttonConfirm = new JButton(confirm);
     private JLabel symbolP = new JLabel(symbol);
     private JButton buttonDelete = new JButton(delete);
     private JLabel refreshP = new JLabel(refresh);
@@ -77,11 +79,13 @@ public class GUIEditContact extends JPanel implements Serializable {
     private JTextField txt5 = new JTextField();
     private JTextField txt6 = new JTextField();
     private JTextField txt7 = new JTextField();
+    private JTextField sure = new JTextField("Are you sure?");
     Color blanc = new Color(255, 255, 255);
     Font ecriture = new Font("SANS_SERIF", 50, 30);
     int indexC;
     Contact contactX;
     GUIContacts guic;
+    Font fonto = new Font("Dialog", Font.BOLD, 15);
 
     public GUIEditContact(GUITelephone guit, AppContact contactA, GUIContacts guic) {
         this.guit = guit;
@@ -377,16 +381,23 @@ public class GUIEditContact extends JPanel implements Serializable {
             panelSouth.removeAll();
             updateUI();
             panelSouth.setLayout(new FlowLayout());
-            buttonDone2.setContentAreaFilled(false);
+            buttonConfirm.setContentAreaFilled(false);
             buttonCancel2.setContentAreaFilled(false);
-            buttonDone2.setPreferredSize(new Dimension(35, 35));
-            buttonCancel2.setPreferredSize(new Dimension(35, 35));
-            buttonDone2.setBorderPainted(false);
+            buttonConfirm.setPreferredSize(new Dimension(120, 120));
+            buttonCancel2.setPreferredSize(new Dimension(120, 120));
+            buttonConfirm.setBorderPainted(false);
+            sure.setOpaque(false);
+            sure.setRequestFocusEnabled(false);
+            sure.setOpaque(false);
+            sure.setForeground(Color.WHITE);
+            sure.setFont(fonto);
+            sure.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, Color.white));
             buttonCancel2.setBorderPainted(false);
-            panelSouth.add(buttonDone2);
+            panelSouth.add(buttonConfirm);
+            panelSouth.add(sure);
             panelSouth.add(buttonCancel2);
             panelSouth.setPreferredSize(new Dimension(120, 120));
-            buttonDone2.addActionListener(new GUIEditContact.deleteSecondClick());
+            buttonConfirm.addActionListener(new GUIEditContact.deleteSecondClick());
             buttonCancel2.addActionListener(new GUIEditContact.deleteReturnClick());
         }
     }
