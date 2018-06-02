@@ -117,6 +117,8 @@ public class GUIContacts extends JPanel implements Serializable {
             JButton migna = new JButton();
             JButton cpt = CreationBoutonContact(migna);
             cpt.setText(contactA.getArrayContacts().get(i).getPrenom() + " " + contactA.getArrayContacts().get(i).getNom());
+            cpt.setIcon(contactA.getArrayContacts().get(i).getImageContact());
+            cpt.setIconTextGap(contactA.getArrayContacts().get(i).getImageContact().getIconWidth());
             cpt.setMaximumSize(new Dimension(480, 50));
             cpt.setMinimumSize(new Dimension(480, 50));
             cpt.setContentAreaFilled(false);

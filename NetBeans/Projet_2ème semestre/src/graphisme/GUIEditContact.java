@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 import static java.util.UUID.randomUUID;
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -25,6 +26,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.border.EmptyBorder;
 import structure.AppContact;
 import structure.Contact;
 
@@ -43,9 +45,12 @@ public class GUIEditContact extends JPanel implements Serializable {
     private JPanel panelWest = new JPanel();
     private JPanel panelNtm = new JPanel();
     private JPanel empty = new JPanel();
+    private JPanel empty2 = new JPanel();
     private JPanel panelSouth = new JPanel();
     private JPanel panelEast = new JPanel();
-    ImageIcon done = new ImageIcon("src/images/done.png");
+    private JPanel panelSud = new JPanel();
+    private JPanel panelImageContact = new JPanel();
+    ImageIcon save = new ImageIcon("src/images/save.png");
     ImageIcon cancel = new ImageIcon("src/images/cancel.png");
     ImageIcon addImage = new ImageIcon("src/images/addImage.png");
     ImageIcon symbol = new ImageIcon("src/images/symbol.png");
@@ -53,8 +58,9 @@ public class GUIEditContact extends JPanel implements Serializable {
     ImageIcon delete2 = new ImageIcon("src/images/delete2.png");
     ImageIcon refresh = new ImageIcon("src/images/refresh.png");
     ImageIcon confirm = new ImageIcon("src/images/confirm.png");
+    private JButton buttonImageContact = new JButton();
     private JButton buttonCancel = new JButton(cancel);
-    private JButton buttonDone = new JButton(done);
+    private JButton buttonSave = new JButton(save);
     private JButton buttonCancel2 = new JButton(delete2);
     private JButton buttonConfirm = new JButton(confirm);
     private JLabel symbolP = new JLabel(symbol);
@@ -79,9 +85,9 @@ public class GUIEditContact extends JPanel implements Serializable {
     private JTextField txt5 = new JTextField();
     private JTextField txt6 = new JTextField();
     private JTextField txt7 = new JTextField();
-    private JTextField sure = new JTextField("Are you sure?");
+    private JLabel sure = new JLabel("<html>Etes-vous sûr de<br/>supprimer ce contact</html>");
     Color blanc = new Color(255, 255, 255);
-    Font ecriture = new Font("SANS_SERIF", 50, 30);
+    Font ecriture = new Font("SANS_SERIF", Font.ITALIC, 18);
     int indexC;
     Contact contactX;
     GUIContacts guic;
@@ -97,11 +103,20 @@ public class GUIEditContact extends JPanel implements Serializable {
         contactDetails.setOpaque(false);
         contactDetails.setPreferredSize(new Dimension(480, 683));
         contactDetails.setLayout(new BorderLayout());
+        panelDetails.setOpaque(false);
+        panelDetails.setPreferredSize(new Dimension(480, 600));
+        
+        empty2.setOpaque(false);
+        
+        buttonImageContact.setContentAreaFilled(false);
+        buttonImageContact.setBorder(new EmptyBorder(0, 0, 0, 0));
+        panelImageContact.setOpaque(false);
+        panelImageContact.add(buttonImageContact);
 
         panelDetails.setLayout(new GridLayout(10, 1, 0, 0));
         contactDetails.add(panelDetails, BorderLayout.CENTER);
         contactDetails.add(panelNorth, BorderLayout.NORTH);
-        contactDetails.add(panelSouth, BorderLayout.SOUTH);
+        contactDetails.add(panelSud, BorderLayout.SOUTH);
         contactDetails.add(panelWest, BorderLayout.EAST);
         contactDetails.add(panelEast, BorderLayout.WEST);
 
@@ -121,34 +136,26 @@ public class GUIEditContact extends JPanel implements Serializable {
 
         // **** NORTH **** //
         panelNorth.setLayout(new BorderLayout());
-        buttonDone.setContentAreaFilled(false);
-        buttonCancel.setContentAreaFilled(false);
-        BaddImage.setContentAreaFilled(false);
-        buttonDone.setPreferredSize(new Dimension(35, 35));
-        buttonCancel.setPreferredSize(new Dimension(35, 35));
-        BaddImage.setPreferredSize(new Dimension(70, 70));
-        buttonDone.setBorderPainted(false);
-        buttonCancel.setBorderPainted(false);
-        BaddImage.setBorderPainted(false);
-        panelNorth.add(panelNtm, BorderLayout.NORTH);
-        panelNtm.setLayout(new FlowLayout());
+        buttonSave.setContentAreaFilled(false);
+//        buttonSave.setPreferredSize(new Dimension(40, 40));
+        buttonSave.setBorderPainted(false);
+        panelNorth.add(panelNtm, BorderLayout.CENTER);
         panelNtm.setOpaque(false);
-        panelNtm.add(buttonDone);
-        panelNtm.add(BaddImage);
-        panelNtm.add(buttonCancel);
+        panelNtm.add(buttonSave);
         panelNorth.add(empty, BorderLayout.SOUTH);
         empty.setPreferredSize(new Dimension(480, 5));
         empty.setOpaque(true);
-        panelNorth.setPreferredSize(new Dimension(280, 83));
+        panelNorth.setPreferredSize(new Dimension(280, 85));
         panelNorth.setOpaque(false);
-
-        buttonDone.addActionListener(new GUIEditContact.doneClick());
-        buttonCancel.addActionListener(new GUIEditContact.cancelClick());
+        buttonSave.addActionListener(new GUIEditContact.doneClick());
         refreshP.requestFocus();
 
         // **** SOUTH **** //
+        panelSud.setLayout(new BoxLayout(panelSud, BoxLayout.Y_AXIS));
+        panelSud.setPreferredSize(new Dimension(480, 200));
+        panelSud.add(panelSouth);
+        panelSud.setOpaque(false);
         panelSouthRefresh();
-
     }
 
     // **** POUR CHAQUE TXT DE LA BOUCLE DES CHAMPS **** //
@@ -177,34 +184,57 @@ public class GUIEditContact extends JPanel implements Serializable {
             txtboucle.setForeground(blanc);
             txtboucle.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.white));
             txtboucle.setFont(ecriture);
+            txtboucle.setMaximumSize(new Dimension(480, 50));
+            txtboucle.setMinimumSize(new Dimension(480, 50));
             switch (j) {
                 case 0:
                     txt1 = txtboucle;
                     txtboucle.setText(contactA.arrayContacts.get(indexC).getPrenom());
+                    if (txt1.getText().equals(vide)) {
+                        txt1.setText(prenomB);
+                    }
                     break;
                 case 1:
                     txt2 = txtboucle;
                     txtboucle.setText(contactA.arrayContacts.get(indexC).getNom());
+                    if (txt2.getText().equals(vide)) {
+                        txt2.setText(nomB);
+                    }
                     break;
                 case 2:
                     txt3 = txtboucle;
                     txtboucle.setText(contactA.arrayContacts.get(indexC).getNumero());
+                    if (txt3.getText().equals(vide)) {
+                        txt3.setText(numeroB);
+                    }
                     break;
                 case 3:
                     txt4 = txtboucle;
                     txtboucle.setText(contactA.arrayContacts.get(indexC).getEmail());
+                    if (txt4.getText().equals(vide)) {
+                        txt4.setText(emailB);
+                    }
                     break;
                 case 4:
                     txt5 = txtboucle;
                     txtboucle.setText(contactA.arrayContacts.get(indexC).getAdresse());
+                    if (txt5.getText().equals(vide)) {
+                        txt5.setText(adresseB);
+                    }
                     break;
                 case 5:
                     txt6 = txtboucle;
                     txtboucle.setText(contactA.arrayContacts.get(indexC).getAnniversaire());
+                    if (txt6.getText().equals(vide)) {
+                        txt6.setText(anniB);
+                    }
                     break;
                 case 6:
                     txt7 = txtboucle;
                     txtboucle.setText(contactA.arrayContacts.get(indexC).getGroupe());
+                    if (txt7.getText().equals(vide)) {
+                        txt7.setText(groupeB);
+                    }
                     break;
             }
             // **** SUR CHAQUE ACTIONLISTENER : SI LE TEXTE EST VIDE LE REMPLACE PAR UN TEXTE PAR DEFAUT **** //
@@ -300,10 +330,12 @@ public class GUIEditContact extends JPanel implements Serializable {
                     }
                 }
             });
+            refreshP.requestFocus();
             panelDetails.add(txtboucle);
-            panelDetails.setOpaque(false);
+            panelDetails.add(empty2);
+            panelDetails.add(panelImageContact);
+            buttonImageContact.setIcon(contactA.arrayContacts.get(indexC).getImageContact());
         }
-
     }
 
     // **** ENREGISTRE LE CONTACT ET REVIENT SUR LA LISTE DE CONTACTS **** //
@@ -353,15 +385,6 @@ public class GUIEditContact extends JPanel implements Serializable {
         buttonDelete.setBorderPainted(false);
         panelSouth.add(buttonDelete);
         buttonDelete.addActionListener(new GUIEditContact.deleteFirstClick());
-    }
-
-    // **** ANNULE L'EDITION DU ET REVIENT SUR LA LISTE DE CONTACTS **** //
-    private class cancelClick implements ActionListener {
-
-        public void actionPerformed(ActionEvent e) {
-
-            guit.setCurrentPanel("contacts");
-        }
     }
 
     // **** CONFIRME LA SUPPRESSION ET REVIENT SUR LA LISTE DE CONTACTS **** //

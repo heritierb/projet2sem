@@ -2,8 +2,10 @@ package structure;
 // ****                        **** //
 // **** AUTEUR BENOIT HERITIER **** //
 // ****                        **** //
+import graphisme.ImagePanel;
 import java.io.Serializable;
 import java.util.UUID;
+import javax.swing.ImageIcon;
 
 public class Contact implements Serializable {
     
@@ -16,10 +18,11 @@ public class Contact implements Serializable {
     String adresse;
     String anniversaire;
     String groupe;
+    ImageIcon imageContact;
     
     // **** CONSTRUCTEUR **** //
     public Contact(UUID ID, String prenom, String nom, String numero, String email,
-            String adresse, String anniversaire, String groupe) {
+            String adresse, String anniversaire, String groupe, ImageIcon imageContact) {
         this.ID = ID;
         this.prenom = prenom;
         this.nom = nom;
@@ -28,6 +31,7 @@ public class Contact implements Serializable {
         this.adresse = adresse;
         this.anniversaire = anniversaire;
         this.groupe = groupe;
+        this.imageContact = imageContact;
     }
     // **** GETTERS&SETTERS **** //
     public UUID getID() {
@@ -78,4 +82,11 @@ public class Contact implements Serializable {
     public void setGroupe(String groupe) {
         this.groupe = groupe;
     }
+    public ImageIcon getImageContact() {
+        return imageContact;
+    }
+    public void setImageContact(ImageIcon imageContact) {
+        this.imageContact = imageContact;
+    }
+    
 }
