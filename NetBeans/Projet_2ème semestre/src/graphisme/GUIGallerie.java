@@ -1,37 +1,31 @@
 package graphisme;
 
 import javax.swing.JButton;
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
-
 import structure.AppGallerie;
 
 public class GUIGallerie extends JPanel {
 	AppGallerie gallerieA;
-
 	static int TAILLE_BOUTON = 100;
-
 	private GUITelephone guit = (GUITelephone) SwingUtilities
 			.getAncestorOfClass(GUITelephone.class, GUIGallerie.this);
 	private ImagePanel gallerie = new ImagePanel(new ImageIcon(
 			"src/images/wallpaper.png"));
 	private ArrayList<String> fichiers;
-	private static String imageAAfficher = "test";
-	private JPanel panelcenter = new JPanel();
-	private JPanel panelcentscroll = new JPanel();
-	private JScrollPane panelScroll = new JScrollPane(panelcenter,
+	private static String imageAAfficher = "chemin image pas trouvé";
+	private JPanel panelImage = new JPanel();
+	private JPanel panelImageEtScroll = new JPanel();
+	private JScrollPane panelScroll = new JScrollPane(panelImage,
 			JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 			JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 	private int tailleScroll;
@@ -41,35 +35,35 @@ public class GUIGallerie extends JPanel {
 		fichiers = gallerieA.getFichiers();
 		this.guit = guit;
 
-		tailleScroll = (fichiers.size()/3+1)*116;
-		
-		panelcenter.setLayout(new FlowLayout());
-		panelcenter.setOpaque(false);
-		panelcenter.setBackground(null);
-		panelcenter.setBorder(null);
-		panelcenter.setPreferredSize(new Dimension(480, tailleScroll));
+		tailleScroll = (fichiers.size() / 3 + 1) * 116;
 
-		panelcentscroll.setLayout(new BorderLayout());
-		panelcentscroll.setOpaque(false);
-		panelcentscroll.setBackground(null);
-		panelcentscroll.setBorder(null);
-		panelcentscroll.setPreferredSize(new Dimension(480, 650));
+		panelImage.setLayout(new FlowLayout());
+		panelImage.setOpaque(false);
+		panelImage.setBackground(null);
+		panelImage.setBorder(null);
+		panelImage.setPreferredSize(new Dimension(480, tailleScroll));
+
+		panelImageEtScroll.setLayout(new BorderLayout());
+		panelImageEtScroll.setOpaque(false);
+		panelImageEtScroll.setBackground(null);
+		panelImageEtScroll.setBorder(null);
+		panelImageEtScroll.setPreferredSize(new Dimension(480, 650));
 
 		panelScroll.getViewport().setOpaque(false);
 		panelScroll.setOpaque(false);
 		panelScroll.setPreferredSize(new Dimension(15, 600));
 
-		// Pour chaque image du dossier, céer un bouton		
+		// Pour chaque image du dossier, céer un bouton avec un nom
 		for (int i = 0; i < fichiers.size(); i++) {
-			JButton cpt = CreationBoutonImage((String) gallerieA.getFichiers()
-					.get(i));
-			cpt.setName((String) gallerieA.getFichiers().get(i));
-			panelcenter.add(cpt);
-			cpt.addActionListener(new ClickImage());
-			panelcentscroll.add(panelScroll);
+			JButton boutonImage = CreationBoutonImage((String) gallerieA
+					.getFichiers().get(i));
+			boutonImage.setName((String) gallerieA.getFichiers().get(i));
+			panelImage.add(boutonImage);
+			boutonImage.addActionListener(new ClickImage());
+			panelImageEtScroll.add(panelScroll);
 		}
 
-		gallerie.add(panelcentscroll, BorderLayout.CENTER);
+		gallerie.add(panelImageEtScroll, BorderLayout.CENTER);
 
 		// Affichage de la gallerie
 		gallerie.setLayout(new FlowLayout());
@@ -90,7 +84,8 @@ public class GUIGallerie extends JPanel {
 						java.awt.Image.SCALE_SMOOTH);
 		imageBouton = new ImageIcon(imageBoutonRedim);
 		bouton = new JButton(imageBouton);
-
+		bouton.setContentAreaFilled(false);
+		bouton.setBorderPainted(false);
 		return bouton;
 	}
 
@@ -99,7 +94,8 @@ public class GUIGallerie extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 
 			JButton button = (JButton) e.getSource();
-
+			imageAAfficher = gallerieA.getDOSSIER().concat(button.getName());
+			guit.guiimage.update();
 			guit.setCurrentPanel("image");
 			guit.setBackPosition(4);
 
