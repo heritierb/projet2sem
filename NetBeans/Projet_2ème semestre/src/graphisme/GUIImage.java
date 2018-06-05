@@ -22,40 +22,32 @@ public class GUIImage extends JPanel {
 
 	}
 	
-
-	
-
-	
 	public void update(){
 		this.removeAll();
 		ImageIcon icon = new ImageIcon(GUIGallerie.getImageAAfficher());
 		JLabel img = new JLabel(icon);
 		ImagePanel image = new ImagePanel(new ImageIcon("y"));
-		
-		
-				
+	
 		panelImage.setLayout(new FlowLayout());
 		panelImage.setOpaque(false);
 		panelImage.setBackground(null);
 		panelImage.setBorder(null);
-		
-		
-		panelImageEtScroll.setLayout(new BorderLayout());
-		panelImageEtScroll.setOpaque(false);
-		panelImageEtScroll.setBackground(null);
-		panelImageEtScroll.setBorder(null);
-		panelImageEtScroll.setPreferredSize(new Dimension(image.getWidth(), image.getHeight()));
+		panelImage.setPreferredSize(new Dimension(480, 1000));
 		
 		panelScroll.getViewport().setOpaque(false);
 		panelScroll.setOpaque(false);
 		panelScroll.setPreferredSize(new Dimension(15, 600));
 		
+		panelImageEtScroll.setLayout(new BorderLayout());
+		panelImageEtScroll.setOpaque(false);
+		panelImageEtScroll.setBackground(null);
+		panelImageEtScroll.setBorder(null);
+		panelImageEtScroll.setPreferredSize(new Dimension(480, 650));
+		
 		image.add(img);
-		add(image);
-		
-		
-		
-		add(panelImageEtScroll, BorderLayout.CENTER);
+		panelImage.add(image);
+		panelImageEtScroll.add(panelScroll);
+		add(panelImageEtScroll, BorderLayout.CENTER);	
 		
 	}
 
