@@ -1,6 +1,7 @@
 package graphisme;
 
 import javax.swing.JButton;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -8,11 +9,14 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
+
 import structure.AppGallerie;
+import structure.Gallerie;
 
 public class GUIGallerie extends JPanel {
 	AppGallerie gallerieA;
@@ -21,7 +25,8 @@ public class GUIGallerie extends JPanel {
 			.getAncestorOfClass(GUITelephone.class, GUIGallerie.this);
 	private ImagePanel gallerie = new ImagePanel(new ImageIcon(
 			"src/images/wallpaper.png"));
-	private ArrayList<String> fichiers;
+	private ArrayList<String> fichiers2;
+	private ArrayList<JButton> tableauBouton = new ArrayList<JButton>();
 	private static String imageAAfficher = "chemin image pas trouvé";
 	private JPanel panelImage = new JPanel();
 	private JPanel panelImageEtScroll = new JPanel();
@@ -29,13 +34,15 @@ public class GUIGallerie extends JPanel {
 			JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 			JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 	private int tailleScroll;
+	String numeroImage;
 
 	public GUIGallerie(GUITelephone guit, AppGallerie gallerieA) {
 		this.gallerieA = gallerieA;
-		fichiers = gallerieA.getFichiers();
+		this.tableauBouton=tableauBouton;
+		fichiers2 = gallerieA.getFichiers();
 		this.guit = guit;
 
-		tailleScroll = (fichiers.size() / 3 + 1) * 116;
+		tailleScroll = (fichiers2.size() / 3 + 1) * 116;
 
 		panelImage.setLayout(new FlowLayout());
 		panelImage.setOpaque(false);
@@ -54,13 +61,14 @@ public class GUIGallerie extends JPanel {
 		panelScroll.setPreferredSize(new Dimension(15, 600));
 
 		// Pour chaque image du dossier, céer un bouton avec un nom
-		for (int i = 0; i < fichiers.size(); i++) {
+		for (int i = 0; i < fichiers2.size(); i++) {
 			JButton boutonImage = CreationBoutonImage((String) gallerieA
 					.getFichiers().get(i));
 			boutonImage.setName((String) gallerieA.getFichiers().get(i));
 			panelImage.add(boutonImage);
 			boutonImage.addActionListener(new ClickImage());
 			panelImageEtScroll.add(panelScroll);
+			tableauBouton.add(boutonImage);
 		}
 
 		gallerie.add(panelImageEtScroll, BorderLayout.CENTER);
@@ -95,6 +103,7 @@ public class GUIGallerie extends JPanel {
 
 			JButton button = (JButton) e.getSource();
 			imageAAfficher = gallerieA.getDOSSIER().concat(button.getName());
+			numeroImage = gallerieA.fichiers.get(tableauBouton.indexOf(button));
 			guit.guiimage.update();
 			guit.setCurrentPanel("image");
 			guit.setBackPosition(4);
@@ -107,6 +116,9 @@ public class GUIGallerie extends JPanel {
 	public static String getImageAAfficher() {
 
 		return imageAAfficher;
+	}
+	public String getNumeroImage(){
+		return numeroImage;
 	}
 
 }
