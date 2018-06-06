@@ -34,10 +34,32 @@ public class GUIImage extends JPanel {
 		
 		ImageIcon icon = new ImageIcon(GUIGallerie.getImageAAfficher());
 		JLabel img = new JLabel(icon);
-		ImagePanel image = new ImagePanel(new ImageIcon("y"));
 		ImageIcon image2;
 		
-		imageRedim = icon.getImage().getScaledInstance(480, 600,
+		icon.getIconHeight();
+		int hauteurOriginale=icon.getIconHeight();
+		int largeurOriginale=icon.getIconWidth();
+		int hauteurFinale=600;
+		int largeurFinale=480;
+		int ratio;
+		
+		if (hauteurOriginale>600){
+			hauteurFinale=600;
+			ratio=hauteurOriginale/hauteurFinale;
+			largeurFinale=largeurOriginale/ratio;
+		}
+		else
+			hauteurFinale=hauteurOriginale;
+		
+		if(largeurOriginale>480){
+			largeurFinale=480;
+			ratio=largeurOriginale/largeurFinale;
+			hauteurFinale=hauteurOriginale/ratio;
+		}
+		else
+			largeurFinale=largeurOriginale;
+		
+		imageRedim = icon.getImage().getScaledInstance(largeurFinale, hauteurFinale,
 				java.awt.Image.SCALE_SMOOTH);
 		image2 = new ImageIcon(imageRedim);
 
@@ -53,8 +75,6 @@ public class GUIImage extends JPanel {
 		panelImageEtScroll.setBorder(null);
 		panelImageEtScroll.setPreferredSize(new Dimension(480, 650));
 		
-		
-		//image.add(img);
 		img.setIcon(new ImageIcon(imageRedim));
 		panelImageEtScroll.add(img);
 		add(panelImageEtScroll, BorderLayout.CENTER);
@@ -64,10 +84,6 @@ public class GUIImage extends JPanel {
 		
 		
 
-	}
-	void retour(){
-		
-		guit.remove(panelImageEtScroll);
 	}
 
 }
