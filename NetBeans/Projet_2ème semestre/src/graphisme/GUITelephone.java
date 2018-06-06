@@ -36,7 +36,7 @@ public class GUITelephone extends JFrame implements Serializable {
     private GUIGallerie guigallerie;
     private GUIContacts guicontacts;
     private GUINewContact guinewcontact;
-    private GUIImage guiimage;
+    GUIImage guiimage;
     private GUIEditContact guieditcontact;
 
     // **** DECLARATION PANELS **** //
@@ -96,12 +96,13 @@ public class GUITelephone extends JFrame implements Serializable {
         this.guigallerie = new GUIGallerie(this, gallerieA);
         this.guicontacts = new GUIContacts(this, contactA);
         this.guinewcontact = new GUINewContact(this, contactA);
-        this.guiimage = new GUIImage(this);
+        this.guiimage = new GUIImage(this, guicontacts, contactA);
         this.guieditcontact = new GUIEditContact(this, contactA, guicontacts);
 
         // **** CONFIG FRAME **** // Position+size
         Calendar cal = Calendar.getInstance();
         hour = cal.get(Calendar.HOUR_OF_DAY);
+        minute = cal.get(Calendar.MINUTE);
         minute = cal.get(Calendar.MINUTE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(480, 800));
@@ -234,7 +235,12 @@ public class GUITelephone extends JFrame implements Serializable {
         northpanelE.setLayout(new FlowLayout());
         northpanelW.setLayout(new FlowLayout());
         northpanelE.add(time);
-        time.setText((hour + ":" + minute));
+        if(minute<10){
+            time.setText((hour + ":0" + minute));
+        }
+        else{
+            time.setText((hour + ":" + minute));
+        }
         time.setRequestFocusEnabled(false);
         time.setOpaque(false);
         time.setForeground(Color.WHITE);

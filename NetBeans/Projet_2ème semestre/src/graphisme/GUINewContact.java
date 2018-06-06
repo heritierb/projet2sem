@@ -2,12 +2,14 @@ package graphisme;
 // ****                        **** //
 // **** AUTEUR BENOIT HERITIER **** //
 // ****                        **** //
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -38,7 +40,7 @@ public class GUINewContact extends JPanel {
     private JPanel panel_center = new JPanel();
     private JPanel panel_west = new JPanel();
     private JPanel panel_east = new JPanel();
-    private JPanel panel_north = new JPanel();
+    private JPanel panelNorth = new JPanel();
     private JPanel panel_ntm = new JPanel();
     private JPanel empty = new JPanel();
     private JPanel panelSud = new JPanel();
@@ -63,19 +65,17 @@ public class GUINewContact extends JPanel {
     private JTextField txt5 = new JTextField();
     private JTextField txt6 = new JTextField();
     private JTextField txt7 = new JTextField();
-    ImageIcon done = new ImageIcon("src/images/done.png");
-    ImageIcon cancel = new ImageIcon("src/images/cancel.png");
-    ImageIcon addImage = new ImageIcon("src/images/addImage.png");
+    ImageIcon done = new ImageIcon("src/images/save.png");
     ImageIcon symbol = new ImageIcon("src/images/symbol.png");
-    private JButton buttonCancel = new JButton(cancel);
-    private JButton buttonDone = new JButton(done);
+    private JButton buttonSave = new JButton(done);
     private JLabel symbolP = new JLabel(symbol);
     private JButton buttonImageContact = new JButton();
-    JButton BaddImage = new JButton(addImage);
     Color blanc = new Color(255, 255, 255);
     Color blancasse = new Color(250, 250, 250);
     Font ecriture = new Font("SANS_SERIF", Font.ITALIC, 18);
     ImageIcon user = new ImageIcon("src/images/user.png");
+    ImageIcon icone;
+
 
     public GUINewContact(GUITelephone guit, AppContact contactA) {
         this.guit = guit;
@@ -88,7 +88,7 @@ public class GUINewContact extends JPanel {
         newcontact.setOpaque(false);
 
         // **** WEST **** //
-        panel_west.setLayout(new GridLayout(10, 1, 0, 0));
+        panel_west.setLayout(new GridLayout(8, 1, 0, 0));
         for (int i = 0; i < 7; i++) {
             symbolP = new JLabel(CreationImageIcon(symbol));
             panel_west.add(symbolP);
@@ -98,59 +98,49 @@ public class GUINewContact extends JPanel {
         panel_west.setPreferredSize(new Dimension(40, 600));
         // **** EAST **** //
         panel_east.setPreferredSize(new Dimension(40, 600));
-        
+
         // **** SOUTH **** //
-        panelSud.setLayout(new BoxLayout(panelSud, BoxLayout.Y_AXIS));
+        //panelSud.setLayout(new BoxLayout(panelSud, BoxLayout.Y_AXIS));
         panelSud.setPreferredSize(new Dimension(480, 200));
         panelSud.add(panelImageContact);
         panelSud.setOpaque(false);
-        buttonImageContact = new JButton(user);
+        icone = new ImageIcon(user.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+        buttonImageContact.setIcon(icone);
+        panelImageContact.setPreferredSize(new Dimension(150, 150));
         buttonImageContact.setContentAreaFilled(false);
         buttonImageContact.setBorder(new EmptyBorder(0, 0, 0, 0));
         panelImageContact.setOpaque(false);
         panelImageContact.add(buttonImageContact);
-        
+
         // **** NORTH **** //
-        panel_north.setLayout(new BorderLayout());
-        buttonDone.setContentAreaFilled(false);
-        buttonCancel.setContentAreaFilled(false);
-        BaddImage.setContentAreaFilled(false);
-        buttonDone.setPreferredSize(new Dimension(35, 35));
-        buttonCancel.setPreferredSize(new Dimension(35, 35));
-        BaddImage.setPreferredSize(new Dimension(70, 70));
-        buttonDone.setBorderPainted(false);
-        buttonCancel.setBorderPainted(false);
-        BaddImage.setBorderPainted(false);
-        panel_north.add(panel_ntm, BorderLayout.NORTH);
-        panel_ntm.setLayout(new FlowLayout());
+        panelNorth.setLayout(new BorderLayout());
+        buttonSave.setContentAreaFilled(false);
+        buttonSave.setBorderPainted(false);
+        panelNorth.add(panel_ntm, BorderLayout.CENTER);
         panel_ntm.setOpaque(false);
-        panel_ntm.add(buttonDone);
-        panel_ntm.add(BaddImage);
-        panel_ntm.add(buttonCancel);
-        panel_north.add(empty, BorderLayout.SOUTH);
+        panel_ntm.add(buttonSave);
+        panelNorth.add(empty, BorderLayout.SOUTH);
         empty.setPreferredSize(new Dimension(480, 5));
         empty.setOpaque(true);
-        panel_north.setPreferredSize(new Dimension(280, 83));
+        panelNorth.setPreferredSize(new Dimension(280, 85));
+        panelNorth.setOpaque(false);
+        buttonSave.addActionListener(new GUINewContact.doneClick());
 
         // **** COLOR+DISPOSITION **** //
         newcontact.add(panel_west, BorderLayout.WEST);
         newcontact.add(panel_east, BorderLayout.EAST);
-        newcontact.add(panel_north, BorderLayout.NORTH);
+        newcontact.add(panelNorth, BorderLayout.NORTH);
         newcontact.add(panelSud, BorderLayout.SOUTH);
         newcontact.add(panel_center, BorderLayout.CENTER);
         panel_center.setOpaque(false);
-        panel_north.setOpaque(false);
+        panelNorth.setOpaque(false);
         panel_east.setOpaque(false);
         panel_west.setOpaque(false);
-        panel_north.setBorder(new EmptyBorder(0, 0, 0, 0));
-
-        // **** ACTION LISTENERS ****//
-        buttonDone.addActionListener(new doneClick());
-        buttonCancel.addActionListener(new cancelClick());
+        panelNorth.setBorder(new EmptyBorder(0, 0, 0, 0));
         symbolP.requestFocus();
 
         // **** CENTER **** //
-        panel_center.setLayout(new GridLayout(10, 1, 0, 0));
+        panel_center.setLayout(new GridLayout(8, 1, 0, 0));
         for (int i = 0; i < 7; i++) {
             txtboucle = CreationFieldContact(txt);
             txtboucle.setOpaque(false);
@@ -282,8 +272,7 @@ public class GUINewContact extends JPanel {
                 }
             }
         });
-        panel_center.setPreferredSize(
-                new Dimension(340, 683));
+        panel_center.setPreferredSize(new Dimension(340, 683));
     }
 
     // **** POUR CHAQUE TXT DE LA BOUCLE DES CHAMPS **** //

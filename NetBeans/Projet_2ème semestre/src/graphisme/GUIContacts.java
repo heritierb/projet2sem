@@ -2,17 +2,17 @@ package graphisme;
 // ****                        **** //
 // **** AUTEUR BENOIT HERITIER **** //
 // ****                        **** //
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.UUID;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -59,6 +59,8 @@ public class GUIContacts extends JPanel implements Serializable {
     Color blanc = new Color(255, 255, 255);
     UUID ID;
     int indexC;
+    ImageIcon icon;
+    int switcheditadd = 0;
 
     public GUIContacts(GUITelephone guit, AppContact contactA) {
 
@@ -113,12 +115,16 @@ public class GUIContacts extends JPanel implements Serializable {
     // **** RECUPERE LA LISTE DES CONTACTS ET CREE DES BOUTONS PRENOM+NOM **** //
     public void afficheUnit() {
         arrayCc = contactA.getArrayContacts();
+
         for (int i = 0; i < contactA.getArrayContacts().size(); i++) {
             JButton migna = new JButton();
             JButton cpt = CreationBoutonContact(migna);
+
             cpt.setText(contactA.getArrayContacts().get(i).getPrenom() + " " + contactA.getArrayContacts().get(i).getNom());
-            cpt.setIcon(contactA.getArrayContacts().get(i).getImageContact());
-            cpt.setIconTextGap(contactA.getArrayContacts().get(i).getImageContact().getIconWidth());
+            icon = new ImageIcon(new ImageIcon(contactA.getArrayContacts().get(i).getImageContact().getImage()).getImage().getScaledInstance(45, 45, Image.SCALE_SMOOTH));
+            cpt.setIcon(icon);
+
+            cpt.setIconTextGap(10);
             cpt.setMaximumSize(new Dimension(480, 50));
             cpt.setMinimumSize(new Dimension(480, 50));
             cpt.setContentAreaFilled(false);
@@ -185,6 +191,14 @@ public class GUIContacts extends JPanel implements Serializable {
 
     public void setArrayButton(ArrayList<JButton> arrayButton) {
         this.arrayButton = arrayButton;
+    }
+
+    public int getSwitcheditadd() {
+        return switcheditadd;
+    }
+
+    public void setSwitcheditadd(int switcheditadd) {
+        this.switcheditadd = switcheditadd;
     }
 
 }

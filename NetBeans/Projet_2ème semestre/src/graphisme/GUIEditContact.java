@@ -5,18 +5,18 @@ package graphisme;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import static java.awt.Color.WHITE;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.UUID;
-import static java.util.UUID.randomUUID;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -40,6 +40,7 @@ public class GUIEditContact extends JPanel implements Serializable {
     private ArrayList<Contact> arrayCc;
 
     private ImagePanel contactDetails = new ImagePanel(new ImageIcon("src/images/wallpaper.png"));
+    private JPanel panelCenter = new JPanel();
     private JPanel panelDetails = new JPanel();
     private JPanel panelNorth = new JPanel();
     private JPanel panelWest = new JPanel();
@@ -92,6 +93,7 @@ public class GUIEditContact extends JPanel implements Serializable {
     Contact contactX;
     GUIContacts guic;
     Font fonto = new Font("Dialog", Font.BOLD, 15);
+    ImageIcon icone;
 
     public GUIEditContact(GUITelephone guit, AppContact contactA, GUIContacts guic) {
         this.guit = guit;
@@ -104,21 +106,26 @@ public class GUIEditContact extends JPanel implements Serializable {
         contactDetails.setPreferredSize(new Dimension(480, 683));
         contactDetails.setLayout(new BorderLayout());
         panelDetails.setOpaque(false);
-        panelDetails.setPreferredSize(new Dimension(480, 600));
-        
+        panelDetails.setPreferredSize(new Dimension(480, 580));
+
         empty2.setOpaque(false);
-        
+
         buttonImageContact.setContentAreaFilled(false);
-        buttonImageContact.setBorder(new EmptyBorder(0, 0, 0, 0));
+        buttonImageContact.setBorder(BorderFactory.createLineBorder(WHITE));
         panelImageContact.setOpaque(false);
+        buttonImageContact.addActionListener(new changePhotoClick());
         panelImageContact.add(buttonImageContact);
 
-        panelDetails.setLayout(new GridLayout(10, 1, 0, 0));
-        contactDetails.add(panelDetails, BorderLayout.CENTER);
+        panelDetails.setLayout(new GridLayout(7, 1, 0, 0));
+        contactDetails.add(panelCenter, BorderLayout.CENTER);
         contactDetails.add(panelNorth, BorderLayout.NORTH);
         contactDetails.add(panelSud, BorderLayout.SOUTH);
         contactDetails.add(panelWest, BorderLayout.EAST);
         contactDetails.add(panelEast, BorderLayout.WEST);
+
+        panelCenter.setLayout(new BorderLayout());
+        panelCenter.setOpaque(false);
+        panelCenter.add(panelDetails, BorderLayout.CENTER);
 
         // **** WEST **** //
         panelWest.setLayout(new GridLayout(10, 1, 0, 0));
@@ -137,7 +144,6 @@ public class GUIEditContact extends JPanel implements Serializable {
         // **** NORTH **** //
         panelNorth.setLayout(new BorderLayout());
         buttonSave.setContentAreaFilled(false);
-//        buttonSave.setPreferredSize(new Dimension(40, 40));
         buttonSave.setBorderPainted(false);
         panelNorth.add(panelNtm, BorderLayout.CENTER);
         panelNtm.setOpaque(false);
@@ -152,7 +158,7 @@ public class GUIEditContact extends JPanel implements Serializable {
 
         // **** SOUTH **** //
         panelSud.setLayout(new BoxLayout(panelSud, BoxLayout.Y_AXIS));
-        panelSud.setPreferredSize(new Dimension(480, 200));
+        panelSud.setPreferredSize(new Dimension(480, 100));
         panelSud.add(panelSouth);
         panelSud.setOpaque(false);
         panelSouthRefresh();
@@ -332,9 +338,15 @@ public class GUIEditContact extends JPanel implements Serializable {
             });
             refreshP.requestFocus();
             panelDetails.add(txtboucle);
-            panelDetails.add(empty2);
-            panelDetails.add(panelImageContact);
-            buttonImageContact.setIcon(contactA.arrayContacts.get(indexC).getImageContact());
+            //panelDetails.add(empty2);
+            panelCenter.add(panelImageContact, BorderLayout.SOUTH);
+            buttonImageContact.setIcon(icone);
+            icone = new ImageIcon(new ImageIcon(contactA.getArrayContacts().get(indexC).getImageContact().getImage()).getImage().getScaledInstance(150,150, Image.SCALE_SMOOTH));
+
+//            buttonImageContact.setPreferredSize(new Dimension(contactA.arrayContacts.get(indexC).getImageContact().getImage().getHeight(sure),
+//                    contactA.arrayContacts.get(indexC).getImageContact().getImage().getHeight(sure)));
+//            buttonImageContact.setSize(400,400);
+            panelImageContact.setPreferredSize(new Dimension(158, 158));
         }
     }
 
@@ -370,6 +382,7 @@ public class GUIEditContact extends JPanel implements Serializable {
             contactX.setAdresse(txt5.getText());
             contactX.setAnniversaire(txt6.getText());
             contactX.setGroupe(txt7.getText());
+            contactX.setImageContact(icone);
             contactA.editC(contactX);
             guit.setCurrentPanel("contacts");
         }
@@ -430,6 +443,16 @@ public class GUIEditContact extends JPanel implements Serializable {
 
         public void actionPerformed(ActionEvent e) {
             panelSouthRefresh();
+        }
+    }
+
+    // **** CHANGE LA PHOTO EN APPELANT L'APP GALLERIE **** //
+    private class changePhotoClick implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("Test changement de photo");
+            guit.setCurrentPanel("gallerie");
+            guic.switcheditadd = 2;
         }
     }
 
