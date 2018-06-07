@@ -2,6 +2,7 @@ package graphisme;
 // ****                        **** //
 // **** AUTEUR BENOIT HERITIER **** //
 // ****                        **** //
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -13,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.UUID;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -115,7 +117,15 @@ public class GUIContacts extends JPanel implements Serializable {
     // **** RECUPERE LA LISTE DES CONTACTS ET CREE DES BOUTONS PRENOM+NOM **** //
     public void afficheUnit() {
         arrayCc = contactA.getArrayContacts();
+        
+        // **** METS PAR ORDRE ALPHABETIQUE **** //
+        Collections.sort(contactA.arrayContacts, new Comparator<Contact>() {
 
+            public int compare(Contact sort1, Contact sort2) {
+                return (sort1.getPrenom().compareTo(sort2.getPrenom()));
+            }
+        });
+        
         for (int i = 0; i < contactA.getArrayContacts().size(); i++) {
             JButton migna = new JButton();
             JButton cpt = CreationBoutonContact(migna);
@@ -201,4 +211,5 @@ public class GUIContacts extends JPanel implements Serializable {
         this.switcheditadd = switcheditadd;
     }
 
+    
 }
