@@ -2,6 +2,7 @@ package graphisme;
 // ****                        **** //
 // **** AUTEUR BENOIT HERITIER **** //
 // ****                        **** //
+
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -80,7 +81,8 @@ public class GUITelephone extends JFrame implements Serializable {
     Font fonto = new Font("Dialog", Font.BOLD, 15);
 
     // **** POSITION BOUTON BACK **** // permet en fonction du panel afficher de retourner au panel supérieur
-    private int backPosition = 0;
+    public int backPosition = 0;
+    public int backPositionAppC = 0;
 
     // **** FORMAT JEU DE CARTES **** // Panel avec gridbag sur un cardlayout
     private CardLayout cardL = new CardLayout();
@@ -95,8 +97,8 @@ public class GUITelephone extends JFrame implements Serializable {
         this.gallerieA = gallerieA;
         this.guigallerie = new GUIGallerie(this, gallerieA);
         this.guicontacts = new GUIContacts(this, contactA);
-        this.guinewcontact = new GUINewContact(this, contactA);
-        this.guiimage = new GUIImage(this, guicontacts, contactA);
+        this.guinewcontact = new GUINewContact(this, contactA, guicontacts);
+        this.guiimage = new GUIImage(this, guicontacts, contactA, guinewcontact, guieditcontact);
         this.guieditcontact = new GUIEditContact(this, contactA, guicontacts);
 
         // **** CONFIG FRAME **** // Position+size
@@ -235,10 +237,9 @@ public class GUITelephone extends JFrame implements Serializable {
         northpanelE.setLayout(new FlowLayout());
         northpanelW.setLayout(new FlowLayout());
         northpanelE.add(time);
-        if(minute<10){
+        if (minute < 10) {
             time.setText((hour + ":0" + minute));
-        }
-        else{
+        } else {
             time.setText((hour + ":" + minute));
         }
         time.setRequestFocusEnabled(false);
@@ -343,9 +344,25 @@ public class GUITelephone extends JFrame implements Serializable {
             } else if (backPosition == 3) {
                 cardL.show(cardP, "contacts");
                 backPosition = 2;
+                guinewcontact.refreshC();
             } else if (backPosition == 4) {
-                cardL.show(cardP, "gallerie");
-                backPosition = 1;
+                if (backPositionAppC == 1) {
+                    backPosition = 5;
+                    cardL.show(cardP, "gallerie");
+                } else if (backPositionAppC == 2) {
+                    backPosition = 6;
+                    cardL.show(cardP, "gallerie");
+                } else {
+                    cardL.show(cardP, "gallerie");
+                    backPosition = 1;
+                }
+            } else if (backPosition == 5) {
+                cardL.show(cardP, "newcontact");
+                guinewcontact.refreshC();
+                backPosition = 3;
+            } else if (backPosition == 6) {
+                cardL.show(cardP, "editcontact");
+                backPosition = 3;
             }
         }
     }
