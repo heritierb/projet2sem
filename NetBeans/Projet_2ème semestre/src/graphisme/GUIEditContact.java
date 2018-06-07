@@ -2,7 +2,6 @@ package graphisme;
 // ****                        **** //
 // **** AUTEUR BENOIT HERITIER **** //
 // ****                        **** //
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import static java.awt.Color.WHITE;
@@ -93,7 +92,9 @@ public class GUIEditContact extends JPanel implements Serializable {
     Contact contactX;
     GUIContacts guic;
     Font fonto = new Font("Dialog", Font.BOLD, 15);
-    ImageIcon icone;
+    ImageIcon user;
+    ImageIcon icone = new ImageIcon("src/images/user.png");
+    ImageIcon iconeX;
 
     public GUIEditContact(GUITelephone guit, AppContact contactA, GUIContacts guic) {
         this.guit = guit;
@@ -340,8 +341,8 @@ public class GUIEditContact extends JPanel implements Serializable {
             panelDetails.add(txtboucle);
             //panelDetails.add(empty2);
             panelCenter.add(panelImageContact, BorderLayout.SOUTH);
-            buttonImageContact.setIcon(icone);
-            icone = new ImageIcon(new ImageIcon(contactA.getArrayContacts().get(indexC).getImageContact().getImage()).getImage().getScaledInstance(150,150, Image.SCALE_SMOOTH));
+            buttonImageContact.setIcon(user);
+            user = new ImageIcon(new ImageIcon(contactA.getArrayContacts().get(indexC).getImageContact().getImage()).getImage().getScaledInstance(150,150, Image.SCALE_SMOOTH));
 
 //            buttonImageContact.setPreferredSize(new Dimension(contactA.arrayContacts.get(indexC).getImageContact().getImage().getHeight(sure),
 //                    contactA.arrayContacts.get(indexC).getImageContact().getImage().getHeight(sure)));
@@ -450,14 +451,22 @@ public class GUIEditContact extends JPanel implements Serializable {
     private class changePhotoClick implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
-            System.out.println("Test changement de photo");
             guit.setCurrentPanel("gallerie");
-            guic.switcheditadd = 2;
+            guit.backPosition = 6;
+            guit.backPositionAppC = 2;
         }
     }
 
     public ImageIcon CreationImageIcon(ImageIcon refresh) {
         refresh = new ImageIcon("src/images/refresh.png");
         return refresh;
+    }
+        // **** ACTUALISE LA PHOTO **** //
+    public void refreshPhoto() {
+        panelImageContact.removeAll();
+        updateUI();
+        iconeX = new ImageIcon(icone.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH));
+        buttonImageContact.setIcon(iconeX);
+        panelImageContact.add(buttonImageContact);
     }
 }
