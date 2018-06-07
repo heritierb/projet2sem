@@ -17,7 +17,6 @@ import java.awt.event.FocusListener;
 import java.util.ArrayList;
 import java.util.UUID;
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -32,7 +31,6 @@ import structure.Contact;
 public class GUINewContact extends JPanel {
 
     AppContact contactA;
-    GUIContacts guicontacts;
     private GUIContacts guic = (GUIContacts) SwingUtilities.getAncestorOfClass(GUIContacts.class, GUINewContact.this);
     private ArrayList<Contact> arrayC;
     private ImagePanel newcontact = new ImagePanel(new ImageIcon("src/images/wallpaper.png"));
@@ -75,11 +73,12 @@ public class GUINewContact extends JPanel {
     Font ecriture = new Font("SANS_SERIF", Font.ITALIC, 18);
     ImageIcon user = new ImageIcon("src/images/user.png");
     ImageIcon icone;
+    ImageIcon iconeR;
 
-
-    public GUINewContact(GUITelephone guit, AppContact contactA) {
+    public GUINewContact(GUITelephone guit, AppContact contactA, GUIContacts guic) {
         this.guit = guit;
         this.contactA = contactA;
+        this.guic = guic;
         add(newcontact);
         arrayC = contactA.getArrayContacts();
         newcontact.setLayout(new BorderLayout());
@@ -109,6 +108,7 @@ public class GUINewContact extends JPanel {
         panelImageContact.setPreferredSize(new Dimension(150, 150));
         buttonImageContact.setContentAreaFilled(false);
         buttonImageContact.setBorder(new EmptyBorder(0, 0, 0, 0));
+        buttonImageContact.addActionListener(new GUINewContact.addPhotoClick());
         panelImageContact.setOpaque(false);
         panelImageContact.add(buttonImageContact);
 
@@ -318,12 +318,14 @@ public class GUINewContact extends JPanel {
         }
     }
 
-// **** ANNULE LA CREATION DE CONTACTS ET REVIENT SUR LA LISTE DE CONTACTS **** //
-    private class cancelClick implements ActionListener {
+    // **** AJOUTE UNE PHOTO EN APPELANT L'APP GALLERIE **** //
+    private class addPhotoClick implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
-            refreshC();
-            guit.setCurrentPanel("contacts");
+            guit.setCurrentPanel("gallerie");
+            guic.switcheditadd = 3;
+            guit.backPosition = 5;
+            guit.backPositionAppC = 1;
         }
     }
 
@@ -336,5 +338,27 @@ public class GUINewContact extends JPanel {
         txt5.setText(adresseB);
         txt6.setText(anniB);
         txt7.setText(groupeB);
+        user = new ImageIcon("src/images/user.png");
+        iconeR = new ImageIcon(user.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+        buttonImageContact.setIcon(iconeR);
+        System.out.println("refresh image");
     }
+
+    // **** ACTUALISE LA PHOTO **** //
+    public void refreshPhoto() {
+        panelImageContact.removeAll();
+        updateUI();
+        icone = new ImageIcon(user.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH));
+        buttonImageContact.setIcon(icone);
+        panelImageContact.add(buttonImageContact);
+    }
+
+    public ImageIcon getUser() {
+        return user;
+    }
+
+    public void setUser(ImageIcon user) {
+        this.user = user;
+    }
+
 }
