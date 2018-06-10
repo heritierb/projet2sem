@@ -161,15 +161,18 @@ public class GUIGallerie extends JPanel {
 				File file = frameChoix.getSelectedFile();
 				frame.setVisible(false);
 				Path pathNouvelleImage = Paths.get(file.getPath());
-				Path pathGallerie = Paths.get("src/photos/");
+				Path pathGallerie = Paths.get("src/photos/".concat(file.getName()));
 				try {
+					System.out.println("path nouvelle image: "+pathNouvelleImage);
+					System.out.println("path Gallerie: "+pathGallerie);
 					Files.copy(pathNouvelleImage, pathGallerie,
 							StandardCopyOption.COPY_ATTRIBUTES);
-					guit.setCurrentPanel("gallerie");
+					guit.remove(panelAjoutImage);
+					Photo nouvelle = new Photo("src/photos/".concat(file.getName()));
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-				System.out.println(file);
+				
 			}
 		}
 
