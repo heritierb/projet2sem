@@ -89,6 +89,7 @@ public class GUINewContact extends JPanel implements Serializable {
         this.contactA = contactA;
         this.guic = guic;
 
+
         // **** AJOUT DU PANEL PRINCIPAL **** //
         add(newcontact);
         arrayC = contactA.getArrayContacts();

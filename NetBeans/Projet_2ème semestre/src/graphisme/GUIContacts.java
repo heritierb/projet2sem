@@ -213,4 +213,5 @@ public class GUIContacts extends JPanel implements Serializable {
         this.switcheditadd = switcheditadd;
     }
 
+    
 }
