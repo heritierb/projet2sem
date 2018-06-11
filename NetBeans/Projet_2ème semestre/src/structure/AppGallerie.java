@@ -11,42 +11,45 @@ public class AppGallerie implements Serializable{
 	private String DOSSIER = "src/photos/";
 	private String EXTENSION = ".jpg";
 	
-	private ArrayList<String> fichiers= new ArrayList<String>();
-	private list_directory photos = new list_directory(DOSSIER, EXTENSION);
+	public ArrayList<List_directory> fichiers= new ArrayList<List_directory>();
+//	private List_directory photos = new List_directory(DOSSIER, EXTENSION);
 	
 	
 	
 	public String getDOSSIER() {
 		return DOSSIER;
 	}
-	public void setDOSSIER(String dOSSIER) {
-		DOSSIER = dOSSIER;
-	}
-	public String getEXTENSION() {
-		return EXTENSION;
-	}
-	public void setEXTENSION(String eXTENSION) {
-		EXTENSION = eXTENSION;
-	}
-	public list_directory getPhotos() {
-		return photos;
-	}
-	public void setPhotos(list_directory photos) {
-		this.photos = photos;
-	}
-	public ArrayList<String> getFichiers() {
+//	public void setDOSSIER(String dOSSIER) {
+//		DOSSIER = dOSSIER;
+//	}
+//	public String getEXTENSION() {
+//		return EXTENSION;
+//	}
+////	public void setEXTENSION(String eXTENSION) {
+////		EXTENSION = eXTENSION;
+//	}
+//	public List_directory getPhotos() {
+//		return photos;
+//	}
+//	public void setPhotos(List_directory photos) {
+//		this.photos = photos;
+//	}
+	public ArrayList<List_directory> getFichiers() {
 		return fichiers;
 	}
-	public void setFichiers(ArrayList<String> fichiers) {
+	public void setFichiers(ArrayList<List_directory> fichiers) {
 		this.fichiers = fichiers;
 	}
-	public AppGallerie(){
-		fichiers = list_directory.listFileNames(DOSSIER, EXTENSION);
-	}
-    public void addC() {
+	
+//	public AppGallerie(){
+//		fichiers = list_directory.listFileNames(DOSSIER, EXTENSION);
+//	}
+    public void addI(List_directory ld) {
+    	fichiers.add(ld);
     }
 
-    public void deleteC() {
+    public void deleteI(List_directory ld) {
+    	fichiers.remove(ld);
     }
 
     public void afficheUnit() 

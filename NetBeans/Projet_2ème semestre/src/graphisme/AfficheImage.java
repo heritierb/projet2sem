@@ -1,19 +1,9 @@
 package graphisme;
 
 import javax.swing.JPanel;
-import java.awt.Color;
 import javax.swing.ImageIcon;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.JTextField;
 import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JButton;
-import java.awt.Image;
-import javax.imageio.ImageIO;
-import java.io.File;
-import java.io.IOException;
-import java.awt.Graphics;
 
 public class AfficheImage {
 

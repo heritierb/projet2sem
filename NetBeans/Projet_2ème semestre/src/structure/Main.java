@@ -6,14 +6,16 @@ import graphisme.GUITelephone;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.Serializable;
 
-public class Main {
+public class Main implements Serializable{
     
     public static void main(String[] args){
         // **** INSTANCE DES APPLICATIONS **** // + deserialisation
         AppContact contactA = new AppContact();
         contactA = deserializeObject();      
         AppGallerie gallerieA = new AppGallerie();
+        //System.out.println(gallerieA.myURL+" = myURL");
         
         // **** LANCE LE PROGRAMME **** //
         GUITelephone tel = new GUITelephone(contactA, gallerieA);

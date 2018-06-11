@@ -2,6 +2,7 @@ package graphisme;
 // ****                        **** //
 // **** AUTEUR BENOIT HERITIER **** //
 // ****                        **** //
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -13,18 +14,20 @@ import java.awt.event.ActionListener;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.UUID;
+import java.util.Comparator;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import structure.AppContact;
 import structure.Contact;
 
+// **** PANEL DE LA LISTE DES CONTACTS, ACCES POUR MODIFIER OU AJOUTER UN CONTACT **** //
 public class GUIContacts extends JPanel implements Serializable {
 
     // **** INSTANCE GUITelephone **** // Recupere la method permettant de switch la card
@@ -50,18 +53,18 @@ public class GUIContacts extends JPanel implements Serializable {
     private JScrollPane panelScroll = new JScrollPane(panelcenter);
 
     // **** AUTRES COMPOSANTS **** // 
-    ImageIcon addContact = new ImageIcon("src/images/addContact.png");
+    private ImageIcon addContact = new ImageIcon("src/images/addContact.png");
+    private ImageIcon icon;
     private JButton buttonAddContact = new JButton(addContact);
-    Font ecriture = new Font("SANS_SERIF", 50, 30);
     private JLabel list = new JLabel();
     private JLabel label2 = new JLabel(" Last name ");
     private JLabel lContact = new JLabel();
-    Color blanc = new Color(255, 255, 255);
-    UUID ID;
+    private Color blanc = new Color(255, 255, 255);
+    private Font ecriture = new Font("SANS_SERIF", 50, 30);
     int indexC;
-    ImageIcon icon;
     int switcheditadd = 0;
 
+     // **** CONSTRUCTEUR **** //
     public GUIContacts(GUITelephone guit, AppContact contactA) {
 
         //**** RECUPERE LES INSTANCES DANS LE CONSTRUCTEUR **** //
@@ -104,9 +107,9 @@ public class GUIContacts extends JPanel implements Serializable {
         panelcentscroll.setPreferredSize(new Dimension(480, 606));
         panelScroll.setPreferredSize(new Dimension(15, 606));
         panelScroll.setHorizontalScrollBarPolicy(
-                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         panelScroll.setVerticalScrollBarPolicy(
-                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+                ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         afficheUnit();
         contacts.add(panelcentscroll, BorderLayout.CENTER);
 
@@ -116,14 +119,21 @@ public class GUIContacts extends JPanel implements Serializable {
     public void afficheUnit() {
         arrayCc = contactA.getArrayContacts();
 
-        for (int i = 0; i < contactA.getArrayContacts().size(); i++) {
-            JButton migna = new JButton();
-            JButton cpt = CreationBoutonContact(migna);
+        // **** METS PAR ORDRE ALPHABETIQUE **** //
+        Collections.sort(contactA.arrayContacts, new Comparator<Contact>() {
 
+            @Override
+            public int compare(Contact sort1, Contact sort2) {
+                return (sort1.getPrenom().compareTo(sort2.getPrenom()));
+            }
+        });
+        // **** BOUCLE D'AJOUT DES CONTACTS ICONE + PRENOM + NOM **** //
+        for (int i = 0; i < contactA.getArrayContacts().size(); i++) {
+            JButton appellecrea = new JButton();
+            JButton cpt = CreationBoutonContact(appellecrea);
             cpt.setText(contactA.getArrayContacts().get(i).getPrenom() + " " + contactA.getArrayContacts().get(i).getNom());
             icon = new ImageIcon(new ImageIcon(contactA.getArrayContacts().get(i).getImageContact().getImage()).getImage().getScaledInstance(45, 45, Image.SCALE_SMOOTH));
             cpt.setIcon(icon);
-
             cpt.setIconTextGap(10);
             cpt.setMaximumSize(new Dimension(480, 50));
             cpt.setMinimumSize(new Dimension(480, 50));
@@ -158,6 +168,7 @@ public class GUIContacts extends JPanel implements Serializable {
     // **** BOUTON POUR AJOUTER UN CONTACT **** //
     private class ClickNewContact implements ActionListener {
 
+        @Override
         public void actionPerformed(ActionEvent e) {
             guit.setCurrentPanel("newcontact");
             guit.setBackPosition(3);
@@ -168,6 +179,7 @@ public class GUIContacts extends JPanel implements Serializable {
     // **** BOUTON POUR MODIFIER UN CONTACT **** //
     private class ClickContact implements ActionListener {
 
+        @Override
         public void actionPerformed(ActionEvent e) {
             JButton boutonClicked = (JButton) e.getSource();
             Contact edit = contactA.arrayContacts.get(arrayButton.indexOf(boutonClicked));
@@ -176,7 +188,7 @@ public class GUIContacts extends JPanel implements Serializable {
             guit.setBackPosition(3);
         }
     }
-
+    // **** GETTERS&SETTERS **** //
     public Contact getEdit() {
         return edit;
     }
