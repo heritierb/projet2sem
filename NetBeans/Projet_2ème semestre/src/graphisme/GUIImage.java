@@ -32,20 +32,18 @@ public class GUIImage extends JPanel {
 	// Recupere la method permettant de switch la card
 	private GUITelephone guit = (GUITelephone) SwingUtilities
 			.getAncestorOfClass(GUITelephone.class, GUIImage.this);
-
-	private ImageIcon icon = new ImageIcon(GUIGallerie.getImageAAfficher());
+	// private ImageIcon icon = new ImageIcon(GUIGallerie.getImageAAfficher());
 	private ImageIcon iconSupprimer = new ImageIcon("src/images/cancel.png");
-	private JLabel img = new JLabel(icon);
+	private ImageIcon iconX;
+	private JLabel img = new JLabel(iconX);
 	private JPanel panelImage = new JPanel();
 	private JPanel panelImageEtScroll = new JPanel();
 	private JPanel panelSupprimer = new JPanel();
 	private JPanel panelSouth = new JPanel();
 	private JButton buttonSetImCt = new JButton(new ImageIcon(
 			"src/images/addtouser.png"));
-	private ImagePanel imageX = new ImagePanel(new ImageIcon(
-			"src/images/wallpaper.png"));
 	private JButton boutonSupprimer = new JButton();
-	private JTextField txt = new JTextField("test");
+	private ArrayList<Contact> arrayC;
 	private int hauteurFinale = 600;
 	private int largeurFinale = 480;
 	private int ratio;
@@ -57,12 +55,10 @@ public class GUIImage extends JPanel {
 	AppGallerie gallerieA;
 	GUINewContact guinewcontact;
 	GUIEditContact guieditcontact;
-	private ArrayList<Contact> arrayC;
-	String test = " ";
-	private ImageIcon iconX;
 
 	public GUIImage(GUITelephone guit, GUIContacts guic, AppContact contactA,
-			GUINewContact guinewcontact, GUIEditContact guieditcontact, AppGallerie gallerieA) {
+			GUINewContact guinewcontact, GUIEditContact guieditcontact,
+			AppGallerie gallerieA) {
 		this.guieditcontact = guieditcontact;
 		this.guinewcontact = guinewcontact;
 		this.guit = guit;
@@ -71,30 +67,31 @@ public class GUIImage extends JPanel {
 		this.gallerieA = gallerieA;
 		arrayC = contactA.getArrayContacts();
 
-		//icon = new ImageIcon(GUIGallerie.getImageAAfficher());
-		JLabel img = new JLabel(iconX);
-
 		panelImage.setLayout(new BorderLayout());
-		panelImage.setOpaque(false);
-		panelImage.setBackground(null);
+		panelImage.setOpaque(true);
+		panelImage.setBackground(Color.BLACK);
 		panelImage.setBorder(null);
 		panelImage.setPreferredSize(new Dimension(480, 600));
 
 		panelImageEtScroll.setLayout(new BorderLayout());
-		panelImageEtScroll.setOpaque(false);
-		panelImageEtScroll.setBackground(null);
+		panelImageEtScroll.setOpaque(true);
+		panelImageEtScroll.setBackground(Color.BLACK);
 		panelImageEtScroll.setBorder(null);
 		panelImageEtScroll.setPreferredSize(new Dimension(480, 600));
 
 		panelImageEtScroll.add(img);
 		add(panelImageEtScroll, BorderLayout.CENTER);
+
 	}
 
+	// **** méthode qui sert à afficher l'image sélectionnée dans la gallerie
+	// **** //
 	public void update() {
 		panelImageEtScroll.removeAll();
 		panelSupprimer.removeAll();
 		updateUI();
-		iconX = new ImageIcon(gallerieA.getFichiers().get(guig.getNumeroImage()).getImageI().getImage());
+		iconX = new ImageIcon(gallerieA.getFichiers()
+				.get(guig.getNumeroImage()).getImageI().getImage());
 		img = new JLabel(iconX);
 
 		hauteurOriginale = iconX.getIconHeight();
@@ -117,39 +114,34 @@ public class GUIImage extends JPanel {
 		imageRedim = iconX.getImage().getScaledInstance(largeurFinale,
 				hauteurFinale, java.awt.Image.SCALE_SMOOTH);
 		img.setIcon(new ImageIcon(imageRedim));
-		panelImageEtScroll.add(img);
+		panelImageEtScroll.add(img, BorderLayout.CENTER);
 		panelImageEtScroll.add(panelSupprimer, BorderLayout.SOUTH);
 		this.validate();
 		this.repaint();
 
 	}
 
+	// **** méthode qui sert à afficher un panel pour supprimer l'image **** //
 	public void panelSuppressionImage() {
 		updateUI();
 		boutonSupprimer = new JButton(iconSupprimer);
 		boutonSupprimer.addActionListener(new Suppression());
+		boutonSupprimer.setContentAreaFilled(false);
+		boutonSupprimer.setBorderPainted(false);
 		panelSupprimer.setLayout(new FlowLayout());
-		panelSupprimer.setBackground(Color.black);
+		panelSupprimer.setPreferredSize(new Dimension(480, 100));
+		panelSupprimer.setBackground(Color.BLACK);
+		panelSupprimer.setOpaque(true);
 		panelSupprimer.add(boutonSupprimer);
 
-		panelImageEtScroll.add(panelSupprimer, BorderLayout.SOUTH);
+		add(panelSupprimer, BorderLayout.SOUTH);
 
 		this.validate();
 		this.repaint();
 
 	}
 
-	public class Suppression implements ActionListener {
-
-		public void actionPerformed(ActionEvent e) {
-
-			File aSupprimer = new File(GUIGallerie.getImageAAfficher());
-			aSupprimer.delete();
-			gallerieA.fichiers.remove(guig.getNumeroImage());
-			guit.setCurrentPanel("gallerie");
-		}
-	}
-
+	// ****afficher un panel pour ajouter l'image à un contact**** //
 	public void panelAddContact() {
 		panelSouth.removeAll();
 		updateUI();
@@ -160,6 +152,18 @@ public class GUIImage extends JPanel {
 		buttonSetImCt.setBorderPainted(false);
 		panelSouth.add(buttonSetImCt);
 		buttonSetImCt.addActionListener(new GUIImage.setImCtClick());
+	}
+
+	// **** class servant au listener de suppression d'image**** //
+	public class Suppression implements ActionListener {
+		// **** méthode qui supprime le fichier et change de panel **** //
+		public void actionPerformed(ActionEvent e) {
+
+			File aSupprimer = new File(GUIGallerie.getImageAAfficher());
+			aSupprimer.delete();
+			gallerieA.fichiers.remove(GUIGallerie.getNumeroImage());
+			guit.setCurrentPanel("gallerie");
+		}
 	}
 
 	// ** CHANGE LA PHOTO EN APPELANT L'APP GALLERIE ** //
