@@ -1,237 +1,226 @@
 package graphisme;
 
-import graphisme.GUIImage.Suppression;
-import javax.imageio.stream.FileCacheImageInputStream;
-import javax.swing.JButton;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
-import java.util.prefs.BackingStoreException;
+
+import javax.swing.AbstractButton;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+
+import structure.AppContact;
 import structure.AppGallerie;
-import structure.Photo;
-import structure.Photo;
+import structure.Contact;
 
-public class GUIGallerie extends JPanel {
-	Photo ld;
-	AppGallerie gallerieA;
-	ImageIcon icone;
-	String DIR = "src/photos/";
-	static int TAILLE_BOUTON = 100;
-	private ImagePanel GALERIE = new ImagePanel(new ImageIcon(
-			"src/images/wallpaper.png"));
+public class GUIImage extends JPanel {
+
+	private Image imageRedim;
+
+	private GUIGallerie guig = (GUIGallerie) SwingUtilities.getAncestorOfClass(
+			GUIGallerie.class, GUIImage.this);
+
+	// ** INSTANCE GUITelephone **
+	// Recupere la method permettant de switch la card
 	private GUITelephone guit = (GUITelephone) SwingUtilities
-			.getAncestorOfClass(GUITelephone.class, GUIGallerie.this);
-	private ArrayList<String> fichiers2;
-	private JPanel panelAjoutImage = new JPanel();
+			.getAncestorOfClass(GUITelephone.class, GUIImage.this);
+	// private ImageIcon icon = new ImageIcon(GUIGallerie.getImageAAfficher());
+	private ImageIcon iconSupprimer = new ImageIcon("src/images/cancel.png");
+	private ImageIcon iconX;
+	private ImageIcon confirm = new ImageIcon("src/images/confirm.png");
+	private JLabel img = new JLabel(iconX);
+	private JPanel panelImage = new JPanel();
 	private JPanel panelImageEtScroll = new JPanel();
-	private JScrollPane panelScroll = new JScrollPane(panelImage,
-			JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-			JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-	private JButton ajoutImage = new JButton("ajout image");
-	private int tailleScroll;
-	private static JPanel panelImage = new JPanel();
-	private static int numeroImage;
-	private static ArrayList<JButton> tableauBouton = new ArrayList<JButton>();
-	private static String imageAAfficher = "chemin image pas trouvé";
+	private JPanel panelSupprimer = new JPanel();
+	private JPanel panelSouth = new JPanel();
+	private JPanel sure = new JPanel();
+	private JButton buttonSetImCt = new JButton(new ImageIcon(
+			"src/images/addtouser.png"));
+	private JButton boutonSupprimer = new JButton();
+	private JButton buttonConfirm = new JButton(confirm);
+	private JButton buttonCancel2 = new JButton();	
+	private ArrayList<Contact> arrayC;
+	private int hauteurFinale = 600;
+	private int largeurFinale = 480;
+	private int ratio;
+	private int hauteurOriginale;
+	private int largeurOriginale;
+	Font fonto = new Font("Dialog", Font.BOLD, 15);
+	GUIContacts guic;
+	AppContact contactA;
+	Contact contactZ;
+	AppGallerie gallerieA;
+	GUINewContact guinewcontact;
+	GUIEditContact guieditcontact;
 
-	public GUIGallerie(GUITelephone guit, AppGallerie gallerieA) {
-		this.gallerieA = gallerieA;
-		this.tableauBouton = tableauBouton;
+	public GUIImage(GUITelephone guit, GUIContacts guic, AppContact contactA,
+			GUINewContact guinewcontact, GUIEditContact guieditcontact,
+			AppGallerie gallerieA) {
+		this.guieditcontact = guieditcontact;
+		this.guinewcontact = guinewcontact;
 		this.guit = guit;
-		File file = new File(DIR);
-		if (file.isDirectory()) {
-			String names[] = file.list();
-			ArrayList<String> names_ok = new ArrayList<>();
-			for (int i = 0; i < names.length; i++) {
-				String m1 = names[i].concat(".jpg");
-				if (m1 != null) {
-					names_ok.add(names[i]);
-				}
-				icone = new ImageIcon(DIR.concat(names[i]));
-				Photo ldd = new Photo(DIR, ".jpg", icone);
-				gallerieA.fichiers.add(ldd);
-			}
-		}
-		affichageBouton();
-	}
+		this.guic = guic;
+		this.contactA = contactA;
+		this.gallerieA = gallerieA;
+		arrayC = contactA.getArrayContacts();
 
-	// **** création d'un panel avec toutes les photos. **** //
-	public void affichageBouton() {
-
-		tailleScroll = (gallerieA.getFichiers().size() / 3 + 1) * 116;
-
-		panelImage.setLayout(new FlowLayout());
-		panelImage.setOpaque(false);
-		panelImage.setBackground(null);
+		panelImage.setLayout(new BorderLayout());
+		panelImage.setOpaque(true);
+		panelImage.setBackground(Color.BLACK);
 		panelImage.setBorder(null);
-		panelImage.setPreferredSize(new Dimension(480, tailleScroll));
-		panelScroll.getViewport().setOpaque(false);
-		panelScroll.setOpaque(false);
-		panelScroll.setPreferredSize(new Dimension(15, 600));
+		panelImage.setPreferredSize(new Dimension(480, 600));
+
 		panelImageEtScroll.setLayout(new BorderLayout());
-		panelImageEtScroll.setOpaque(false);
-		panelImageEtScroll.setBackground(null);
+		panelImageEtScroll.setOpaque(true);
+		panelImageEtScroll.setBackground(Color.BLACK);
 		panelImageEtScroll.setBorder(null);
-		panelImageEtScroll.setPreferredSize(new Dimension(480, 606));
-		panelAjoutImage.setLayout(new FlowLayout());
-		panelAjoutImage.setBackground(Color.BLACK);
-		panelAjoutImage.setPreferredSize(new Dimension(480, 50));
-		panelAjoutImage.add(ajoutImage);
-		add(panelAjoutImage, BorderLayout.NORTH);
+		panelImageEtScroll.setPreferredSize(new Dimension(480, 600));
 
-		ajoutImage.addActionListener(new Ajout());
-		for (int i = 0; i < gallerieA.getFichiers().size(); i++) {
-			CreationBoutonImage(i);
-		}
-		// **** Affichage de la gallerie **** //
-		GALERIE.add(panelImageEtScroll, BorderLayout.CENTER);
-		GALERIE.setLayout(new FlowLayout());
-		GALERIE.setOpaque(false);
-		GALERIE.setPreferredSize(new Dimension(480, 683));
-		add(GALERIE);
+		panelImageEtScroll.add(img);
+		add(panelImageEtScroll, BorderLayout.CENTER);
 
 	}
 
-	// **** Pour chaque image du dossier, céer un bouton avec un nom**** //
-	public void CreationBoutonImage(int i) {
-
-		JButton boutonImage = new JButton();
-		icone = new ImageIcon(new ImageIcon(gallerieA.getFichiers().get(i)
-				.getImageI().getImage()).getImage().getScaledInstance(
-				TAILLE_BOUTON, TAILLE_BOUTON, Image.SCALE_SMOOTH));
-		boutonImage.setIcon(icone);
-		boutonImage.setName(gallerieA.getFichiers().get(i).getImageI()
-				.toString());
-
-		panelImage.add(boutonImage);
-		boutonImage.addActionListener(new ClickImage());
-		panelImageEtScroll.add(panelScroll);
-		tableauBouton.add(boutonImage);
-		boutonImage.setContentAreaFilled(false);
-		boutonImage.setBorderPainted(false);
-	}
-
-	// **** Vide le panel avec images et boutons puis les réaffichent **** //
-	public void updateImage() {
-		panelImage.removeAll();
+	// **** méthode qui sert à afficher l'image sélectionnée dans la gallerie
+	
+	public void update() {
+		panelImageEtScroll.removeAll();
+		panelSupprimer.removeAll();
 		updateUI();
-		tableauBouton.clear();
-		affichageBouton();
+		iconX = new ImageIcon(gallerieA.getFichiers()
+				.get(guig.getNumeroImage()).getImageI().getImage());
+		img = new JLabel(iconX);
+
+		hauteurOriginale = iconX.getIconHeight();
+		largeurOriginale = iconX.getIconWidth();
+
+		if (hauteurOriginale > 600) {
+			hauteurFinale = 600;
+			ratio = hauteurOriginale / hauteurFinale;
+			largeurFinale = largeurOriginale / ratio;
+		} else
+			hauteurFinale = hauteurOriginale;
+
+		if (largeurOriginale > 480) {
+			largeurFinale = 480;
+			ratio = largeurOriginale / largeurFinale;
+			hauteurFinale = hauteurOriginale / ratio;
+		} else
+			largeurFinale = largeurOriginale;
+
+		imageRedim = iconX.getImage().getScaledInstance(largeurFinale,
+				hauteurFinale, java.awt.Image.SCALE_SMOOTH);
+		img.setIcon(new ImageIcon(imageRedim));
+		panelImageEtScroll.add(img, BorderLayout.CENTER);
+		panelImageEtScroll.add(panelSupprimer, BorderLayout.SOUTH);
+		this.validate();
+		this.repaint();
+
 	}
 
-	// **** class Ajout pour le listener**** //
-	private class Ajout implements ActionListener {
-		JFileChooser frameChoix = new JFileChooser();
-		JFrame frame = new JFrame();
+	// **** méthode qui sert à afficher un panel pour supprimer l'image **** //
+	public void panelSuppressionImage() {
+		updateUI();
+		boutonSupprimer = new JButton(iconSupprimer);
+		boutonSupprimer.addActionListener(new deleteFirstClick());
+		boutonSupprimer.setContentAreaFilled(false);
+		boutonSupprimer.setBorderPainted(false);
+		panelSupprimer.setLayout(new FlowLayout());
+		panelSupprimer.setPreferredSize(new Dimension(480, 100));
+		panelSupprimer.setBackground(Color.BLACK);
+		panelSupprimer.setOpaque(true);
+		panelSupprimer.add(boutonSupprimer);
+
+		add(panelSupprimer, BorderLayout.SOUTH);
+
+		this.validate();
+		this.repaint();
+
+	}
+
+	// ****afficher un panel pour ajouter l'image à un contact**** //
+	public void panelAddContact() {
+		panelSouth.removeAll();
+		updateUI();
+		panelSouth.setLayout(new BorderLayout());
+		panelSouth.setOpaque(false);
+		buttonSetImCt.setContentAreaFilled(false);
+		buttonSetImCt.setPreferredSize(new Dimension(120, 120));
+		buttonSetImCt.setBorderPainted(false);
+		panelSouth.add(buttonSetImCt);
+		buttonSetImCt.addActionListener(new GUIImage.setImCtClick());
+	}
+	// **** DEMANDE LA CONFIRMATION DE SUPPRESSION D'UN CONTACT **** //
+    private class deleteFirstClick implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+        	panelSupprimer.removeAll();
+            updateUI();
+            panelSupprimer.setLayout(new FlowLayout());
+            
+			buttonConfirm.setContentAreaFilled(false);
+            buttonCancel2.setContentAreaFilled(false);
+            buttonConfirm.setPreferredSize(new Dimension(120, 120));
+            buttonCancel2.setPreferredSize(new Dimension(120, 120));
+            buttonConfirm.setBorderPainted(false);
+            sure.setOpaque(true);
+            sure.setRequestFocusEnabled(false);
+            sure.setForeground(Color.WHITE);
+            sure.setFont(fonto);
+            sure.setPreferredSize(new Dimension(480, 100));
+            buttonCancel2.setBorderPainted(false);
+            panelSupprimer.add(buttonConfirm);
+            panelSupprimer.add(sure);
+            panelSupprimer.add(buttonCancel2);
+            panelSupprimer.setPreferredSize(new Dimension(120, 120));
+            add(panelSouth);
+            buttonConfirm.addActionListener(new Suppression());
+            buttonCancel2.addActionListener(new Suppression());
+        }
+    }
+	// **** class servant au listener de suppression d'image**** //
+	public class Suppression implements ActionListener {
+		// **** méthode qui supprime le fichier et change de panel **** //
+		public void actionPerformed(ActionEvent e) {
+
+			File aSupprimer = new File(GUIGallerie.getImageAAfficher());
+			aSupprimer.delete();
+			gallerieA.fichiers.remove(GUIGallerie.getNumeroImage());
+			guit.setCurrentPanel("gallerie");
+		}
+	}
+
+	// ** CHANGE LA PHOTO EN APPELANT L'APP GALLERIE ** //
+
+	private class setImCtClick implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
-			frameChoix.setCurrentDirectory(new java.io.File("C:/Users"));
-			frameChoix.setDialogTitle("choix d'image");
-			frameChoix.setPreferredSize(new Dimension(480, 500));
-			frameChoix.setVisible(true);
-			frameChoix.getFileView();
-			add(frameChoix);
-			frame.setAlwaysOnTop(true);
-			int returnVal = frameChoix.showOpenDialog(frame);
 
-			if (returnVal == JFileChooser.APPROVE_OPTION) {
-				File file = frameChoix.getSelectedFile();
-				Path pathNouvelleImage = Paths.get(file.getPath());
-				Path pathGallerie = Paths.get("src/photos/".concat(file
-						.getName()));
-				try {
-					// copie de l'image dans le dossier où toutes les photos du
-					// téléphone sont
-					Files.copy(pathNouvelleImage, pathGallerie,
-							StandardCopyOption.COPY_ATTRIBUTES);
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
+			if (guic.switcheditadd == 3) {
+				guinewcontact.user = new ImageIcon(
+						GUIGallerie.getImageAAfficher());
+				guit.setCurrentPanel("newcontact");
+				guinewcontact.refreshPhoto();
+				guit.backPosition = 5;
 
-				// ajout de la nouvelle image au dossier "DIR"
-				icone = new ImageIcon(DIR.concat(file.getName()));
-				Photo ldd = new Photo(DIR, ".jpg", icone);
-				gallerieA.fichiers.add(ldd);
-				CreationBoutonImage(gallerieA.getFichiers().size() - 1);
-				// le numéro de l'image -1 car la première image a le n°0
-
+			} else if (guic.switcheditadd == 2) {
+				guieditcontact.icone = new ImageIcon(
+						GUIGallerie.getImageAAfficher());
+				guit.setCurrentPanel("editcontact");
+				guieditcontact.refreshPhoto();
+				guit.backPosition = 6;
 			}
 		}
-
-	}
-
-	// **** classe pour le listener mis à chaque bouton image **** //
-	private class ClickImage implements ActionListener {
-		// **** chaque image ouvre la classe GUIImage **** //
-		public void actionPerformed(ActionEvent e) {
-
-			JButton button = (JButton) e.getSource();
-			Photo ld = gallerieA.fichiers.get(tableauBouton
-					.indexOf(button));
-			imageAAfficher = button.getName();
-
-			numeroImage = gallerieA.fichiers.indexOf(ld);
-			guit.guiimage.update();
-			if (guit.backPositionAppC == 0) {
-				guit.guiimage.panelSuppressionImage();
-			} else
-				guit.guiimage.panelAddContact();
-
-			guit.guiimage.validate();
-			guit.setCurrentPanel("image");
-			guit.setBackPosition(4);
-
-		}
-	}
-
-	// **** GETTERS&SETTERS **** //
-	public ArrayList<String> getFichiers2() {
-		return fichiers2;
-	}
-
-	public void setFichiers2(ArrayList<String> fichiers2) {
-		this.fichiers2 = fichiers2;
-	}
-
-	public static void setTableauBouton(ArrayList<JButton> tableauBouton) {
-		GUIGallerie.tableauBouton = tableauBouton;
-	}
-
-	public static JPanel getPanelImage() {
-		return panelImage;
-	}
-
-	public void setPanelImage(JPanel panelImage) {
-		this.panelImage = panelImage;
-	}
-
-	public static String getImageAAfficher() {
-
-		return imageAAfficher;
-	}
-
-	public static int getNumeroImage() {
-		return numeroImage;
-	}
-
-	public static ArrayList<JButton> getTableauBouton() {
-		return tableauBouton;
 	}
 }
