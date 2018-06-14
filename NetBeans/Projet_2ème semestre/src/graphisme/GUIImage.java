@@ -93,7 +93,9 @@ public class GUIImage extends JPanel {
         setBackground(Color.BLACK);
     }
 
-    // **** méthode qui sert à afficher l'image sélectionnée dans la gallerie
+    /**
+     *  méthode qui sert à afficher l'image sélectionnée dans la gallerie
+     */
     public void update() {
         panelImageEtScroll.removeAll();
         panelSupprimer.removeAll();
@@ -128,7 +130,9 @@ public class GUIImage extends JPanel {
         panelImageEtScroll.add(img, BorderLayout.CENTER);
     }
 
-    // **** méthode qui sert à afficher un panel pour supprimer l'image **** //
+    /**
+     * méthode qui sert à afficher un panel pour supprimer l'image
+     */
     public void panelSuppressionImage() {
         panelSouth.removeAll();
         updateUI();
@@ -140,7 +144,9 @@ public class GUIImage extends JPanel {
         panelSouth.add(boutonSupprimer);
     }
 
-    // ****afficher un panel pour ajouter l'image à un contact**** //
+    /**
+     * afficher un panel pour ajouter l'image à un contact
+     */
     public void panelAddContact() {
         panelSouth.removeAll();
         updateUI();
@@ -152,7 +158,11 @@ public class GUIImage extends JPanel {
         panelSouth.add(buttonSetImCt);
         buttonSetImCt.addActionListener(new GUIImage.setImCtClick());
     }
-    // **** DEMANDE LA CONFIRMATION DE SUPPRESSION D'UN CONTACT **** //
+    /**
+     * DEMANDE LA CONFIRMATION DE SUPPRESSION D'UN CONTACT
+     * @author oppik
+     *
+     */
 
     private class deleteFirstClick implements ActionListener {
 
@@ -179,7 +189,11 @@ public class GUIImage extends JPanel {
             buttonCancel2.addActionListener(new deleteReturnClick());
         }
     }
-        // **** ANNULE LA SUPPRESSION ET REMET L'ICONE SUPPRESSION **** //
+        /**
+         * ANNULE LA SUPPRESSION ET REMET L'ICONE SUPPRESSION
+         * @author oppik
+         *
+         */
     private class deleteReturnClick implements ActionListener {
 
         @Override
@@ -187,10 +201,16 @@ public class GUIImage extends JPanel {
             panelSuppressionImage();
         }
     }
-    // **** class servant au listener de suppression d'image**** //
+    /**
+     * class servant au listener de suppression d'image
+     * @author oppik
+     *
+     */
 
     public class Suppression implements ActionListener {
-        // **** méthode qui supprime le fichier et change de panel **** //
+        /**
+         *  méthode qui supprime le fichier et change de panel 
+         */
 
         public void actionPerformed(ActionEvent e) {
 
@@ -201,7 +221,9 @@ public class GUIImage extends JPanel {
         }
     }
 
-    // ** CHANGE LA PHOTO EN APPELANT L'APP GALLERIE ** //
+    /**
+     *  CHANGE LA PHOTO EN APPELANT L'APP GALLERIE 
+     */
     private class setImCtClick implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
