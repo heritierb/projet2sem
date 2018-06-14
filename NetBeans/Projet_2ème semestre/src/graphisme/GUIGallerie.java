@@ -1,11 +1,20 @@
-package graphisme;
+ package graphisme;
+ 
+ 
+ import graphisme.GUIImage.Suppression;
+ import graphisme.GUIImage.Suppression;
 
-import graphisme.GUIImage.Suppression;
-import javax.imageio.stream.FileCacheImageInputStream;
-import javax.swing.JButton;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
+ import javax.imageio.stream.FileCacheImageInputStream;
+ import javax.imageio.stream.FileCacheImageInputStream;
+ import javax.swing.JButton;
+ import javax.swing.JButton;
+
+ import java.awt.BorderLayout;
+ import java.awt.BorderLayout;
+ import java.awt.Color;
+ import java.awt.Color;
+ import java.awt.Dimension;
+ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -15,18 +24,29 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
-import java.util.prefs.BackingStoreException;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.SwingUtilities;
-import structure.AppGallerie;
-import structure.Photo;
-import structure.Photo;
+ import java.nio.file.StandardCopyOption;
+ import java.util.ArrayList;
+ import java.util.ArrayList;
+ import java.util.prefs.BackingStoreException;
+ import java.util.prefs.BackingStoreException;
+
+ import javax.swing.ImageIcon;
+ import javax.swing.ImageIcon;
+ import javax.swing.JFileChooser;
+ import javax.swing.JFileChooser;
+ import javax.swing.JFrame;
+ import javax.swing.JFrame;
+ import javax.swing.JPanel;
+ import javax.swing.JPanel;
+ import javax.swing.JScrollPane;
+ import javax.swing.JScrollPane;
+ import javax.swing.SwingUtilities;
+ import javax.swing.SwingUtilities;
+
+ import structure.AppGallerie;
+ import structure.AppGallerie;
+ import structure.Photo;
+ import structure.Photo;
 
 public class GUIGallerie extends JPanel {
 
@@ -102,7 +122,7 @@ public class GUIGallerie extends JPanel {
         ajoutImage.setPreferredSize(new Dimension (32,32));
         add(panelAjoutImage, BorderLayout.NORTH);
 
-        ajoutImage.addActionListener(new Ajout());
+        ajoutImage.addActionListener((ActionListener) new Ajout());
         for (int i = 0; i < gallerieA.getFichiers().size(); i++) {
             CreationBoutonImage(i);
         }
