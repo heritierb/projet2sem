@@ -175,6 +175,10 @@ public class GUIEditContact extends JPanel implements Serializable {
         panelSouthRefresh();
     }
 
+    public GUIEditContact() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     // **** POUR CHAQUE TXT DE LA BOUCLE DES CHAMPS, CREE UN NOUVEAU TXT **** //
     public JTextField CreationFieldContact(JTextField txt) {
         txt = new JTextField();

@@ -29,7 +29,6 @@ public class Main implements Serializable{
             ObjectInputStream obfichier = new ObjectInputStream(fichier);
             contactB = (AppContact)obfichier.readObject();
             if(contactB != null)
-            System.out.println(contactB.arrayContacts.size());
             obfichier.close();
             return contactB;
         } catch (IOException e) {
