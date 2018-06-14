@@ -19,12 +19,18 @@ public class AppGallerie implements AppAll, Serializable{
 	public void setFichiers(ArrayList<Photo> fichiers) {
 		this.fichiers = fichiers;
 	}
-	// **** ajout d'une photo **** //
+	/**
+	 *  ajout d'une photo
+	 * @param o
+	 */
     public void addCI(Object o) {
         Photo ld = (Photo) o;
     	fichiers.add(ld);
     }
-    // **** suppression d'une photo **** //
+    /** 
+     * suppression d'une photo **** //
+     * @param o
+     */
     public void deleteCI(Object o) {
         Photo ld = (Photo) o;
     	fichiers.remove(ld);
