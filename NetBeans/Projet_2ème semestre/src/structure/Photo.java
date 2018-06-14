@@ -49,8 +49,16 @@ public class Photo {
 	public void setExtension(String extension) {
 		this.extension = extension;
 	}
+	public ArrayList<String> getFichiers() {
+		return fichiers;
+	}
 
-
+/**
+ * donne tous les noms d'un fichier dir dont les extesions sont définies
+ * @param dir
+ * @param extension
+ * @return
+ */
 	public static ArrayList<String> listFileNames(String dir, String extension) {
 		File file = new File(dir);
 		if (file.isDirectory()) {
@@ -75,9 +83,7 @@ public class Photo {
 	}
 
 
-	public ArrayList<String> getFichiers() {
-		return fichiers;
-	}
+
 
 
 	
