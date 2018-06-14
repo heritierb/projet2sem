@@ -27,21 +27,33 @@ import javax.swing.border.EmptyBorder;
 import structure.AppContact;
 import structure.Contact;
 
-// **** PANEL DE LA LISTE DES CONTACTS, ACCES POUR MODIFIER OU AJOUTER UN CONTACT **** //
+/**
+ * PANEL DE LA LISTE DES CONTACTS, ACCES POUR MODIFIER OU AJOUTER UN CONTACT
+ *
+ * @author ben
+ */
 public class GUIContacts extends JPanel implements Serializable {
 
-    // **** INSTANCE GUITelephone **** // Recupere la method permettant de switch la card
+    /**
+     * INSTANCE GUITelephone Recupere la method permettant de switch la card
+     */
     private GUITelephone guit = (GUITelephone) SwingUtilities.getAncestorOfClass(GUITelephone.class, GUIContacts.this);
 
-    // **** INSTANCE AppContact **** // Recupere le tableau de contacts
+    /**
+     * INSTANCE AppContact Recupere le tableau de contacts
+     */
     AppContact contactA;
     private ArrayList<Contact> arrayCc;
 
-    // **** CREATION D'UNE LISTE DE BOUTONS DE CONTACTS **** //
+    /**
+     * CREATION D'UNE LISTE DE BOUTONS DE CONTACTS
+     */
     ArrayList<JButton> arrayButton = new ArrayList<>();
     Contact edit;
 
-    // **** CREATIONS PANELS **** //
+    /**
+     * CREATIONS PANELS
+     */
     private ImagePanel contacts = new ImagePanel(new ImageIcon("src/images/wallpaper.png"));
     private JPanel panelnorth = new JPanel();
     private JPanel panelcenter = new JPanel();
@@ -49,7 +61,9 @@ public class GUIContacts extends JPanel implements Serializable {
     private JPanel panelntm = new JPanel();
     private JPanel empty = new JPanel();
 
-    // **** CREATION SCROLLBAR **** //
+    /**
+     * CREATION SCROLLBAR
+     */
     private JScrollPane panelScroll = new JScrollPane(panelcenter);
 
     // **** AUTRES COMPOSANTS **** // 
@@ -64,15 +78,24 @@ public class GUIContacts extends JPanel implements Serializable {
     int indexC;
     int switcheditadd = 0;
 
-     // **** CONSTRUCTEUR **** //
+    /**
+     * CONSTRUCTEUR
+     *
+     * @param guit
+     * @param contactA
+     */
     public GUIContacts(GUITelephone guit, AppContact contactA) {
 
-        //**** RECUPERE LES INSTANCES DANS LE CONSTRUCTEUR **** //
+        /**
+         * RECUPERE LES INSTANCES DANS LE CONSTRUCTEUR
+         */
         this.guit = guit;
         this.contactA = contactA;
         this.arrayButton = arrayButton;
 
-        // **** CONFIG DE BASE **** //
+        /**
+         * CONFIG DE BASE
+         */
         add(contacts);
         setBackground(Color.BLACK);
         contacts.setBorder(new EmptyBorder(0, 0, 0, 0));
@@ -80,7 +103,9 @@ public class GUIContacts extends JPanel implements Serializable {
         contacts.setOpaque(false);
         contacts.setBackground(null);
 
-        // **** AJOUT DU PANEL NORD **** // bouton add un contact
+        /**
+         * AJOUT DU PANEL NORD bouton add un contact
+         */
         contacts.add(panelnorth, BorderLayout.NORTH);
         panelntm.add(buttonAddContact);
         panelnorth.setLayout(new BorderLayout());
@@ -95,7 +120,10 @@ public class GUIContacts extends JPanel implements Serializable {
         buttonAddContact.setContentAreaFilled(false);
         buttonAddContact.setBorderPainted(false);
 
-        // **** AJOUT DE LA LISTE DES CONTACTS **** // Appelle afficheUnit qui donne la liste des contacts
+        /**
+         * AJOUT DE LA LISTE DES CONTACTS Appelle afficheUnit qui donne la liste
+         * des contacts
+         */
         panelcentscroll.setLayout(new BorderLayout());
         panelcentscroll.setOpaque(false);
         panelcentscroll.setBackground(null);
@@ -116,11 +144,15 @@ public class GUIContacts extends JPanel implements Serializable {
 
     }
 
-    // **** RECUPERE LA LISTE DES CONTACTS ET CREE DES BOUTONS PRENOM+NOM **** //
+    /**
+     * RECUPERE LA LISTE DES CONTACTS ET CREE DES BOUTONS PRENOM+NOM
+     */
     public void afficheUnit() {
         arrayCc = contactA.getArrayContacts();
 
-        // **** METS PAR ORDRE ALPHABETIQUE **** //
+        /**
+         * METS PAR ORDRE ALPHABETIQUE
+         */
         Collections.sort(contactA.arrayContacts, new Comparator<Contact>() {
 
             @Override
@@ -128,7 +160,9 @@ public class GUIContacts extends JPanel implements Serializable {
                 return (sort1.getPrenom().compareTo(sort2.getPrenom()));
             }
         });
-        // **** BOUCLE D'AJOUT DES CONTACTS ICONE + PRENOM + NOM **** //
+        /**
+         * BOUCLE D'AJOUT DES CONTACTS ICONE + PRENOM + NOM
+         */
         for (int i = 0; i < contactA.getArrayContacts().size(); i++) {
             JButton appellecrea = new JButton();
             JButton cpt = CreationBoutonContact(appellecrea);
@@ -152,13 +186,18 @@ public class GUIContacts extends JPanel implements Serializable {
         }
     }
 
-    // **** POUR CHAQUE BOUTON DE LA BOUCLE AFFICHEUNIT **** //
+    /**
+     * POUR CHAQUE BOUTON DE LA BOUCLE AFFICHEUNIT
+     * @return bouton
+     */
     public JButton CreationBoutonContact(JButton bouton) {
         bouton = new JButton();
         return bouton;
     }
 
-    // **** EFFACE ET RECREE LA LISTE DE CONTACTS **** //
+    /**
+     * EFFACE ET RECREE LA LISTE DE CONTACTS
+     */
     public void refresh() {
         panelcenter.removeAll();
         updateUI();
@@ -166,7 +205,9 @@ public class GUIContacts extends JPanel implements Serializable {
         afficheUnit();
     }
 
-    // **** BOUTON POUR AJOUTER UN CONTACT **** //
+    /**
+     * BOUTON POUR AJOUTER UN CONTACT
+     */
     private class ClickNewContact implements ActionListener {
 
         @Override
@@ -177,7 +218,9 @@ public class GUIContacts extends JPanel implements Serializable {
         }
     }
 
-    // **** BOUTON POUR MODIFIER UN CONTACT **** //
+    /**
+     * BOUTON POUR MODIFIER UN CONTACT
+     */
     private class ClickContact implements ActionListener {
 
         @Override
@@ -189,11 +232,11 @@ public class GUIContacts extends JPanel implements Serializable {
             guit.setBackPosition(3);
         }
     }
-    // **** GETTERS&SETTERS **** //
+
+
     public Contact getEdit() {
         return edit;
     }
-
     public void setEdit(Contact edit) {
         this.edit = edit;
     }
@@ -214,5 +257,4 @@ public class GUIContacts extends JPanel implements Serializable {
         this.switcheditadd = switcheditadd;
     }
 
-    
 }

@@ -2,7 +2,7 @@ package structure;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class AppGallerie implements Serializable{
+public class AppGallerie implements AppAll, Serializable{
 
 	private String DOSSIER = "src/photos/";
 	private String EXTENSION = ".jpg";
@@ -20,11 +20,13 @@ public class AppGallerie implements Serializable{
 		this.fichiers = fichiers;
 	}
 	// **** ajout d'une photo **** //
-    public void addI(Photo ld) {
+    public void addCI(Object o) {
+        Photo ld = (Photo) o;
     	fichiers.add(ld);
     }
     // **** suppression d'une photo **** //
-    public void deleteI(Photo ld) {
+    public void deleteCI(Object o) {
+        Photo ld = (Photo) o;
     	fichiers.remove(ld);
     }
 

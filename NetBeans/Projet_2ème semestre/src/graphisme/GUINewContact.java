@@ -28,10 +28,17 @@ import javax.swing.border.EmptyBorder;
 import structure.AppContact;
 import structure.Contact;
 
-// **** PANEL AJOUT DE CONTACT, ACCES POUR SAUVEGARDER + APPGALLERIE POUR AJOUTER UNE PHOTO **** //
+/**
+ * PANEL AJOUT DE CONTACT, ACCES POUR SAUVEGARDER + APPGALLERIE POUR AJOUTER UNE
+ * PHOTO
+ *
+ * @author ben
+ */
 public class GUINewContact extends JPanel implements Serializable {
 
-    // **** INSTANCES **** //
+    /**
+     * INSTANCES
+     */
     AppContact contactA;
     private GUIContacts guic = (GUIContacts) SwingUtilities.getAncestorOfClass(GUIContacts.class, GUINewContact.this);
     private ArrayList<Contact> arrayC;
@@ -74,7 +81,7 @@ public class GUINewContact extends JPanel implements Serializable {
     private ImageIcon icone;
     private ImageIcon iconeR;
     ImageIcon iconeE;
-        ImageIcon iconeZ = new ImageIcon("src/images/user.png");
+    ImageIcon iconeZ = new ImageIcon("src/images/user.png");
     private JButton buttonImageContact = new JButton();
     private JButton buttonSave = new JButton(done);
 
@@ -83,14 +90,19 @@ public class GUINewContact extends JPanel implements Serializable {
     private Color blancasse = new Color(250, 250, 250);
     private Font ecriture = new Font("SANS_SERIF", Font.ITALIC, 18);
 
-    // **** CONSTRUCTEUR **** //
+    /**
+     * CONSTRUCTEUR
+     *
+     * @param guit
+     * @param contactA
+     * @param guic
+     */
     public GUINewContact(GUITelephone guit, AppContact contactA, GUIContacts guic) {
 
         // **** REPRISE INSTANCES **** //
         this.guit = guit;
         this.contactA = contactA;
         this.guic = guic;
-
 
         // **** AJOUT DU PANEL PRINCIPAL **** //
         add(newcontact);
@@ -307,19 +319,31 @@ public class GUINewContact extends JPanel implements Serializable {
         panel_center.setPreferredSize(new Dimension(340, 683));
     }
 
-    // **** POUR CHAQUE TXT DE LA BOUCLE DES CHAMPS **** //
+    /**
+     * POUR CHAQUE TXT DE LA BOUCLE DES CHAMPS
+     *
+     * @param txt
+     * @return
+     */
     public JTextField CreationFieldContact(JTextField txt) {
         txt = new JTextField();
         return txt;
     }
 
-    // **** POUR CHAQUE LOGO DE LA BOUCLE,  CREE UN NOUVEAU LOGO **** //
+    /**
+     * POUR CHAQUE LOGO DE LA BOUCLE, CREE UN NOUVEAU LOGO
+     *
+     * @param symbol
+     * @return
+     */
     public ImageIcon CreationImageIcon(ImageIcon symbol) {
         symbol = new ImageIcon("src/images/symbol.png");
         return symbol;
     }
 
-    // **** ENREGISTRE LE CONTACT ET REVIENT SUR LA LISTE DE CONTACTS **** //
+    /**
+     * ENREGISTRE LE CONTACT ET REVIENT SUR LA LISTE DE CONTACTS
+     */
     private class doneClick implements ActionListener {
 
         @Override
@@ -352,7 +376,9 @@ public class GUINewContact extends JPanel implements Serializable {
         }
     }
 
-    // **** AJOUTE UNE PHOTO EN APPELANT L'APP GALLERIE **** //
+    /**
+     * AJOUTE UNE PHOTO EN APPELANT L'APP GALLERIE
+     */
     private class addPhotoClick implements ActionListener {
 
         @Override
@@ -364,7 +390,9 @@ public class GUINewContact extends JPanel implements Serializable {
         }
     }
 
-// **** VIDE LES CHAMPS DE TEXTE LORSQU'ON QUITTE LE PANEL**** //
+    /**
+     * VIDE LES CHAMPS DE TEXTE LORSQU'ON QUITTE LE PANEL
+     */
     public void refreshC() {
         txt1.setText(prenomB);
         txt2.setText(nomB);
@@ -378,7 +406,9 @@ public class GUINewContact extends JPanel implements Serializable {
         buttonImageContact.setIcon(iconeR);
     }
 
-    // **** ACTUALISE LA PHOTO **** //
+    /**
+     * ACTUALISE LA PHOTO
+     */
     public void refreshPhoto() {
         panelImageContact.removeAll();
         updateUI();
@@ -387,7 +417,6 @@ public class GUINewContact extends JPanel implements Serializable {
         panelImageContact.add(buttonImageContact);
     }
 
-    // **** GETTERS&SETTERS **** //
     public ImageIcon getUser() {
         return user;
     }

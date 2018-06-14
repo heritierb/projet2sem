@@ -6,10 +6,16 @@ package structure;
 import java.io.Serializable;
 import javax.swing.ImageIcon;
 
-// **** DEFINITION D'UN CONTACT **** //
+/**
+ * DEFINITION D'UN CONTACT
+ *
+ * @author ben
+ */
 public class Contact implements Serializable {
 
-    // **** COMPOSANTS D'UN CONTACT **** //
+    /**
+     * COMPOSANTS D'UN CONTACT
+     */
     String prenom;
     String nom;
     String numero;
@@ -19,7 +25,18 @@ public class Contact implements Serializable {
     String groupe;
     ImageIcon imageContact;
 
-    // **** CONSTRUCTEUR **** //
+    /**
+     * CONSTRUCTEUR
+     *
+     * @param prenom
+     * @param nom
+     * @param numero
+     * @param email
+     * @param adresse
+     * @param anniversaire
+     * @param groupe
+     * @param imageContact
+     */
     public Contact(String prenom, String nom, String numero, String email,
             String adresse, String anniversaire, String groupe, ImageIcon imageContact) {
         this.prenom = prenom;
@@ -32,7 +49,6 @@ public class Contact implements Serializable {
         this.imageContact = imageContact;
     }
 
-    // **** GETTERS&SETTERS **** //
     public String getPrenom() {
         return prenom;
     }

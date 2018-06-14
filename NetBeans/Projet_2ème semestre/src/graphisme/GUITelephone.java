@@ -29,10 +29,15 @@ import javax.swing.border.EmptyBorder;
 import structure.AppContact;
 import structure.AppGallerie;
 
-// **** FRAME PRINCIPALE AVEC BARRE DES TACHES ET BOUTONS HOME, GESTION DES CARDPANELS **** //
+/**
+ * FRAME PRINCIPALE AVEC BARRE DES TACHES ET BOUTONS HOME, GESTION DES CARDPANELS
+ * @author ben
+ */
 public class GUITelephone extends JFrame implements Serializable {
 
-    // **** DECLARATION APPLICATIONS **** //
+    /**
+     * DECLARATION APPLICATIONS
+     */
     private AppContact contactA;
     private AppGallerie gallerieA;
     private GUIGallerie guigallerie;
@@ -89,8 +94,12 @@ public class GUITelephone extends JFrame implements Serializable {
     private CardLayout cardL = new CardLayout();
     private JPanel cardP = new JPanel(cardL);
     private GridBagConstraints bag = new GridBagConstraints();
-
-    // **** CONSTRUCTEUR **** //
+    
+    /**
+     * CONSTRUCTEUR
+     * @param contactA
+     * @param gallerieA 
+     */
     public GUITelephone(AppContact contactA, AppGallerie gallerieA) {
         
         // **** REPRISE DES INSTANCES DANS LE CONSTRUCTEUR **** //
@@ -293,7 +302,11 @@ public class GUITelephone extends JFrame implements Serializable {
         setLocationRelativeTo(null);
     }
 
-    // **** CHANGEMENT DE CARTE **** // +REFRESH DES PANELS LORS D'AJOUT D'OBJETS
+    /**
+     * CHANGEMENT DE CARTE
+     * +REFRESH DES PANELS LORS D'AJOUT D'OBJETS
+     * @param currentPanel 
+     */
     public void setCurrentPanel(String currentPanel) {
         cardL.show(cardP, currentPanel);
         if (currentPanel == "contacts") {
@@ -305,7 +318,9 @@ public class GUITelephone extends JFrame implements Serializable {
         }
     }
 
-    // **** OUVERTURE PANEL GUIGallerie **** //
+    /**
+     * OUVERTURE PANEL GUIGallerie
+     */
     private class ClickGallerie implements ActionListener {
 
         @Override
@@ -314,9 +329,11 @@ public class GUITelephone extends JFrame implements Serializable {
             backPosition = 1;
 
         }
-    }
-
-    // **** OUVERTURE PANEL GUIContacts **** //
+    }  
+    
+    /**
+     * OUVERTURE PANEL GUIContacts
+     */
     private class ClickContacts implements ActionListener {
 
         @Override
@@ -326,7 +343,9 @@ public class GUITelephone extends JFrame implements Serializable {
         }
     }
 
-    // **** RETOUR SUR GUITelephone **** //
+    /**
+     * RETOUR SUR GUITelephone
+     */
     private class ClickHome implements ActionListener {
 
         @Override
@@ -338,7 +357,10 @@ public class GUITelephone extends JFrame implements Serializable {
         }
     }
 
-    // **** RETOUR SUR LE PANEL PRECEDANT **** // recupere le backPosition
+    /**
+     * RETOUR SUR LE PANEL PRECEDANT
+     * recupere le backPosition
+     */
     private class ClickBack implements ActionListener {
 
         @Override
@@ -381,7 +403,9 @@ public class GUITelephone extends JFrame implements Serializable {
         }
     }
 
-    // **** ETEINDS L'APPLICATION + SERIALISATION **** //
+    /**
+     * ETEINDS L'APPLICATION + SERIALISATION
+     */
     private class ClickOff implements ActionListener {
 
         @Override
@@ -390,8 +414,7 @@ public class GUITelephone extends JFrame implements Serializable {
             dispose();
         }
     }
-
-    // **** GETTERS&SETTERS **** //
+ 
     public int getBackPosition() {
         return backPosition;
     }
@@ -400,7 +423,9 @@ public class GUITelephone extends JFrame implements Serializable {
         this.backPosition = backPosition;
     }
 
-    // **** SERIALISE L'INSTANCE contactA de AppContact **** //
+    /**
+     * SERIALISE L'INSTANCE contactA de AppConta
+     */
     public void serializeObject() {
         try {
             FileOutputStream fichier = new FileOutputStream("src/svg.ser");

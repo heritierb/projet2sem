@@ -28,13 +28,22 @@ import javax.swing.SwingUtilities;
 import structure.AppContact;
 import structure.Contact;
 
-// **** PANEL D'EDITION DE CONTACT, ACCES POUR SAUVEGARDER UNE MODIF + APPGALLERIE POUR CHANGER LA PHOTO **** //
+/**
+ * PANEL D'EDITION DE CONTACT, ACCES POUR SAUVEGARDER UNE MODIF + APPGALLERIE POUR CHANGER LA PHOTO
+ * @author ben
+ */
 public class GUIEditContact extends JPanel implements Serializable {
 
-    // **** INSTANCE GUITelephone **** // Recupere la method permettant de switch la card
+    /**
+     * INSTANCE GUITelephone
+     * Recupere la method permettant de switch la card
+     */
     private GUITelephone guit = (GUITelephone) SwingUtilities.getAncestorOfClass(GUITelephone.class, GUIEditContact.this);
 
-    // **** INSTANCES **** // + Recupere le tableau de contacts
+    /**
+     * INSTANCES 
+     * Recupere le tableau de contacts
+     */
     AppContact contactA;
     Contact contactX;
     GUIContacts guic;
@@ -102,18 +111,29 @@ public class GUIEditContact extends JPanel implements Serializable {
     private int indexC;
     private Font fonto = new Font("Dialog", Font.BOLD, 15);
 
-    // **** CONSTRUCTEUR **** //
+    /**
+     * CONSTRUCTEUR 
+     * @param guit
+     * @param contactA
+     * @param guic 
+     */
     public GUIEditContact(GUITelephone guit, AppContact contactA, GUIContacts guic) {
-        // **** Récupération instances GUITelephone, GUIContacts, AppContact **** //
+        /**
+         * Récupération instances GUITelephone, GUIContacts, AppContact
+         */
         this.guit = guit;
         this.guic = guic;
         this.contactA = contactA;
 
-        // **** AJOUT DU PANEL PRINCIPAL **** //
+        /**
+         * AJOUT DU PANEL PRINCIPAL
+         */
         add(contactDetails);
-        // **** APPELLE LA METHODE QUI REFRESH LES CHAMPS DU CONTACT **** //
+        /**
+         * APPELLE LA METHODE QUI REFRESH LES CHAMPS DU CONTACT
+         */
         refreshE();
-        // **** OPTIONS DE BASE **** //
+
         contactDetails.setOpaque(false);
         setBackground(Color.BLACK);
         contactDetails.setPreferredSize(new Dimension(480, 683));
@@ -175,17 +195,22 @@ public class GUIEditContact extends JPanel implements Serializable {
         panelSouthRefresh();
     }
 
-    public GUIEditContact() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    public GUIEditContact() {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
 
-    // **** POUR CHAQUE TXT DE LA BOUCLE DES CHAMPS, CREE UN NOUVEAU TXT **** //
+    /**
+     * POUR CHAQUE TXT DE LA BOUCLE DES CHAMPS, CREE UN NOUVEAU TXT
+     * @param txt
+     * @return 
+     */
     public JTextField CreationFieldContact(JTextField txt) {
         txt = new JTextField();
         return txt;
     }
-
-    // **** REPAINT DU PANELDETAILS => APPELLE DE LA METHODE D'AFFICHAGE **** //
+    /**
+     * REPAINT DU PANELDETAILS = APPELLE DE LA METHODE D'AFFICHAGE
+     */
     public void refreshE() {
         panelDetails.removeAll();
         updateUI();
@@ -197,7 +222,9 @@ public class GUIEditContact extends JPanel implements Serializable {
         }
     }
 
-    // **** AVEC UNE BOUCLE AFFICHE LES DETAILS DU CONTACT **** //
+    /**
+     * AVEC UNE BOUCLE AFFICHE LES DETAILS DU CONTACT
+     */
     public void afficheEdit() {
         for (int j = 0; j < 7; j++) {
             txtboucle = CreationFieldContact(txt);
@@ -381,7 +408,9 @@ public class GUIEditContact extends JPanel implements Serializable {
         }
     }
 
-    // **** ENREGISTRE LE CONTACT ET REVIENT SUR LA LISTE DE CONTACTS **** //
+    /**
+     * ENREGISTRE LE CONTACT ET REVIENT SUR LA LISTE DE CONTACTS
+     */
     private class doneClick implements ActionListener {
 
         @Override
@@ -422,7 +451,9 @@ public class GUIEditContact extends JPanel implements Serializable {
         }
     }
 
-    // **** REPAINT => SUPPRESSION A CONFIRMATION **** //
+    /**
+     * REPAINT = SUPPRESSION A CONFIRMATION
+     */
     public void panelSouthRefresh() {
         panelSouth.removeAll();
         updateUI();
@@ -435,7 +466,9 @@ public class GUIEditContact extends JPanel implements Serializable {
         buttonDelete.addActionListener(new GUIEditContact.deleteFirstClick());
     }
 
-    // **** CONFIRME LA SUPPRESSION ET REVIENT SUR LA LISTE DE CONTACTS **** //
+    /**
+     * CONFIRME LA SUPPRESSION ET REVIENT SUR LA LISTE DE CONTACTS
+     */
     private class deleteSecondClick implements ActionListener {
 
         @Override
@@ -446,7 +479,9 @@ public class GUIEditContact extends JPanel implements Serializable {
         }
     }
 
-    // **** DEMANDE LA CONFIRMATION DE SUPPRESSION D'UN CONTACT **** //
+    /**
+     * DEMANDE LA CONFIRMATION DE SUPPRESSION D'UN CONTACT
+     */
     private class deleteFirstClick implements ActionListener {
 
         @Override
@@ -475,7 +510,9 @@ public class GUIEditContact extends JPanel implements Serializable {
         }
     }
 
-    // **** ANNULE LA SUPPRESSION ET REMET L'ICONE SUPPRESSION **** //
+    /**
+     * ANNULE LA SUPPRESSION ET REMET L'ICONE SUPPRESSION
+     */
     private class deleteReturnClick implements ActionListener {
 
         @Override
@@ -484,7 +521,9 @@ public class GUIEditContact extends JPanel implements Serializable {
         }
     }
 
-    // **** CHANGE LA PHOTO EN APPELANT L'APP GALLERIE **** //
+    /**
+     * ANNULE LA SUPPRESSION ET REMET L'ICONE SUPPRESSION
+     */
     private class changePhotoClick implements ActionListener {
 
         @Override
@@ -496,13 +535,19 @@ public class GUIEditContact extends JPanel implements Serializable {
         }
     }
 
-    // **** POUR CHAQUE LOGO DE LA BOUCLE,  CREE UN NOUVEAU LOGO **** //
+    /**
+     * POUR CHAQUE LOGO DE LA BOUCLE,  CREE UN NOUVEAU LOGO
+     * @param refresh
+     * @return 
+     */
     public ImageIcon CreationImageIcon(ImageIcon refresh) {
         refresh = new ImageIcon("src/images/refresh.png");
         return refresh;
     }
 
-    // **** ACTUALISE LA PHOTO **** //
+    /**
+     * ACTUALISE LA PHOTO
+     */
     public void refreshPhoto() {
         panelImageContact.removeAll();
         updateUI();

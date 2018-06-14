@@ -8,6 +8,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 
+/**
+ * LANCEMENT DU TELEPHONE
+ * @author ben
+ */
 public class Main implements Serializable{
     
     public static void main(String[] args){
@@ -15,13 +19,15 @@ public class Main implements Serializable{
         AppContact contactA = new AppContact();
         contactA = deserializeObject();      
         AppGallerie gallerieA = new AppGallerie();
-        //System.out.println(gallerieA.myURL+" = myURL");
+
         
         // **** LANCE LE PROGRAMME **** //
         GUITelephone tel = new GUITelephone(contactA, gallerieA);
         tel.setVisible(true);
     }
-        // **** RECUPERE L'INSTANCE contactB DU FICHIER DE SAUVEGARDE **** //
+    /**
+     * RECUPERE L'INSTANCE contactB DU FICHIER DE SAUVEGARDE
+     */
         public static AppContact deserializeObject() {
         try {
             AppContact contactB = new AppContact();
