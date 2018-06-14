@@ -74,6 +74,7 @@ public class GUIContacts extends JPanel implements Serializable {
 
         // **** CONFIG DE BASE **** //
         add(contacts);
+        setBackground(Color.BLACK);
         contacts.setBorder(new EmptyBorder(0, 0, 0, 0));
         contacts.setLayout(new BorderLayout());
         contacts.setOpaque(false);
@@ -85,7 +86,7 @@ public class GUIContacts extends JPanel implements Serializable {
         panelnorth.setLayout(new BorderLayout());
         panelnorth.add(panelntm, BorderLayout.NORTH);
         panelntm.setLayout(new FlowLayout());
-        panelnorth.add(empty, BorderLayout.SOUTH);
+        //panelnorth.add(empty, BorderLayout.SOUTH);
         panelnorth.setOpaque(false);
         panelntm.setOpaque(false);
         empty.setOpaque(true);

@@ -92,15 +92,16 @@ public class GUITelephone extends JFrame implements Serializable {
 
     // **** CONSTRUCTEUR **** //
     public GUITelephone(AppContact contactA, AppGallerie gallerieA) {
-
+        
         // **** REPRISE DES INSTANCES DANS LE CONSTRUCTEUR **** //
         this.contactA = contactA;
         this.gallerieA = gallerieA;
         this.guigallerie = new GUIGallerie(this, gallerieA);
         this.guicontacts = new GUIContacts(this, contactA);
         this.guinewcontact = new GUINewContact(this, contactA, guicontacts);
-        this.guiimage = new GUIImage(this, guicontacts, contactA, guinewcontact, guieditcontact, gallerieA);
         this.guieditcontact = new GUIEditContact(this, contactA, guicontacts);
+        this.guiimage = new GUIImage(this, guicontacts, contactA, guinewcontact, guieditcontact, gallerieA, guigallerie);
+        
 
         // **** CONFIG FRAME **** // Position+size
         Calendar cal = Calendar.getInstance();
@@ -298,7 +299,7 @@ public class GUITelephone extends JFrame implements Serializable {
         if (currentPanel == "contacts") {
             guicontacts.refresh();
         } else if (currentPanel == "editcontact") {
-            guieditcontact.refreshE();
+               guieditcontact.refreshE();  
         } else if (currentPanel == "gallerie") {
             guigallerie.updateImage();
         }
@@ -311,7 +312,7 @@ public class GUITelephone extends JFrame implements Serializable {
         public void actionPerformed(ActionEvent e) {
             cardL.show(cardP, "gallerie");
             backPosition = 1;
-            guicontacts.afficheUnit();
+
         }
     }
 
@@ -332,6 +333,8 @@ public class GUITelephone extends JFrame implements Serializable {
         public void actionPerformed(ActionEvent e) {
             cardL.show(cardP, "main");
             backPosition = 0;
+            guinewcontact.refreshC();
+            backPositionAppC = 0;
         }
     }
 
@@ -368,9 +371,12 @@ public class GUITelephone extends JFrame implements Serializable {
                 cardL.show(cardP, "newcontact");
                 guinewcontact.refreshC();
                 backPosition = 3;
+                backPositionAppC = 0;
             } else if (backPosition == 6) {
                 cardL.show(cardP, "editcontact");
+                guieditcontact.refreshE();
                 backPosition = 3;
+                backPositionAppC = 0;
             }
         }
     }

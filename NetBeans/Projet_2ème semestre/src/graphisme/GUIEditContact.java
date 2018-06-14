@@ -75,7 +75,7 @@ public class GUIEditContact extends JPanel implements Serializable {
 
     private JLabel symbolP = new JLabel(symbol);
     private JLabel refreshP = new JLabel(refresh);
-    private JLabel sure = new JLabel("<html>Etes-vous sûr de<br/>supprimer ce contact</html>");
+    private JLabel sure = new JLabel("<html>Etes-vous sûr de vouloir<br/>supprimer ce contact ?</html>");
 
     private String parametre = "";
     private String vide = "";
@@ -115,6 +115,7 @@ public class GUIEditContact extends JPanel implements Serializable {
         refreshE();
         // **** OPTIONS DE BASE **** //
         contactDetails.setOpaque(false);
+        setBackground(Color.BLACK);
         contactDetails.setPreferredSize(new Dimension(480, 683));
         contactDetails.setLayout(new BorderLayout());
         contactDetails.add(panelCenter, BorderLayout.CENTER);
@@ -158,7 +159,7 @@ public class GUIEditContact extends JPanel implements Serializable {
         panelNorth.add(panelNtm, BorderLayout.CENTER);
         panelNtm.setOpaque(false);
         panelNtm.add(buttonSave);
-        panelNorth.add(empty, BorderLayout.SOUTH);
+        //panelNorth.add(empty, BorderLayout.SOUTH);
         empty.setPreferredSize(new Dimension(480, 5));
         empty.setOpaque(true);
         panelNorth.setPreferredSize(new Dimension(280, 85));
@@ -409,7 +410,9 @@ public class GUIEditContact extends JPanel implements Serializable {
             contactX.setAdresse(txt5.getText());
             contactX.setAnniversaire(txt6.getText());
             contactX.setGroupe(txt7.getText());
+            if(guit.guiimage.retour == 1){
             contactX.setImageContact(icone);
+            }
             contactA.editCI(contactX);
             guit.setCurrentPanel("contacts");
         }
@@ -483,6 +486,7 @@ public class GUIEditContact extends JPanel implements Serializable {
         @Override
         public void actionPerformed(ActionEvent e) {
             guit.setCurrentPanel("gallerie");
+            guic.switcheditadd = 2;
             guit.backPosition = 6;
             guit.backPositionAppC = 2;
         }

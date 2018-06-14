@@ -73,6 +73,8 @@ public class GUINewContact extends JPanel implements Serializable {
     ImageIcon user = new ImageIcon("src/images/user.png");
     private ImageIcon icone;
     private ImageIcon iconeR;
+    ImageIcon iconeE;
+        ImageIcon iconeZ = new ImageIcon("src/images/user.png");
     private JButton buttonImageContact = new JButton();
     private JButton buttonSave = new JButton(done);
 
@@ -92,6 +94,7 @@ public class GUINewContact extends JPanel implements Serializable {
 
         // **** AJOUT DU PANEL PRINCIPAL **** //
         add(newcontact);
+        setBackground(Color.BLACK);
         arrayC = contactA.getArrayContacts();
         newcontact.setLayout(new BorderLayout());
         newcontact.setAlignmentY(0);
@@ -131,7 +134,7 @@ public class GUINewContact extends JPanel implements Serializable {
         panelNorth.add(panel_ntm, BorderLayout.CENTER);
         panel_ntm.setOpaque(false);
         panel_ntm.add(buttonSave);
-        panelNorth.add(empty, BorderLayout.SOUTH);
+        //panelNorth.add(empty, BorderLayout.SOUTH);
         empty.setPreferredSize(new Dimension(480, 5));
         empty.setOpaque(true);
         panelNorth.setPreferredSize(new Dimension(280, 85));
